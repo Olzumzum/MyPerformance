@@ -1,12 +1,16 @@
 package com.example.myperformance;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Timer;
@@ -14,72 +18,65 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    //Кнопки управления подсчета временем
-    private Button startCountingTime;
-    private Button pauseCountingTime;
-    private Button stopCountingTime;
-
-    //счетчик времени выполнения действия
-    private Chronometer chronometerEmployment;
-    private boolean running = false;
-    private long pauseOffset;
-
+    CoutingTime coutingTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startCountingTime = findViewById(R.id.start_countring_time);
-        pauseCountingTime = findViewById(R.id.pause_countring_time);
-        stopCountingTime = findViewById(R.id.stop_countring_time);
+        //Кнопки управления подсчета временем
+        Button startCountingTime = findViewById(R.id.start_countring_time);
+        Button pauseCountingTime = findViewById(R.id.pause_countring_time);
+        Button stopCountingTime = findViewById(R.id.stop_countring_time);
 
-        chronometerEmployment = findViewById(R.id.chronometer_employment);
+        Chronometer chronometerEmployment = findViewById(R.id.chronometer_employment);
+
+        coutingTime = new CoutingTime(chronometerEmployment);
 
         startCountingTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startCount(v);
+                coutingTime.startCount();
             }
         });
 
         stopCountingTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stopCounting(v);
+                coutingTime.stopCounting();
             }
         });
 
         pauseCountingTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pauseCounting(v);
+                coutingTime.pauseCounting();
             }
         });
+    }
 
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        long pauseOffset = coutingTime.getPauseOffset();
+        boolean running = coutingTime.getRunning();
+        outState.putInt("TimeCount", (int) pauseOffset);
+        outState.putBoolean("RunningTimer", running);
+        Log.d("MyLog", "Положила " + pauseOffset + " " + running);
+        super.onSaveInstanceState(outState, outPersistentState);
 
     }
 
-    public void startCount(View view){
-        if(!running){
-            chronometerEmployment.setBase(SystemClock.elapsedRealtime() - pauseOffset);
-            chronometerEmployment.start();
-            running = true;
-        }
-    }
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        long pauseOffset = savedInstanceState.getInt("TimeCount");
+        boolean running = savedInstanceState.getBoolean("RunningTimer");
 
-    public void pauseCounting(View view){
-        if(running){
-            chronometerEmployment.stop();
-            pauseOffset = SystemClock.elapsedRealtime() - chronometerEmployment.getBase();
-            running = false;
-        }
-    }
+        coutingTime.setPauseOffset(pauseOffset);
+        coutingTime.setRunning(running);
+        super.onRestoreInstanceState(savedInstanceState);
 
-    public void stopCounting(View view){
-        chronometerEmployment.stop();
-        running = false;
-        pauseOffset = 0;
-        chronometerEmployment.setBase(SystemClock.elapsedRealtime());
+
     }
 }
