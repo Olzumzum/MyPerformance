@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Chronometer
+        android:id="@+id/chronometer_employment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="92dp"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chronometer_employment"
+        app:layout_constraintVertical_bias="0.0">
+
+        <Button
+            android:id="@+id/start_countring_time"
+            android:layout_width="123dp"
+            android:layout_height="64dp"
+            android:layout_margin="14dp"
+            android:text="@string/start_counting_time" />
+
+        <Button
+            android:id="@+id/pause_countring_time"
+            android:layout_width="123dp"
+            android:layout_height="64dp"
+            android:layout_margin="14dp"
+
+            android:text="@string/pause_counting_time" />
+
+        <Button
+            android:id="@+id/stop_countring_time"
+            android:layout_width="123dp"
+            android:layout_height="64dp"
+            android:layout_margin="14dp"
+            android:text="@string/stop_counting_time" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,6 +18,7 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
+    //обеспечивает работу с таймером
     CoutingTime coutingTime;
 
     @Override
@@ -33,6 +34,16 @@ public class MainActivity extends AppCompatActivity {
         Chronometer chronometerEmployment = findViewById(R.id.chronometer_employment);
 
         coutingTime = new CoutingTime(chronometerEmployment);
+
+        if(savedInstanceState != null){
+            long pauseOffset = savedInstanceState.getLong("TimeCount");
+            boolean running = savedInstanceState.getBoolean("RunningTimer");
+            savedInstanceState.putLong("TimeCount", 0);
+                coutingTime.setPauseOffset(pauseOffset);
+                coutingTime.setRunning(running);
+                coutingTime.restartChronometr();
+        }
+
 
         startCountingTime.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,27 +67,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     @Override
-    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-        long pauseOffset = coutingTime.getPauseOffset();
-        boolean running = coutingTime.getRunning();
-        outState.putInt("TimeCount", (int) pauseOffset);
-        outState.putBoolean("RunningTimer", running);
-        Log.d("MyLog", "Положила " + pauseOffset + " " + running);
-        super.onSaveInstanceState(outState, outPersistentState);
-
+    protected void onPause() {
+        super.onPause();
+        //установить время, прошедшее с начала запуска таймера
+        coutingTime.setCurrentTime();
+        //поменять флаг - выполнение таймера приостанавливается для перезапуска
+        coutingTime.setRunning(false);
     }
 
     @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        long pauseOffset = savedInstanceState.getInt("TimeCount");
-        boolean running = savedInstanceState.getBoolean("RunningTimer");
-
-        coutingTime.setPauseOffset(pauseOffset);
-        coutingTime.setRunning(running);
-        super.onRestoreInstanceState(savedInstanceState);
-
-
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putLong("TimeCount", coutingTime.getPauseOffset());
+        outState.putBoolean("RunningTimer", coutingTime.getRunning());
+        super.onSaveInstanceState(outState);
     }
+
 }
