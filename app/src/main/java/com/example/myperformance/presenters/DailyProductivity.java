@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.SimpleXYSeries;
+import com.androidplot.xy.StepModelFit;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
 import com.example.myperformance.R;
@@ -38,6 +39,13 @@ public class DailyProductivity extends AppCompatActivity {
                 keyDate, valueTime, "День");
 
         LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.RED, Color.GREEN, null, null);
+
+        plot.
+        double[] inc_domain = new double[]{1,2,3};
+        double[] inc_range = new double[]{1,5,10,20,50,100};
+        final int NUM_GRIDLINES = valueTime.size();
+        plot.setDomainStepModel(new StepModelFit(plot.getBounds().getxRegion(),inc_domain,NUM_GRIDLINES));
+        plot.setRangeStepModel( new StepModelFit(plot.getBounds().getyRegion(),inc_range,NUM_GRIDLINES));
         plot.addSeries(series1, series1Format);
 
     }
