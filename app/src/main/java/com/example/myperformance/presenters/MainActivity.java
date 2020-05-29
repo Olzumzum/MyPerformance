@@ -1,20 +1,15 @@
-package com.example.myperformance;
+package com.example.myperformance.presenters;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Chronometer;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.os.SystemClock;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Chronometer;
-import android.widget.Toast;
-
-import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
+import com.example.myperformance.R;
+import com.example.myperformance.worktime.CoutingTime;
 
 public class MainActivity extends AppCompatActivity {
 

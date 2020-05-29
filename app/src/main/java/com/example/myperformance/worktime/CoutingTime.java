@@ -1,4 +1,4 @@
-package com.example.myperformance;
+package com.example.myperformance.worktime;
 
 import android.os.SystemClock;
 import android.widget.Chronometer;
@@ -6,7 +6,7 @@ import android.widget.Chronometer;
 /**
  * обеспечивает работу таймера выполнения действия
  */
-class CoutingTime {
+public class CoutingTime {
     //счетчик времени выполнения действия
     private Chronometer chronometerEmployment;
     //флаг, обозначающий, был ли запущен таймер
@@ -14,11 +14,11 @@ class CoutingTime {
     //хранит количество времени, прошедшее с запуска таймера
     private long pauseOffset;
 
-    long getPauseOffset() {
+    public long getPauseOffset() {
         return pauseOffset;
     }
 
-    boolean getRunning() {
+    public boolean getRunning() {
         return running;
     }
 
@@ -69,7 +69,7 @@ class CoutingTime {
     /**
      * перезапускает таймер при onPause
      */
-    void restartChronometr() {
+    public void restartChronometr() {
         if (pauseOffset != 0)
             startCount();
     }
@@ -77,7 +77,7 @@ class CoutingTime {
     /**
      * рассчитывает сколько прошшло времени с начала запуска таймера
      */
-    void setCurrentTime() {
+    public void setCurrentTime() {
         if (running)
             pauseOffset = SystemClock.elapsedRealtime() - chronometerEmployment.getBase();
     }
