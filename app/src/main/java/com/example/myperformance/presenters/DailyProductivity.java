@@ -1,12 +1,14 @@
 package com.example.myperformance.presenters;
 
 import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Paint;
+import android.graphics.Shader;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.StepMode;
@@ -23,38 +25,43 @@ import java.util.List;
 
 public class DailyProductivity extends AppCompatActivity {
 
-    private XYPlot plot;
-    private List<Integer> keyDate = new ArrayList();
+    private List<Integer> keyDate = new ArrayList<>();
     private List<Integer> valueTime = new ArrayList<>();
+    private static final String MONTH_TITLE_SERIAS = "Производительность за несколько дней";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.daily_productivity);
 
-        plot = findViewById(R.id.plot);
-        plot.setPlotMargins(0,0,0,0);
-        plot.setPlotPadding(0,0,0,0);
+        XYPlot plot = findViewById(R.id.plot);
+        plot.setPlotMargins(0, 0, 0, 0);
+        plot.setPlotPadding(0, 0, 0, 0);
 
 
         //получить данные для отображения на графике
         getData();
 
+        //оформление кривой графика
+        LineAndPointFormatter series1Format = new LineAndPointFormatter(
+                Color.rgb(0, 200, 0),
+                Color.rgb(0, 100, 0),
+                Color.CYAN,
+                null);
+        //оформление градиентной заливки для графика
+        Paint lineFill = new Paint();
+        lineFill.setAlpha(200);
+        lineFill.setShader(new LinearGradient
+                (0, 0, 0, 250, Color.WHITE, Color.GREEN, Shader.TileMode.MIRROR));
 
+        series1Format.setFillPaint(lineFill);
 
-        XYSeries series1 = new SimpleXYSeries(
-                keyDate, valueTime, "День");
+        //определение данных по которым строится кривая и название кривой
+        XYSeries series1 = new SimpleXYSeries(keyDate, valueTime, MONTH_TITLE_SERIAS);
 
-        LineAndPointFormatter series1Format = new LineAndPointFormatter(Color.RED, Color.GREEN, null, null);
-
-
-        double[] inc_domain = new double[]{1,2,3};
-        double[] inc_range = new double[]{1,5,10,20,50,100};
+        //настройка отображения осей графика
+        //получить количество итераций по оси Х (количество дней, для которых строится график)
         final int NUM_GRIDLINES = valueTime.size();
-        final int MAX_VALUE_TIME = 20;
-
-//        plot.setDomainStepModel(new StepModelFit(plot.getBounds().getxRegion(),inc_domain,NUM_GRIDLINES));
-//        plot.setRangeStepModel( new StepModelFit(plot.getBounds().getyRegion(),inc_range,NUM_GRIDLINES));
 
         //Domain
         plot.setDomainStep(StepMode.INCREMENT_BY_VAL, NUM_GRIDLINES);
@@ -62,8 +69,7 @@ public class DailyProductivity extends AppCompatActivity {
         plot.setDomainStepValue(1);
 
         //Range
-        plot.setRangeBoundaries(0, MAX_VALUE_TIME, BoundaryMode.FIXED);
-//        plot.setRangeStepValue(1);
+        //настройка шага по осям (чтобы измерения были не десятичными, а целыми)
         plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.LEFT).setFormat(new DecimalFormat("0"));
         plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).setFormat(new DecimalFormat("0"));
 
@@ -78,7 +84,7 @@ public class DailyProductivity extends AppCompatActivity {
     }
 
     //получить данные для отображения на графике
-    private void getData(){
+    private void getData() {
         ReturningDataChart rDataChart = new ChartDataHolder();
         keyDate = rDataChart.getListDayOfWeek();
         valueTime = rDataChart.getListTimeValue();

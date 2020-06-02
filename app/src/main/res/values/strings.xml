@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">MyPerformance</string>
-    <string name="start_counting_time"> Старт </string>
-    <string name="pause_counting_time"> Пауза </string>
-    <string name="stop_counting_time"> Стоп </string>
-    <string name="default_time"> 00:00</string>
+    <string name="start_counting_time">Старт</string>
+    <string name="pause_counting_time">Пауза</string>
+    <string name="stop_counting_time">Стоп</string>
+    <string name="default_time">00:00</string>
+    <string name="days_of_month_title_graph">Производительность по дням</string>
 </resources>

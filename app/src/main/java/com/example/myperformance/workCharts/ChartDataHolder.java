@@ -3,12 +3,12 @@ package com.example.myperformance.workCharts;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class ChartDataHolder implements ReturningDataChart {
-    private Map<Calendar, Integer> timeHolderMap = new HashMap<>();
+    private Map<Calendar, Integer> timeHolderMap = new TreeMap<>();
     private List<Integer> keyDate = new ArrayList<>();
     private List<Integer> valueTime = new ArrayList<>();
 
