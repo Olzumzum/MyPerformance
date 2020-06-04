@@ -2,20 +2,22 @@ package com.example.myperformance.workCharts;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
-import android.graphics.DashPathEffect;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Shader;
 
 import androidx.annotation.NonNull;
 
+import com.androidplot.Plot;
 import com.androidplot.util.PixelUtils;
 import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
+import com.androidplot.xy.PanZoom;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.StepMode;
 import com.androidplot.xy.XYGraphWidget;
 import com.androidplot.xy.XYPlot;
+import com.androidplot.xy.ZoomEstimator;
 
 import java.text.DecimalFormat;
 import java.text.FieldPosition;
@@ -29,15 +31,14 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 public class GraphicPainter  {
-
+    private final String NAME_AXIS_X = "Дата";
+    private final String NAME_AXIS_Y = "Время";
     private  static final String MONTH_TITLE_SERIAS = "Производительность";
+
     private SimpleXYSeries series;
-    private int NUM_GRIDLINES;
     private List<? extends Number> keyDate = new ArrayList<>();
     private List<? extends Number> valueTime = new ArrayList<>();
 
-
-    private static final String SERIES_TITLE = "Signthings in USA";
 
     private XYPlot plot1;
 
@@ -55,13 +56,8 @@ public class GraphicPainter  {
     };
 
     private void setDataChart(List<? extends Number> keyDate, List<? extends Number> valueTime){
-
         this.keyDate = keyDate;
         this.valueTime = valueTime;
-
-        //настройка отображения осей графика
-        //получить количество итераций по оси Х (количество дней, для которых строится график)
-        NUM_GRIDLINES = valueTime.size();
 
     }
 
@@ -69,17 +65,9 @@ public class GraphicPainter  {
     private void paintChart(){
         addSeries();
 
-        plot1.setRangeBoundaries(0, 10, BoundaryMode.FIXED);
-
-        plot1.getGraph().getGridBackgroundPaint().setColor(Color.WHITE);
-        plot1.getGraph().getDomainGridLinePaint().setColor(Color.BLACK);
-        plot1.getGraph().getDomainGridLinePaint().
-                setPathEffect(new DashPathEffect(new float[]{1, 1}, 1));
-        plot1.getGraph().getRangeGridLinePaint().setColor(Color.BLACK);
-        plot1.getGraph().getRangeGridLinePaint().
-                setPathEffect(new DashPathEffect(new float[]{1, 1}, 1));
-        plot1.getGraph().getDomainOriginLinePaint().setColor(Color.BLACK);
-        plot1.getGraph().getRangeOriginLinePaint().setColor(Color.BLACK);
+        plot1.setRangeBoundaries(0, 10, BoundaryMode.GROW);
+        plot1.setDomainBoundaries(0, 7, BoundaryMode.FIXED);
+        plot1.setBorderStyle(Plot.BorderStyle.NONE, null, null);
 
         plot1.getGraph().setPaddingRight(2);
 
@@ -87,8 +75,8 @@ public class GraphicPainter  {
         plot1.setDomainStep(StepMode.SUBDIVIDE, keyDate.size());
 
         // customize our domain/range labels
-        plot1.setDomainLabel("Year");
-        plot1.setRangeLabel("# of Sightings");
+        plot1.setDomainLabel(NAME_AXIS_X);
+        plot1.setRangeLabel(NAME_AXIS_Y);
 
         // get rid of decimal points in our range labels:
         plot1.getGraph().getLineLabelStyle(XYGraphWidget.Edge.LEFT).
@@ -106,8 +94,6 @@ public class GraphicPainter  {
                                                @NonNull StringBuffer toAppendTo,
                                                @NonNull FieldPosition pos) {
 
-                        // this rounding is necessary to avoid precision loss when converting from
-                        // double back to int:
                         int yearIndex = (int) Math.round(((Number) obj).doubleValue());
                         return dateFormat.format(keyDate.get(yearIndex), toAppendTo, pos);
                     }
@@ -121,8 +107,9 @@ public class GraphicPainter  {
 
 
         //настройка масштабирования
-//        PanZoom panZoom = PanZoom.attach(plot1, PanZoom.Pan.BOTH, PanZoom.Zoom.STRETCH_BOTH, PanZoom.ZoomLimit.MIN_TICKS);
-//        plot1.getRegistry().setEstimator(new ZoomEstimator());
+        PanZoom panZoom = PanZoom.attach(plot1, PanZoom.Pan.BOTH, PanZoom.Zoom.STRETCH_BOTH, PanZoom.ZoomLimit.MIN_TICKS);
+        plot1.getRegistry().setEstimator(new ZoomEstimator());
+//        plot1.getOuterLimits().set(0, keyDate.size(), 0, 20);
     }
 
     public void addSeries() {
@@ -131,7 +118,7 @@ public class GraphicPainter  {
 
         // create our series from our array of nums:
         series = new SimpleXYSeries(valueTime,
-                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, SERIES_TITLE);
+                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, MONTH_TITLE_SERIAS);
 
         LineAndPointFormatter series1Format  =
                 new LineAndPointFormatter(Color.rgb(0, 200, 0),

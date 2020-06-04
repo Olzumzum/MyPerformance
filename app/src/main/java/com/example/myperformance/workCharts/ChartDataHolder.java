@@ -26,21 +26,21 @@ public class ChartDataHolder <E> implements ReturningDataChart {
         timeHolderMap.put(new GregorianCalendar(2006, 0, 22), 5);
         timeHolderMap.put(new GregorianCalendar(2006, 0, 23), 8);
         timeHolderMap.put(new GregorianCalendar(2006, 11, 24), 3);
-//        timeHolderMap.put(new GregorianCalendar(2006, 0, 25), 3);
-//        timeHolderMap.put(new GregorianCalendar(2006, 0, 26), 3);
-//        timeHolderMap.put(new GregorianCalendar(2006, 0, 27), 3);
-//        timeHolderMap.put(new GregorianCalendar(2006, 0, 28), 3);
-//        timeHolderMap.put(new GregorianCalendar(2006, 0, 29), 3);
-//        timeHolderMap.put(new GregorianCalendar(2006, 0, 30), 3);
-//        timeHolderMap.put(new GregorianCalendar(2006, 0, 31), 3);
-//        timeHolderMap.put(new GregorianCalendar(2006, 1, 1), 3);
-//        timeHolderMap.put(new GregorianCalendar(2006, 1, 2), 3);
-//        timeHolderMap.put(new GregorianCalendar(2006, 1, 3), 3);
-//        timeHolderMap.put(new GregorianCalendar(2006, 1, 4), 3);
-//        timeHolderMap.put(new GregorianCalendar(2006, 1, 5), 3);
-//        timeHolderMap.put(new GregorianCalendar(2006, 1, 6), 3);
-//        timeHolderMap.put(new GregorianCalendar(2006, 1, 7), 3);
-//        timeHolderMap.put(new GregorianCalendar(2006, 1, 8), 3);
+        timeHolderMap.put(new GregorianCalendar(2006, 0, 25), 3);
+        timeHolderMap.put(new GregorianCalendar(2006, 0, 26), 3);
+        timeHolderMap.put(new GregorianCalendar(2006, 0, 27), 3);
+        timeHolderMap.put(new GregorianCalendar(2006, 0, 28), 3);
+        timeHolderMap.put(new GregorianCalendar(2006, 0, 29), 3);
+        timeHolderMap.put(new GregorianCalendar(2006, 0, 30), 3);
+        timeHolderMap.put(new GregorianCalendar(2006, 0, 31), 3);
+        timeHolderMap.put(new GregorianCalendar(2006, 1, 1), 3);
+        timeHolderMap.put(new GregorianCalendar(2006, 1, 2), 3);
+        timeHolderMap.put(new GregorianCalendar(2006, 1, 3), 3);
+        timeHolderMap.put(new GregorianCalendar(2006, 1, 4), 3);
+        timeHolderMap.put(new GregorianCalendar(2006, 1, 5), 3);
+        timeHolderMap.put(new GregorianCalendar(2006, 1, 6), 3);
+        timeHolderMap.put(new GregorianCalendar(2006, 1, 7), 3);
+        timeHolderMap.put(new GregorianCalendar(2006, 1, 8), 3);
 
         timeAndDateRecording();
     }
