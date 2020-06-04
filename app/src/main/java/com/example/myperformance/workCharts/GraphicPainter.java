@@ -3,8 +3,9 @@ package com.example.myperformance.workCharts;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
-import android.os.Bundle;
+import android.graphics.Shader;
 
 import androidx.annotation.NonNull;
 
@@ -22,7 +23,6 @@ import java.text.Format;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -35,7 +35,7 @@ public class GraphicPainter  {
     private int NUM_GRIDLINES;
     private List<? extends Number> keyDate = new ArrayList<>();
     private List<? extends Number> valueTime = new ArrayList<>();
-    Bundle savedInstanceState;
+
 
     private static final String SERIES_TITLE = "Signthings in USA";
 
@@ -67,7 +67,7 @@ public class GraphicPainter  {
 
 
     private void paintChart(){
-        addSeries(savedInstanceState);
+        addSeries();
 
         plot1.setRangeBoundaries(0, 10, BoundaryMode.FIXED);
 
@@ -84,7 +84,7 @@ public class GraphicPainter  {
         plot1.getGraph().setPaddingRight(2);
 
         // draw a domain tick for each year:
-        plot1.setDomainStep(StepMode.SUBDIVIDE, years.length);
+        plot1.setDomainStep(StepMode.SUBDIVIDE, keyDate.size());
 
         // customize our domain/range labels
         plot1.setDomainLabel("Year");
@@ -125,41 +125,35 @@ public class GraphicPainter  {
 //        plot1.getRegistry().setEstimator(new ZoomEstimator());
     }
 
-    public void addSeries(Bundle savedInstanceState) {
-        Number[] yVals;
+    public void addSeries() {
 
-        if(savedInstanceState != null) {
-            yVals = (Number[]) savedInstanceState.getSerializable(SERIES_TITLE);
-        } else {
-            yVals = new Number[]{5, 8, 6, 9, 3, 8, 5, 4, 7, 4};
-        }
+
 
         // create our series from our array of nums:
-        series = new SimpleXYSeries(Arrays.asList(yVals),
-                valueTime, SERIES_TITLE);
+        series = new SimpleXYSeries(valueTime,
+                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, SERIES_TITLE);
 
-        LineAndPointFormatter formatter =
-                new LineAndPointFormatter(Color.rgb(0, 0, 0), Color.RED, Color.RED, null);
-        formatter.getVertexPaint().setStrokeWidth(PixelUtils.dpToPix(10));
-        formatter.getLinePaint().setStrokeWidth(PixelUtils.dpToPix(5));
+        LineAndPointFormatter series1Format  =
+                new LineAndPointFormatter(Color.rgb(0, 200, 0),
+                        Color.rgb(0, 100, 0),
+                        Color.CYAN,
+                        null);
 
-        // setup our line fill paint to be a slightly transparent gradient:
+        series1Format .getVertexPaint().setStrokeWidth(PixelUtils.dpToPix(10));
+        series1Format .getLinePaint().setStrokeWidth(PixelUtils.dpToPix(5));
+
+        //оформление градиентной заливки для графика
         Paint lineFill = new Paint();
         lineFill.setAlpha(200);
+        lineFill.setShader(new LinearGradient
+                (0, 0, 0, 250, Color.WHITE, Color.GREEN, Shader.TileMode.MIRROR));
 
-        formatter.setFillPaint(lineFill);
+        series1Format.setFillPaint(lineFill);
 
-        plot1.addSeries(series, formatter);
+        plot1.addSeries(series, series1Format );
     }
 
-    public Bundle getSavedInstanceState(){
-        return savedInstanceState;
-    }
-
-    public SimpleXYSeries getSeries(){return series;}
-
-    public void paint(Bundle savedInstanceState, XYPlot plot, List<? extends Number> domainData, List<? extends Number> rangeData) {
-        this.savedInstanceState = savedInstanceState;
+    public void paint(XYPlot plot, List<? extends Number> domainData, List<? extends Number> rangeData) {
         plot1 = plot;
         setDataChart(domainData, rangeData);
         paintChart();

@@ -35,20 +35,10 @@ public class DailyProductivity extends AppCompatActivity {
 
         getData();
         graphicPainter = new GraphicPainter();
-        graphicPainter.paint(savedInstanceState, plot1, keyDate, valueTime);
-
+        graphicPainter.paint(plot1, keyDate, valueTime);
 
     }
 
-
-
-    @Override
-    public void onSaveInstanceState(Bundle bundle) {
-        // persist our series data so we don't have to regenerate each time:
-        super.onSaveInstanceState(bundle);
-        series = graphicPainter.getSeries();
-        bundle.putSerializable(SERIES_TITLE, series.getyVals().toArray(new Number[]{}));
-    }
 
     //получить данные для отображения на графике
     private void getData() {
