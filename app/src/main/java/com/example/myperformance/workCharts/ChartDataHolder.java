@@ -9,10 +9,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class ChartDataHolder implements ReturningDataChart {
+public class ChartDataHolder <E> implements ReturningDataChart {
     private Map<Calendar, Integer> timeHolderMap = new TreeMap<>();
-    private List<Double> keyDate = new ArrayList<>();
+    private List<E> keyDate = new ArrayList<>();
     private List<Integer> valueTime = new ArrayList<>();
+
 
     public ChartDataHolder() {
         timeHolderMap.put(new GregorianCalendar(2006, 5, 15), 15);
@@ -53,9 +54,9 @@ public class ChartDataHolder implements ReturningDataChart {
 
             Log.d("DaysMap", "день " + infoDate.get(Calendar.DAY_OF_MONTH) + "."
                     + infoDate.get(Calendar.MONTH) + " время " + entry.getValue());
-            double date = infoDate.get(Calendar.MONTH);
-            date += infoDate.get(Calendar.DAY_OF_MONTH);
-            keyDate.add(date);
+
+
+            keyDate.add((E) infoDate.getTime());
             //записываем в список данные о времени
             valueTime.add((Integer) entry.getValue());
 
@@ -68,7 +69,7 @@ public class ChartDataHolder implements ReturningDataChart {
     }
 
     @Override
-    public List<Double> getListDayOfWeek() {
+    public  List<?> getListDayOfWeek() {
         return keyDate;
     }
 

@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface ReturningDataChart {
     //возвращает списко дней, для которых подсчитывалось время
-    List<Double> getListDayOfWeek();
+    List<?> getListDayOfWeek();
     //возвращает значение времени
     List<Integer> getListTimeValue();
 }

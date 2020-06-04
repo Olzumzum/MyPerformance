@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.example.myperformance.R;
 import com.example.myperformance.workCharts.ChartDataHolder;
@@ -16,32 +17,43 @@ import java.util.List;
 
 public class DailyProductivity extends AppCompatActivity {
 
-    private List<Double> keyDate = new ArrayList<>();
+    private List<? extends Number> keyDate = new ArrayList<>();
     private List<Integer> valueTime = new ArrayList<>();
+    private static final String SERIES_TITLE = "Signthings in USA";
+
+    private XYPlot plot1;
+    private SimpleXYSeries series;
+
+    GraphicPainter graphicPainter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.daily_productivity);
 
-        XYPlot plot = findViewById(R.id.plot);
+        plot1 = findViewById(R.id.plot);
 
-        //получить данные для отображения на графике
         getData();
+        graphicPainter = new GraphicPainter();
+        graphicPainter.paint(savedInstanceState, plot1, keyDate, valueTime);
 
-        new GraphicPainter().paint(plot, keyDate, valueTime);
 
     }
 
+
+
     @Override
-    protected void onResume() {
-        super.onResume();
+    public void onSaveInstanceState(Bundle bundle) {
+        // persist our series data so we don't have to regenerate each time:
+        super.onSaveInstanceState(bundle);
+        series = graphicPainter.getSeries();
+        bundle.putSerializable(SERIES_TITLE, series.getyVals().toArray(new Number[]{}));
     }
 
     //получить данные для отображения на графике
     private void getData() {
         ReturningDataChart rDataChart = new ChartDataHolder();
-        keyDate = rDataChart.getListDayOfWeek();
+        keyDate = (List<? extends Number>) rDataChart.getListDayOfWeek();
         valueTime = rDataChart.getListTimeValue();
     }
 
