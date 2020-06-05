@@ -35,7 +35,7 @@ public class GraphicPainter {
     private int MIN_VALUE_X = 0;
     private int MAX_VALUE_X;
     private int MIN_VALUE_Y = 0;
-    private int MAX_VALUE_Y = 20;
+    private int MAX_VALUE_Y = 0;
 
     private XYPlot plot;
     private SimpleXYSeries series;
@@ -66,6 +66,22 @@ public class GraphicPainter {
         //рассчет диапазона графика (минимального и максимального значения)
         //для масштабирования
         MAX_VALUE_X = keyDate.size() -1;
+        MAX_VALUE_Y = searchMaxValue(valueTime);
+    }
+
+    @org.jetbrains.annotations.Contract("null -> fail")
+    private int searchMaxValue(List<? extends Number> list){
+        if(list == null)
+            throw new NullPointerException("Список, в котором производится поиск максимума не создан");
+        if(list.size() == 0)
+            throw new IndexOutOfBoundsException("Список, в котором производится поиск максимума не заполнен");
+        int max = 0;
+        for(Number el: list){
+            int e = (Integer) el;
+            if(e > max)
+                max = e;
+        }
+        return max;
     }
 
     /**

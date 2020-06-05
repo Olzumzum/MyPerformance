@@ -85,4 +85,6 @@ public class ChartDataHolder <E> implements ReturningDataChart {
     public List<Integer> getListTimeValue() {
         return valueTime;
     }
+
+
 }
