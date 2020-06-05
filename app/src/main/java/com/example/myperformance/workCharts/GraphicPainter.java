@@ -25,67 +25,76 @@ import java.text.Format;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
-public class GraphicPainter  {
+public class GraphicPainter {
     private final String NAME_AXIS_X = "Дата";
     private final String NAME_AXIS_Y = "Время";
-    private  static final String MONTH_TITLE_SERIAS = "Производительность";
+    private static final String MONTH_TITLE_SERIAS = "Производительность";
 
+    private int MIN_VALUE_X = 0;
+    private int MAX_VALUE_X;
+    private int MIN_VALUE_Y = 0;
+    private int MAX_VALUE_Y = 20;
+
+    private XYPlot plot;
     private SimpleXYSeries series;
     private List<? extends Number> keyDate = new ArrayList<>();
     private List<? extends Number> valueTime = new ArrayList<>();
 
+    /**
+     * вызвать функции по отрисовке графика
+     * @param plot - передать пространство для отрисовки графика
+     * @param domainData - диапазон данных по оси Х
+     * @param rangeData - диапазон данных по оси Y
+     */
+    public void paint(XYPlot plot, List<? extends Number> domainData, List<? extends Number> rangeData) {
+        this.plot = plot;
+        setDataChart(domainData, rangeData);
+        paintChart();
+    }
 
-    private XYPlot plot1;
-
-    final Date[] years = {
-            new GregorianCalendar(2001, Calendar.JANUARY, 1).getTime(),
-            new GregorianCalendar(2001, Calendar.JULY, 1).getTime(),
-            new GregorianCalendar(2002, Calendar.JANUARY, 1).getTime(),
-            new GregorianCalendar(2002, Calendar.JULY, 1).getTime(),
-            new GregorianCalendar(2003, Calendar.JANUARY, 1).getTime(),
-            new GregorianCalendar(2003, Calendar.JULY, 1).getTime(),
-            new GregorianCalendar(2004, Calendar.JANUARY, 1).getTime(),
-            new GregorianCalendar(2004, Calendar.JULY, 1).getTime(),
-            new GregorianCalendar(2005, Calendar.JANUARY, 1).getTime(),
-            new GregorianCalendar(2005, Calendar.JULY, 1).getTime()
-    };
-
-    private void setDataChart(List<? extends Number> keyDate, List<? extends Number> valueTime){
+    /**
+     * установить данные, необходимые для построения графика
+     * @param keyDate - данные по оси Х
+     * @param valueTime - данные по оси Y
+     */
+    private void setDataChart(List<? extends Number> keyDate, List<? extends Number> valueTime) {
         this.keyDate = keyDate;
         this.valueTime = valueTime;
 
+        //рассчет диапазона графика (минимального и максимального значения)
+        //для масштабирования
+        MAX_VALUE_X = keyDate.size() -1;
     }
 
-
-    private void paintChart(){
+    /**
+     * отрисовать пространство графика
+     * установить диапазон масштабирования
+     * и другие параметры для корректного отображения
+     */
+    private void paintChart() {
         addSeries();
 
-        plot1.setRangeBoundaries(0, 10, BoundaryMode.GROW);
-        plot1.setDomainBoundaries(0, 7, BoundaryMode.FIXED);
-        plot1.setBorderStyle(Plot.BorderStyle.NONE, null, null);
+        plot.setRangeBoundaries(0, 10, BoundaryMode.AUTO);
+        plot.setDomainBoundaries(0, 7, BoundaryMode.FIXED);
+        plot.setBorderStyle(Plot.BorderStyle.NONE, null, null);
 
-        plot1.getGraph().setPaddingRight(2);
+        plot.getGraph().setPaddingRight(2);
 
-        // draw a domain tick for each year:
-        plot1.setDomainStep(StepMode.SUBDIVIDE, keyDate.size());
+        // отрисовка шага по оси Х
+        plot.setDomainStep(StepMode.SUBDIVIDE, 9);
 
-        // customize our domain/range labels
-        plot1.setDomainLabel(NAME_AXIS_X);
-        plot1.setRangeLabel(NAME_AXIS_Y);
+        // название осей
+        plot.setDomainLabel(NAME_AXIS_X);
+        plot.setRangeLabel(NAME_AXIS_Y);
 
-        // get rid of decimal points in our range labels:
-        plot1.getGraph().getLineLabelStyle(XYGraphWidget.Edge.LEFT).
+        // формат итераций по осям
+        plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.LEFT).
                 setFormat(new DecimalFormat("0"));
 
-        plot1.getGraph().getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).
+        plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).
                 setFormat(new Format() {
-
-
                     @SuppressLint("SimpleDateFormat")
                     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM");
 
@@ -107,27 +116,29 @@ public class GraphicPainter  {
 
 
         //настройка масштабирования
-        PanZoom panZoom = PanZoom.attach(plot1, PanZoom.Pan.BOTH, PanZoom.Zoom.STRETCH_BOTH, PanZoom.ZoomLimit.MIN_TICKS);
-        plot1.getRegistry().setEstimator(new ZoomEstimator());
-//        plot1.getOuterLimits().set(0, keyDate.size(), 0, 20);
+        PanZoom panZoom = PanZoom.attach(plot, PanZoom.Pan.BOTH, PanZoom.Zoom.STRETCH_BOTH, PanZoom.ZoomLimit.OUTER);
+        plot.getRegistry().setEstimator(new ZoomEstimator());
+        //задать границы графика
+        plot.getOuterLimits().set(MIN_VALUE_X, MAX_VALUE_X, MIN_VALUE_Y, MAX_VALUE_Y);
     }
 
+    /**
+     * построить саму кривую графика
+     * задать данные для ее построения,
+     * определить стиль кривой
+     */
     public void addSeries() {
-
-
-
-        // create our series from our array of nums:
         series = new SimpleXYSeries(valueTime,
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, MONTH_TITLE_SERIAS);
 
-        LineAndPointFormatter series1Format  =
+        LineAndPointFormatter series1Format =
                 new LineAndPointFormatter(Color.rgb(0, 200, 0),
                         Color.rgb(0, 100, 0),
                         Color.CYAN,
                         null);
 
-        series1Format .getVertexPaint().setStrokeWidth(PixelUtils.dpToPix(10));
-        series1Format .getLinePaint().setStrokeWidth(PixelUtils.dpToPix(5));
+        series1Format.getVertexPaint().setStrokeWidth(PixelUtils.dpToPix(10));
+        series1Format.getLinePaint().setStrokeWidth(PixelUtils.dpToPix(5));
 
         //оформление градиентной заливки для графика
         Paint lineFill = new Paint();
@@ -137,12 +148,7 @@ public class GraphicPainter  {
 
         series1Format.setFillPaint(lineFill);
 
-        plot1.addSeries(series, series1Format );
+        plot.addSeries(series, series1Format);
     }
 
-    public void paint(XYPlot plot, List<? extends Number> domainData, List<? extends Number> rangeData) {
-        plot1 = plot;
-        setDataChart(domainData, rangeData);
-        paintChart();
-    }
 }

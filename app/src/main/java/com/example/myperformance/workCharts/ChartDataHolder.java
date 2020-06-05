@@ -14,7 +14,6 @@ public class ChartDataHolder <E> implements ReturningDataChart {
     private List<E> keyDate = new ArrayList<>();
     private List<Integer> valueTime = new ArrayList<>();
 
-
     public ChartDataHolder() {
         timeHolderMap.put(new GregorianCalendar(2006, 5, 15), 15);
         timeHolderMap.put(new GregorianCalendar(2006, 5, 16), 4);
@@ -45,7 +44,9 @@ public class ChartDataHolder <E> implements ReturningDataChart {
         timeAndDateRecording();
     }
 
-    //запись данных о датах и времени в списки для отображения в виде графика
+    /**
+     * запись данных о датах и времени в списки для отображения в виде графика
+     */
     private void timeAndDateRecording() {
         for (Map.Entry entry : timeHolderMap.entrySet()) {
             //получаем дату - ключ
@@ -68,11 +69,18 @@ public class ChartDataHolder <E> implements ReturningDataChart {
         }
     }
 
+    /**
+     * @return вернуть список дней
+     */
     @Override
     public  List<?> getListDayOfWeek() {
         return keyDate;
     }
 
+    /**
+     *
+     * @return вернуть список значений времени
+     */
     @Override
     public List<Integer> getListTimeValue() {
         return valueTime;
