@@ -69,6 +69,11 @@ public class GraphicPainter {
         MAX_VALUE_Y = searchMaxValue(valueTime);
     }
 
+    /**
+     * найти максимальный элемент коллекции для правильного выполнения масштабирования
+     * @param list - коллекция, в которой осуществляется поиск максимума
+     * @return int-элемент - максимальный элемент коллекции
+     */
     @org.jetbrains.annotations.Contract("null -> fail")
     private int searchMaxValue(List<? extends Number> list){
         if(list == null)
