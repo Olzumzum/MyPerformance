@@ -10,14 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".presenters.MainActivity">
-
-        </activity>
-        <activity android:name=".presenters.DailyProductivity">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.MAIN" />
 
             </intent-filter>
+        </activity>
+        <activity android:name=".presenters.DailyProductivity">
+
         </activity>
     </application>
 

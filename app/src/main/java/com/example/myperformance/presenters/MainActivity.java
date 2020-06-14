@@ -1,5 +1,6 @@
 package com.example.myperformance.presenters;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -58,6 +59,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 coutingTime.pauseCounting();
+            }
+        });
+
+        Button grathact = findViewById(R.id.grath_activity);
+        grathact.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DailyProductivity.class );
+                startActivity(intent);
             }
         });
     }
