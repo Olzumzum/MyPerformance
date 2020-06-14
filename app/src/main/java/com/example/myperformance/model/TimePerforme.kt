@@ -5,6 +5,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
+/**
+ * Stores performance data
+ * (date when the time and time value were considered)
+ */
 @Entity (tableName = "timeperforme_table")
 class TimePerforme(
         @ColumnInfo(name = "date_perf") val datePerfor: Calendar,
