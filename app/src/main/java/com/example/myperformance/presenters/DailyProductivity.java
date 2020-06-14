@@ -15,6 +15,7 @@ import com.example.myperformance.workCharts.ReturningDataChart;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class DailyProductivity extends AppCompatActivity {
 
     private List<? extends Number> keyDate = new ArrayList<>();
