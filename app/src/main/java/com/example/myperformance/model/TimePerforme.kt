@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
-@Entity
+@Entity (tableName = "timeperforme_table")
 class TimePerforme(
         @ColumnInfo(name = "date_perf") val datePerfor: Calendar,
         @ColumnInfo(name = "time_perf") val timePerf: Int

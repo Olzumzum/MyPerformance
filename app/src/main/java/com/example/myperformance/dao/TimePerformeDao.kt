@@ -9,7 +9,7 @@ import com.example.myperformance.model.TimePerforme
 
 @Dao
 interface TimePerformeDao {
-    @Query("SELECT * FROM timeperforme_tabel")
+    @Query("SELECT * FROM timeperforme_table")
     fun getAllDataAboutTime(): LiveData<List<TimePerforme>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
