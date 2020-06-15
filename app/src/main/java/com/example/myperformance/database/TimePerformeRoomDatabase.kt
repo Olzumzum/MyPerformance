@@ -10,7 +10,7 @@ import com.example.myperformance.dao.TimePerformeDao
 import com.example.myperformance.model.TimePerforme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-
+import java.util.*
 
 
 /**
@@ -19,10 +19,10 @@ import kotlinx.coroutines.launch
  * Filling in database data
  */
 @Database(entities = arrayOf(TimePerforme::class), version = 1, exportSchema = false)
-abstract class TPerfRoomDatabase : RoomDatabase() {
+abstract class TimePerformeRoomDatabase : RoomDatabase() {
     abstract fun timePerformeDao(): TimePerformeDao
 
-    class TPerfDatabaseCallback(private val scope: CoroutineScope) : RoomDatabase.Callback() {
+    class TimePerformeDatabaseCallback(private val scope: CoroutineScope) : RoomDatabase.Callback() {
 
         override fun onOpen(db: SupportSQLiteDatabase) {
             super.onOpen(db)
@@ -31,23 +31,24 @@ abstract class TPerfRoomDatabase : RoomDatabase() {
                     val timePerformeDao = database.timePerformeDao()
 
                     timePerformeDao.deleteAll()
-//                    var valuePerforme = TimePerforme(GregorianCalendar(2006, 5, 15), 15)
-//                    timePerformeDao.insert(valuePerforme)
-//
-//                    valuePerforme = TimePerforme(GregorianCalendar(2006, 5, 16), 4)
-//                    timePerformeDao.insert(valuePerforme)
-//
-//                    valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 18), 0)
-//                    timePerformeDao.insert(valuePerforme)
-//
-//                    valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 19), 3)
-//                    timePerformeDao.insert(valuePerforme)
-//
-//                    valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 20), 3)
-//                    timePerformeDao.insert(valuePerforme)
-//
-//                    valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 21), 3)
-//                    timePerformeDao.insert(valuePerforme)
+                    var valuePerforme = TimePerforme(
+                            GregorianCalendar(2006, 5, 15).toString(), 15)
+                    timePerformeDao.insert(valuePerforme)
+
+                    valuePerforme = TimePerforme(GregorianCalendar(2006, 5, 16).toString(), 4)
+                    timePerformeDao.insert(valuePerforme)
+
+                    valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 18).toString(), 0)
+                    timePerformeDao.insert(valuePerforme)
+
+                    valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 19).toString(), 3)
+                    timePerformeDao.insert(valuePerforme)
+
+                    valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 20).toString(), 3)
+                    timePerformeDao.insert(valuePerforme)
+
+                    valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 21).toString(), 3)
+                    timePerformeDao.insert(valuePerforme)
 
 
                 }
@@ -57,12 +58,12 @@ abstract class TPerfRoomDatabase : RoomDatabase() {
 
     companion object {
         @Volatile
-        private var INSTANCE: TPerfRoomDatabase? = null
+        private var INSTANCE: TimePerformeRoomDatabase? = null
 
         fun getDatabase(
                 context: Context,
                 scope: CoroutineScope
-        ): TPerfRoomDatabase {
+        ): TimePerformeRoomDatabase {
 
             val tempInstance = INSTANCE
             if (tempInstance != null) {
@@ -71,10 +72,10 @@ abstract class TPerfRoomDatabase : RoomDatabase() {
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                         context.applicationContext,
-                        TPerfRoomDatabase::class.java,
+                        TimePerformeRoomDatabase::class.java,
                         "tp_database"
                 )
-                        .addCallback(TPerfDatabaseCallback(scope))
+                        .addCallback(TimePerformeDatabaseCallback(scope))
                         .build()
 
                 INSTANCE = instance

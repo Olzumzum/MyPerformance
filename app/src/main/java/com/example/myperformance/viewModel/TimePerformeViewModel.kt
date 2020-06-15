@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.myperformance.database.TPerfRoomDatabase
+import com.example.myperformance.database.TimePerformeRoomDatabase
 import com.example.myperformance.model.TimePerforme
 import com.example.myperformance.repository.TimePerformeRepository
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +16,7 @@ class TimePerformeViewModel(application: Application) : AndroidViewModel(applica
     val allTimePerforme: LiveData<List<TimePerforme>>?
 
     init {
-        val timePerformeDao = TPerfRoomDatabase.getDatabase(application, viewModelScope).timePerformeDao()
+        val timePerformeDao = TimePerformeRoomDatabase.getDatabase(application, viewModelScope).timePerformeDao()
         repository = TimePerformeRepository(timePerformeDao)
         allTimePerforme = repository.allValueTimePerforme
 

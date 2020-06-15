@@ -33,7 +33,7 @@ public class DailyProductivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.daily_productivity);
 
-//        plot1 = findViewById(R.id.plot);
+        plot1 = findViewById(R.id.plot);
 
 
         final TimePerformeViewModel viewModel = new ViewModelProvider(this).get(TimePerformeViewModel.class);

@@ -12,7 +12,8 @@ import java.util.*
  */
 @Entity(tableName = "timeperforme_table")
 data class TimePerforme(
-        @ColumnInfo(name = "time_perf") val timePerf: String
+        @ColumnInfo(name = "date_perf") val datePerfor: String,
+        @ColumnInfo(name = "time_perf") val timePerf: Int
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
