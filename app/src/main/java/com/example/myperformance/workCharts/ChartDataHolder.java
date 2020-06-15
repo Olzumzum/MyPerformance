@@ -2,9 +2,6 @@ package com.example.myperformance.workCharts;
 
 import android.util.Log;
 
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
-
 import com.example.myperformance.viewModel.TimePerformeViewModel;
 
 import java.util.ArrayList;
@@ -48,7 +45,7 @@ public class ChartDataHolder <E> implements ReturningDataChart {
 //        timeHolderMap.put(new GregorianCalendar(2006, 1, 7), 3);
 //        timeHolderMap.put(new GregorianCalendar(2006, 1, 8), 3);
 
-        viewModel = new ViewModelProvider((ViewModelStoreOwner) this).get(TimePerformeViewModel.class);
+//        viewModel = new ViewModelProvider((ViewModelStoreOwner) this).get(TimePerformeViewModel.class);
 //        viewModel.getAllTimePerforme().observe(this, Observer{timePerforme -> );
         timeAndDateRecording();
     }
