@@ -12,7 +12,7 @@ import com.example.myperformance.model.TimePerforme
 // */
 @Dao
 interface TimePerformeDao {
-    @Query("SELECT * FROM timeperforme_table")
+    @Query("SELECT * FROM timeperforme_table ORDER BY time_perf ASC")
     fun getAllDataAboutTime(): LiveData<List<TimePerforme>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

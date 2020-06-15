@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         coutingTime = new CoutingTime(chronometerEmployment);
 
+        //restore state
+        //get time counter value
         if(savedInstanceState != null){
             long pauseOffset = savedInstanceState.getLong("TimeCount");
             boolean running = savedInstanceState.getBoolean("RunningTimer");
