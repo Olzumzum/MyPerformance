@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class TimePerformeViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: TimePerformeRepository
-    val allTimePerforme: LiveData<List<TimePerforme>>?
+    val allTimePerforme: LiveData<List<TimePerforme>>
 
     init {
         val timePerformeDao = TimePerformeRoomDatabase.getDatabase(application, viewModelScope).timePerformeDao()

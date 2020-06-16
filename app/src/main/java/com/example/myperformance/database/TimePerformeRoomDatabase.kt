@@ -1,6 +1,7 @@
 package com.example.myperformance.database
 
 import android.content.Context
+import android.util.Log
 
 import androidx.room.Database
 import androidx.room.Room
@@ -31,28 +32,30 @@ abstract class TimePerformeRoomDatabase : RoomDatabase() {
                     val timePerformeDao = database.timePerformeDao()
 
                     timePerformeDao.deleteAll()
-                    var valuePerforme = TimePerforme(
-                            GregorianCalendar(2006, 5, 15).toString(), 15)
-                    timePerformeDao.insert(valuePerforme)
-
-                    valuePerforme = TimePerforme(GregorianCalendar(2006, 5, 16).toString(), 4)
-                    timePerformeDao.insert(valuePerforme)
-
-                    valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 18).toString(), 0)
-                    timePerformeDao.insert(valuePerforme)
-
-                    valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 19).toString(), 3)
-                    timePerformeDao.insert(valuePerforme)
-
-                    valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 20).toString(), 3)
-                    timePerformeDao.insert(valuePerforme)
-
-                    valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 21).toString(), 3)
-                    timePerformeDao.insert(valuePerforme)
-
-
+                    fillDatabase(timePerformeDao)
                 }
             }
+        }
+
+        private suspend fun fillDatabase(timePerformeDao: TimePerformeDao){
+            var valuePerforme = TimePerforme(
+                    GregorianCalendar(2006, 5, 15).timeInMillis, 15)
+            timePerformeDao.insert(valuePerforme)
+
+            valuePerforme = TimePerforme(GregorianCalendar(2006, 5, 16).timeInMillis, 4)
+            timePerformeDao.insert(valuePerforme)
+
+            valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 18).timeInMillis, 0)
+            timePerformeDao.insert(valuePerforme)
+
+            valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 19).timeInMillis, 3)
+            timePerformeDao.insert(valuePerforme)
+
+            valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 20).timeInMillis, 3)
+            timePerformeDao.insert(valuePerforme)
+
+            valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 21).timeInMillis, 3)
+            timePerformeDao.insert(valuePerforme)
         }
     }
 
