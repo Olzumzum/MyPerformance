@@ -53,16 +53,16 @@ abstract class TimePerformeRoomDatabase : RoomDatabase() {
             valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 19).timeInMillis, 3)
             timePerformeDao.insert(valuePerforme)
 
-            valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 20).timeInMillis, 3)
+            valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 20).timeInMillis, 5)
             timePerformeDao.insert(valuePerforme)
 
-            valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 21).timeInMillis, 3)
+            valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 21).timeInMillis, 4)
             timePerformeDao.insert(valuePerforme)
 
             valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 22).timeInMillis, 8)
             timePerformeDao.insert(valuePerforme)
 
-            valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 23).timeInMillis, 6)
+            valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 1).timeInMillis, 6)
             timePerformeDao.insert(valuePerforme)
 
             valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 24).timeInMillis, 11)
