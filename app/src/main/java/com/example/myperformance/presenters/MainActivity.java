@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         grathact.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DailyProductivity.class );
+                Intent intent = new Intent(MainActivity.this, DailyProductivityActivity.class );
                 startActivity(intent);
             }
         });

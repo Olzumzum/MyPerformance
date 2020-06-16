@@ -32,12 +32,14 @@ abstract class TimePerformeRoomDatabase : RoomDatabase() {
                     val timePerformeDao = database.timePerformeDao()
 
                     timePerformeDao.deleteAll()
+
                     fillDatabase(timePerformeDao)
                 }
             }
         }
 
         private suspend fun fillDatabase(timePerformeDao: TimePerformeDao){
+
             var valuePerforme = TimePerforme(
                     GregorianCalendar(2006, 5, 15).timeInMillis, 15)
             timePerformeDao.insert(valuePerforme)
@@ -58,6 +60,12 @@ abstract class TimePerformeRoomDatabase : RoomDatabase() {
             timePerformeDao.insert(valuePerforme)
 
             valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 22).timeInMillis, 8)
+            timePerformeDao.insert(valuePerforme)
+
+            valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 23).timeInMillis, 6)
+            timePerformeDao.insert(valuePerforme)
+
+            valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 24).timeInMillis, 11)
             timePerformeDao.insert(valuePerforme)
         }
     }
