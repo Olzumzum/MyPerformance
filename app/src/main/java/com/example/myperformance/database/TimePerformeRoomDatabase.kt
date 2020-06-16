@@ -38,6 +38,7 @@ abstract class TimePerformeRoomDatabase : RoomDatabase() {
             }
         }
 
+
         private suspend fun fillDatabase(timePerformeDao: TimePerformeDao){
 
             var valuePerforme = TimePerforme(
@@ -67,6 +68,12 @@ abstract class TimePerformeRoomDatabase : RoomDatabase() {
 
             valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 24).timeInMillis, 11)
             timePerformeDao.insert(valuePerforme)
+
+            valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 25).timeInMillis, 11)
+            timePerformeDao.insert(valuePerforme)
+
+            valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 26).timeInMillis, 11)
+            timePerformeDao.insert(valuePerforme)
         }
     }
 
@@ -79,10 +86,10 @@ abstract class TimePerformeRoomDatabase : RoomDatabase() {
                 scope: CoroutineScope
         ): TimePerformeRoomDatabase {
 
-            val tempInstance = INSTANCE
-            if (tempInstance != null) {
-                return tempInstance
-            }
+//            val tempInstance = INSTANCE
+//            if (tempInstance != null) {
+//                return tempInstance
+//            }
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                         context.applicationContext,

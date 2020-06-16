@@ -55,11 +55,12 @@ public class DailyProductivityActivity extends AppCompatActivity {
             }
 
         });
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        viewModel.deleteAll();
+
     }
 }
