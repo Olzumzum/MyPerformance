@@ -25,4 +25,8 @@ class TimePerformeViewModel(application: Application) : AndroidViewModel(applica
     fun insert(timePerforme: TimePerforme) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(timePerforme)
     }
+
+    fun deleteAll() = viewModelScope.launch ( Dispatchers.IO) {
+        repository.deleteAll()
+    }
 }

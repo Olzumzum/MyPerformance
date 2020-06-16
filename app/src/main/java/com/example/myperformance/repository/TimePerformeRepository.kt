@@ -11,4 +11,8 @@ class TimePerformeRepository(private val timePerformeDao: TimePerformeDao) {
     suspend fun insert(timePerforme: TimePerforme){
         timePerformeDao.insert(timePerforme)
     }
+
+    suspend fun deleteAll(){
+        timePerformeDao.deleteAll()
+    }
 }

@@ -40,12 +40,15 @@ public class DailyProductivity extends AppCompatActivity {
 
 
         final TimePerformeViewModel viewModel = new ViewModelProvider(this).get(TimePerformeViewModel.class);
+        viewModel.deleteAll();
         viewModel.getAllTimePerforme().observe(this, new Observer<List<TimePerforme>>() {
             @Override
             public void onChanged(List<TimePerforme> timePerformes) {
-                List<TimePerforme> l = timePerformes;
-                for(TimePerforme el: l){
-                    Log.d("My_log", el.getId() + ": " + el.getDatePerfor() + " " + el.getTimePerf());
+                if(timePerformes.size() != 0) {
+                    List<TimePerforme> l = timePerformes;
+                    for (TimePerforme el : l) {
+                        Log.d("My_log", el.getId() + ": " + el.getDatePerfor() + " " + el.getTimePerf());
+                    }
                 }
             }
         });
