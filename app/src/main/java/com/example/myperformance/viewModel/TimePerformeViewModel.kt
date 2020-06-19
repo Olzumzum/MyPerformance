@@ -1,19 +1,21 @@
 package com.example.myperformance.viewModel
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
+import androidx.arch.core.util.Function
+import androidx.lifecycle.*
 import com.example.myperformance.database.TimePerformeRoomDatabase
 import com.example.myperformance.model.TimePerforme
 import com.example.myperformance.repository.TimePerformeRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.time.TimedValue
 
 
 class TimePerformeViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: TimePerformeRepository
-    val allTimePerforme: LiveData<List<TimePerforme>>
+    var allTimePerforme: LiveData<List<TimePerforme>>
+
 
     init {
         val timePerformeDao = TimePerformeRoomDatabase.getDatabase(application, viewModelScope).timePerformeDao()
@@ -26,7 +28,9 @@ class TimePerformeViewModel(application: Application) : AndroidViewModel(applica
         repository.insert(timePerforme)
     }
 
-    fun deleteAll() = viewModelScope.launch ( Dispatchers.IO) {
+    fun deleteAll() = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteAll()
     }
+
+
 }

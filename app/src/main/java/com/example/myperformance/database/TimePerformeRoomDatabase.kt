@@ -23,7 +23,8 @@ import java.util.*
 abstract class TimePerformeRoomDatabase : RoomDatabase() {
     abstract fun timePerformeDao(): TimePerformeDao
 
-    class TimePerformeDatabaseCallback(private val scope: CoroutineScope) : RoomDatabase.Callback() {
+    class TimePerformeDatabaseCallback(private val scope: CoroutineScope)
+        : RoomDatabase.Callback() {
 
         override fun onOpen(db: SupportSQLiteDatabase) {
             super.onOpen(db)
@@ -42,10 +43,13 @@ abstract class TimePerformeRoomDatabase : RoomDatabase() {
         private suspend fun fillDatabase(timePerformeDao: TimePerformeDao){
 
             var valuePerforme = TimePerforme(
-                    GregorianCalendar(2006, 5, 15).timeInMillis, 15)
+                    GregorianCalendar(2006, 5, 15).timeInMillis,
+                    15)
             timePerformeDao.insert(valuePerforme)
 
-            valuePerforme = TimePerforme(GregorianCalendar(2006, 5, 16).timeInMillis, 4)
+            valuePerforme = TimePerforme(
+                    GregorianCalendar(2006, 5, 16).timeInMillis,
+                    4)
             timePerformeDao.insert(valuePerforme)
 
             valuePerforme = TimePerforme(GregorianCalendar(2006, 0, 18).timeInMillis, 0)
@@ -86,10 +90,10 @@ abstract class TimePerformeRoomDatabase : RoomDatabase() {
                 scope: CoroutineScope
         ): TimePerformeRoomDatabase {
 
-//            val tempInstance = INSTANCE
-//            if (tempInstance != null) {
-//                return tempInstance
-//            }
+            val tempInstance = INSTANCE
+            if (tempInstance != null) {
+                return tempInstance
+            }
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                         context.applicationContext,

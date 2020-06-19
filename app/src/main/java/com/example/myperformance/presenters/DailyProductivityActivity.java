@@ -28,7 +28,7 @@ public class DailyProductivityActivity extends AppCompatActivity {
     private XYPlot plot1;
 
     GraphicPainter graphicPainter;
-
+    List<TimePerforme> liveData;
 
     //viewModel retrieving stored data from a database
     private TimePerformeViewModel viewModel;
@@ -39,28 +39,41 @@ public class DailyProductivityActivity extends AppCompatActivity {
         setContentView(R.layout.daily_productivity);
 
         plot1 = findViewById(R.id.plot);
-
+         final GraphicPainter painter = new GraphicPainter();
 
         viewModel = new ViewModelProvider(this).get(TimePerformeViewModel.class);
-        viewModel.getAllTimePerforme().observe(this, new Observer<List<TimePerforme>>() {
+        viewModel.getAllTimePerforme().observeForever(new Observer<List<TimePerforme>>() {
             @Override
             public void onChanged(List<TimePerforme> timePerformes) {
                 if (timePerformes.size() != 0) {
+
                     ReturningDataChart rDataChart = new ChartDataHolder(timePerformes);
                     keyDate = (List<? extends Number>) rDataChart.getListDayOfWeek();
                     valueTime = rDataChart.getListTimeValue();
-                    graphicPainter = new GraphicPainter();
-                    graphicPainter.paint(plot1, keyDate, valueTime);
+
+                    painter.paint(plot1, keyDate, valueTime);
                 }
             }
-
         });
+//        viewModel.getAllTimePerforme().observe(this, new Observer<List<TimePerforme>>() {
+//            @Override
+//            public void onChanged(List<TimePerforme> timePerformes) {
+//                if (timePerformes.size() != 0) {
+//                    viewModel.tim = timePerformes;
+//
+//                    ReturningDataChart rDataChart = new ChartDataHolder(timePerformes);
+//                    keyDate = (List<? extends Number>) rDataChart.getListDayOfWeek();
+//                    valueTime = rDataChart.getListTimeValue();
+//
+//                    painter.paint(plot1, keyDate, valueTime);
+//                }
+//
+//        });
 
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
     }
 }

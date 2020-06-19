@@ -27,7 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GraphicPainter {
+final public class GraphicPainter {
     private final String NAME_AXIS_X = "Дата";
     private final String NAME_AXIS_Y = "Время";
     private static final String MONTH_TITLE_SERIAS = "Производительность";
