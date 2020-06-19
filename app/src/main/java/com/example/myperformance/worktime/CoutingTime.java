@@ -4,14 +4,14 @@ import android.os.SystemClock;
 import android.widget.Chronometer;
 
 /**
- * обеспечивает работу таймера выполнения действия
+ * provides an action timer
  */
 public class CoutingTime {
-    //счетчик времени выполнения действия
+    //action time counter
     private Chronometer chronometerEmployment;
-    //флаг, обозначающий, был ли запущен таймер
+    //flag indicating whether the timer has been started
     private boolean running = false;
-    //хранит количество времени, прошедшее с запуска таймера
+    //stores the amount of time elapsed since the timer started
     private long pauseOffset;
 
     public long getPauseOffset() {
@@ -35,7 +35,7 @@ public class CoutingTime {
     }
 
     /**
-     * запустить таймер
+     * start timer
      */
     public void startCount() {
         if (!running) {
@@ -46,7 +46,7 @@ public class CoutingTime {
     }
 
     /**
-     * поставить таймер на паузу
+     * pause the timer
      */
     public void pauseCounting() {
         if (running) {
@@ -57,7 +57,7 @@ public class CoutingTime {
     }
 
     /**
-     * остановить таймер
+     * stop timer
      */
     public void stopCounting() {
         chronometerEmployment.stop();
@@ -67,7 +67,7 @@ public class CoutingTime {
     }
 
     /**
-     * перезапускает таймер при onPause
+     * restarts the timer when onPause
      */
     public void restartChronometr() {
         if (pauseOffset != 0)
@@ -75,7 +75,7 @@ public class CoutingTime {
     }
 
     /**
-     * рассчитывает сколько прошшло времени с начала запуска таймера
+     * calculates how much time has passed since the start of the timer
      */
     public void setCurrentTime() {
         if (running)

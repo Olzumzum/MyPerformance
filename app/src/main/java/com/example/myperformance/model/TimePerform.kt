@@ -10,9 +10,9 @@ import java.util.*
  * Stores performance data
  * (date when the time and time value were considered)
  */
-@Entity(tableName = "timeperforme_table")
-data class TimePerforme(
-        @ColumnInfo(name = "date_perf") val datePerfor: Long,
+@Entity(tableName = "timeperform_table")
+data class TimePerform(
+        @ColumnInfo(name = "date_perf") val datePerform: Long,
         @ColumnInfo(name = "time_perf") val timePerf: Int
 ) {
     @PrimaryKey(autoGenerate = true)

@@ -2,7 +2,7 @@ package com.example.myperformance.workCharts;
 
 import android.util.Log;
 
-import com.example.myperformance.model.TimePerforme;
+import com.example.myperformance.model.TimePerform;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,17 +20,15 @@ public class ChartDataHolder <E> implements ReturningDataChart {
     //time count list
     private List<Integer> valueTime = new ArrayList<>();
 
-
-
     /**
      * writing date and time data to lists for display in a graph
      */
     private void timeAndDateRecording(List<E> listValue) {
 
-        for (TimePerforme el : (List<TimePerforme>) listValue) {
+        for (TimePerform el : (List<TimePerform>) listValue) {
             //получаем дату - ключ
             Calendar infoDate = new GregorianCalendar();
-            infoDate.setTimeInMillis(el.getDatePerfor());
+            infoDate.setTimeInMillis(el.getDatePerform());
             //записываем в список
 
             Log.d("DaysMap", "день " + infoDate.get(Calendar.DAY_OF_MONTH) + "."

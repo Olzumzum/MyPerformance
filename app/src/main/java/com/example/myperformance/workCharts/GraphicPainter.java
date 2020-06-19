@@ -43,10 +43,10 @@ final public class GraphicPainter {
     private List<? extends Number> valueTime = new ArrayList<>();
 
     /**
-     * вызвать функции по отрисовке графика
-     * @param plot - передать пространство для отрисовки графика
-     * @param domainData - диапазон данных по оси Х
-     * @param rangeData - диапазон данных по оси Y
+     * call chart rendering functions
+     *@param plot - transfer space for plotting
+     *@param domainData - data range on the X axis
+     *@param rangeData - data range on the y axis
      */
     public void paint(XYPlot plot, List<? extends Number> domainData, List<? extends Number> rangeData) {
         this.plot = plot;
@@ -55,31 +55,33 @@ final public class GraphicPainter {
     }
 
     /**
-     * установить данные, необходимые для построения графика
-     * @param keyDate - данные по оси Х
-     * @param valueTime - данные по оси Y
+     * set the data needed to plot
+     *@param keyDate - X-axis data
+     *@param valueTime - data on the Y axis
      */
     private void setDataChart(List<? extends Number> keyDate, List<? extends Number> valueTime) {
         this.keyDate = keyDate;
         this.valueTime = valueTime;
 
-        //рассчет диапазона графика (минимального и максимального значения)
-        //для масштабирования
+        //calculation of the range of the graph (minimum and maximum values)
+        //to scale
         MAX_VALUE_X = keyDate.size() -1;
         MAX_VALUE_Y = searchMaxValue(valueTime);
     }
 
     /**
-     * найти максимальный элемент коллекции для правильного выполнения масштабирования
-     * @param list - коллекция, в которой осуществляется поиск максимума
-     * @return int-элемент - максимальный элемент коллекции
+     * find the maximum item in the collection for proper scaling
+     *@param list - collection in which maximum search is performed
+     *@return int-element - the maximum element of the collection
      */
     @org.jetbrains.annotations.Contract("null -> fail")
     private int searchMaxValue(List<? extends Number> list){
         if(list == null)
-            throw new NullPointerException("Список, в котором производится поиск максимума не создан");
+            throw new NullPointerException
+                    ("Список, в котором производится поиск максимума не создан");
         if(list.size() == 0)
-            throw new IndexOutOfBoundsException("Список, в котором производится поиск максимума не заполнен");
+            throw new IndexOutOfBoundsException
+                    ("Список, в котором производится поиск максимума не заполнен");
         int max = 0;
         for(Number el: list){
             int e = (Integer) el;
@@ -90,9 +92,9 @@ final public class GraphicPainter {
     }
 
     /**
-     * отрисовать пространство графика
-     * установить диапазон масштабирования
-     * и другие параметры для корректного отображения
+     * draw chart space
+     * set the zoom range
+     * and other parameters for correct display
      */
     private void paintChart() {
         addSeries();
@@ -103,14 +105,14 @@ final public class GraphicPainter {
 
         plot.getGraph().setPaddingRight(2);
 
-        // отрисовка шага по оси Х
+        //X-axis step drawing
         plot.setDomainStep(StepMode.SUBDIVIDE, 9);
 
-        // название осей
+        //axis name
         plot.setDomainLabel(NAME_AXIS_X);
         plot.setRangeLabel(NAME_AXIS_Y);
 
-        // формат итераций по осям
+        //axis iteration format
         plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.LEFT).
                 setFormat(new DecimalFormat("0"));
 
@@ -136,19 +138,19 @@ final public class GraphicPainter {
                 });
 
 
-        //настройка масштабирования
+        //zoom setting
         PanZoom panZoom = PanZoom.attach(plot, PanZoom.Pan.BOTH, PanZoom.Zoom.STRETCH_BOTH, PanZoom.ZoomLimit.OUTER);
         plot.getRegistry().setEstimator(new ZoomEstimator());
-        //задать границы графика
+        //set graph boundaries
         plot.getOuterLimits().set(MIN_VALUE_X, MAX_VALUE_X, MIN_VALUE_Y, MAX_VALUE_Y);
     }
 
     /**
-     * построить саму кривую графика
-     * задать данные для ее построения,
-     * определить стиль кривой
+     * plot the curve itself
+     *set data for its construction,
+     * define curve style
      */
-    public void addSeries() {
+    private void addSeries() {
         series = new SimpleXYSeries(valueTime,
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, MONTH_TITLE_SERIAS);
 
@@ -161,7 +163,7 @@ final public class GraphicPainter {
         series1Format.getVertexPaint().setStrokeWidth(PixelUtils.dpToPix(10));
         series1Format.getLinePaint().setStrokeWidth(PixelUtils.dpToPix(5));
 
-        //оформление градиентной заливки для графика
+        //design gradient fill for the chart
         Paint lineFill = new Paint();
         lineFill.setAlpha(200);
         lineFill.setShader(new LinearGradient

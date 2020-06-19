@@ -5,20 +5,20 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.myperformance.model.TimePerforme
+import com.example.myperformance.model.TimePerform
 
 
 ///**
 // * Dao to get performance table data
 // */
 @Dao
-interface TimePerformeDao{
-    @Query("SELECT * FROM timeperforme_table")
-    fun getAllDataAboutTime(): LiveData<List<TimePerforme>>
+interface TimePerformDao{
+    @Query("SELECT * FROM timeperform_table")
+    fun getAllDataAboutTime(): LiveData<List<TimePerform>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(timePerforme: TimePerforme)
+    suspend fun insert(timePerform: TimePerform)
 
-    @Query("DELETE FROM timeperforme_table")
+    @Query("DELETE FROM timeperform_table")
     suspend fun deleteAll()
 }

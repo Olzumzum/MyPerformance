@@ -9,8 +9,8 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.androidplot.xy.XYPlot;
 import com.example.myperformance.R;
-import com.example.myperformance.model.TimePerforme;
-import com.example.myperformance.viewModel.TimePerformeViewModel;
+import com.example.myperformance.model.TimePerform;
+import com.example.myperformance.viewModel.TimePerformViewModel;
 import com.example.myperformance.workCharts.ChartDataHolder;
 import com.example.myperformance.workCharts.GraphicPainter;
 import com.example.myperformance.workCharts.ReturningDataChart;
@@ -25,10 +25,6 @@ public class DailyProductivityActivity extends AppCompatActivity {
     private List<Integer> valueTime = new ArrayList<>();
     private XYPlot plot1;
 
-
-    //viewModel retrieving stored data from a database
-    private TimePerformeViewModel viewModel;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,13 +33,14 @@ public class DailyProductivityActivity extends AppCompatActivity {
         plot1 = findViewById(R.id.plot);
         final ReturningDataChart rDataChart = new ChartDataHolder();
 
-        viewModel = new ViewModelProvider(this).get(TimePerformeViewModel.class);
-        viewModel.getAllTimePerforme().observeForever(new Observer<List<TimePerforme>>() {
+        //viewModel retrieving stored data from a database
+        TimePerformViewModel viewModel = new ViewModelProvider(this).get(TimePerformViewModel.class);
+        viewModel.getAllTimePerform().observeForever(new Observer<List<TimePerform>>() {
             @Override
-            public void onChanged(List<TimePerforme> timePerformes) {
-                if (timePerformes.size() != 0) {
+            public void onChanged(List<TimePerform> timePerforms) {
+                if (timePerforms.size() != 0) {
                     //get data in a form convenient for dispaying on a chart
-                    rDataChart.setList(timePerformes);
+                    rDataChart.setList(timePerforms);
                     keyDate = (List<? extends Number>) rDataChart.getListDayOfWeek();
                     valueTime = rDataChart.getListTimeValue();
                     //draw a chart

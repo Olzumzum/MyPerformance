@@ -14,7 +14,7 @@ import com.example.myperformance.worktime.CoutingTime;
 
 public class MainActivity extends AppCompatActivity {
 
-    //обеспечивает работу с таймером
+    //provides a timer
     CoutingTime coutingTime;
 
     @Override
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Кнопки управления подсчета временем
+        //Time Control Buttons
         Button startCountingTime = findViewById(R.id.start_countring_time);
         Button pauseCountingTime = findViewById(R.id.pause_countring_time);
         Button stopCountingTime = findViewById(R.id.stop_countring_time);
@@ -68,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
         grathact.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DailyProductivityActivity.class );
+                Intent intent = new Intent(MainActivity.this,
+                        DailyProductivityActivity.class );
                 startActivity(intent);
             }
         });
@@ -77,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        //установить время, прошедшее с начала запуска таймера
+        //set the time elapsed since the start of the timer
         coutingTime.setCurrentTime();
-        //поменять флаг - выполнение таймера приостанавливается для перезапуска
+        //change flag - timer execution is paused to restart
         coutingTime.setRunning(false);
     }
 
