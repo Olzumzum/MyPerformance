@@ -9,9 +9,10 @@ import java.util.List;
  * о вычисленном значении времени.
  * Информация используется для построения графиков
  */
-public interface ReturningDataChart {
+public interface ReturningDataChart <E>{
     //возвращает списко дней, для которых подсчитывалось время
-    List<?> getListDayOfWeek();
+    List<E> getListDayOfWeek();
     //возвращает значение времени
     List<Integer> getListTimeValue();
+    void setList(List<E> list);
 }

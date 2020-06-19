@@ -20,9 +20,7 @@ public class ChartDataHolder <E> implements ReturningDataChart {
     //time count list
     private List<Integer> valueTime = new ArrayList<>();
 
-    public ChartDataHolder(List<E> list) {
-        timeAndDateRecording(list);
-    }
+
 
     /**
      * writing date and time data to lists for display in a graph
@@ -60,6 +58,11 @@ public class ChartDataHolder <E> implements ReturningDataChart {
     @Override
     public List<Integer> getListTimeValue() {
         return valueTime;
+    }
+
+    @Override
+    public void setList(List list) {
+        timeAndDateRecording(list);
     }
 
 

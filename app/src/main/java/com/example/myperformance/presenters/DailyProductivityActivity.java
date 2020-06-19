@@ -23,12 +23,8 @@ public class DailyProductivityActivity extends AppCompatActivity {
 
     private List<? extends Number> keyDate = new ArrayList<>();
     private List<Integer> valueTime = new ArrayList<>();
-    private static final String SERIES_TITLE = "Signthings in USA";
-
     private XYPlot plot1;
 
-    GraphicPainter graphicPainter;
-    List<TimePerforme> liveData;
 
     //viewModel retrieving stored data from a database
     private TimePerformeViewModel viewModel;
@@ -39,41 +35,24 @@ public class DailyProductivityActivity extends AppCompatActivity {
         setContentView(R.layout.daily_productivity);
 
         plot1 = findViewById(R.id.plot);
-         final GraphicPainter painter = new GraphicPainter();
+        final ReturningDataChart rDataChart = new ChartDataHolder();
 
         viewModel = new ViewModelProvider(this).get(TimePerformeViewModel.class);
         viewModel.getAllTimePerforme().observeForever(new Observer<List<TimePerforme>>() {
             @Override
             public void onChanged(List<TimePerforme> timePerformes) {
                 if (timePerformes.size() != 0) {
-
-                    ReturningDataChart rDataChart = new ChartDataHolder(timePerformes);
+                    //get data in a form convenient for dispaying on a chart
+                    rDataChart.setList(timePerformes);
                     keyDate = (List<? extends Number>) rDataChart.getListDayOfWeek();
                     valueTime = rDataChart.getListTimeValue();
-
-                    painter.paint(plot1, keyDate, valueTime);
+                    //draw a chart
+                    new GraphicPainter().paint(plot1, keyDate, valueTime);
                 }
             }
         });
-//        viewModel.getAllTimePerforme().observe(this, new Observer<List<TimePerforme>>() {
-//            @Override
-//            public void onChanged(List<TimePerforme> timePerformes) {
-//                if (timePerformes.size() != 0) {
-//                    viewModel.tim = timePerformes;
-//
-//                    ReturningDataChart rDataChart = new ChartDataHolder(timePerformes);
-//                    keyDate = (List<? extends Number>) rDataChart.getListDayOfWeek();
-//                    valueTime = rDataChart.getListTimeValue();
-//
-//                    painter.paint(plot1, keyDate, valueTime);
-//                }
-//
-//        });
+
 
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
 }
