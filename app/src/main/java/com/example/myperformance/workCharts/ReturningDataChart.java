@@ -4,15 +4,16 @@ import java.util.List;
 
 
 /**
- * интерфейс реализует передачу данных
- * о дне, за которое подсчитывалось время
- * о вычисленном значении времени.
- * Информация используется для построения графиков
+ * interface implements data transfer
+ * about the day for which time was calculated
+ * about the calculated value of time.
+ * Information is used to plot charts
  */
 public interface ReturningDataChart <E>{
-    //возвращает списко дней, для которых подсчитывалось время
+    //returns a list of days for which time was counted
     List<E> getListDayOfWeek();
-    //возвращает значение времени
+    //returns time value
     List<Integer> getListTimeValue();
+    //set all the data to separate them for display on the graph
     void setList(List<E> list);
 }
