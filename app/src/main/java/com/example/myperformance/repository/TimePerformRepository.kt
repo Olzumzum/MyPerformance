@@ -7,8 +7,7 @@ import com.example.myperformance.model.TimePerform
 
 
 class TimePerformRepository(private val timePerformDao: TimePerformDao) {
-    val allValueTimePerform: LiveData<List<TimePerform>> =
-            timePerformDao.getAllDataAboutTime()
+    val allValueTimePerform: LiveData<List<TimePerform>> = timePerformDao.getAllDataAboutTime()
 
     suspend fun insert(timePerform: TimePerform){
         timePerformDao.insert(timePerform)

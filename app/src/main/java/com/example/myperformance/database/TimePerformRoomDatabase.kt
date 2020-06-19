@@ -15,7 +15,7 @@ import java.util.*
 
 /**
  * Connecting to a database using a room
- * Database name = "time_performe_database"
+ * Database name = "time_perform_database"
  * Filling in database data
  */
 @Database(entities = arrayOf(TimePerform::class), version = 1, exportSchema = false)
@@ -42,13 +42,11 @@ abstract class TimePerformRoomDatabase : RoomDatabase() {
         private suspend fun fillDatabase(timePerformDao: TimePerformDao){
 
             var valuePerform = TimePerform(
-                    GregorianCalendar(2006, 5, 15).timeInMillis,
-                    15)
+                    GregorianCalendar(2006, 5, 15).timeInMillis, 15)
             timePerformDao.insert(valuePerform)
 
             valuePerform = TimePerform(
-                    GregorianCalendar(2006, 5, 16).timeInMillis,
-                    4)
+                    GregorianCalendar(2006, 5, 16).timeInMillis, 4)
             timePerformDao.insert(valuePerform)
 
             valuePerform = TimePerform(
@@ -114,7 +112,7 @@ abstract class TimePerformRoomDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                         context.applicationContext,
                         TimePerformRoomDatabase::class.java,
-                        "tp_database"
+                        "timePerf_database"
                 )
                         .addCallback(TimePerformDatabaseCallback(scope))
                         .build()
