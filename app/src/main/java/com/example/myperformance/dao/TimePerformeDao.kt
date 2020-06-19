@@ -7,11 +7,12 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.myperformance.model.TimePerforme
 
+
 ///**
 // * Dao to get performance table data
 // */
 @Dao
-interface TimePerformeDao {
+interface TimePerformeDao{
     @Query("SELECT * FROM timeperforme_table")
     fun getAllDataAboutTime(): LiveData<List<TimePerforme>>
 
