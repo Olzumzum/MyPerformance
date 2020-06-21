@@ -85,7 +85,6 @@ dependencies {
     androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
 
 
-
 }
 repositories {
     mavenCentral()

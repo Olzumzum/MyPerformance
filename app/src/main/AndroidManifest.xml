@@ -12,7 +12,6 @@
 
         <activity
             android:name=".presenters.ScrolbarActivity"
-            android:label="@string/title_activity_scrolbar"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
