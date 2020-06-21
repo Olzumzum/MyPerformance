@@ -1,4 +1,4 @@
-package com.example.myperformance.dao
+package com.example.myperformance.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

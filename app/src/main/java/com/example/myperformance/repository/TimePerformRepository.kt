@@ -2,7 +2,7 @@ package com.example.myperformance.repository
 
 import androidx.lifecycle.LiveData
 
-import com.example.myperformance.dao.TimePerformDao
+import com.example.myperformance.database.TimePerformDao
 import com.example.myperformance.model.TimePerform
 
 
