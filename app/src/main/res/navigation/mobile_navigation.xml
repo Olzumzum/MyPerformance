@@ -30,14 +30,14 @@
     </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.myperformance.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_awards"
+        android:name="com.example.myperformance.ui.awards.AwardsFragment"
+        android:label="@string/menu_awards"
+        tools:layout="@layout/fragment_awards" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.myperformance.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_app_info"
+        android:name="com.example.myperformance.ui.appinfo.AppInfoFragment"
+        android:label="@string/menu_app_info"
+        tools:layout="@layout/fragment_app_info" />
 </navigation>

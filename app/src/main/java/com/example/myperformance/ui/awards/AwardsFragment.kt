@@ -1,4 +1,4 @@
-package com.example.myperformance.ui.gallery
+package com.example.myperformance.ui.awards
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.myperformance.R
 
-class GalleryFragment : Fragment() {
+class AwardsFragment : Fragment() {
 
-    private lateinit var galleryViewModel: GalleryViewModel
+    private lateinit var galleryViewModel: AwardsViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -20,8 +20,9 @@ class GalleryFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_gallery, container, false)
+                ViewModelProviders.of(this).get(AwardsViewModel::class.java)
+
+        val root = inflater.inflate(R.layout.fragment_awards, container, false)
         val textView: TextView = root.findViewById(R.id.text_gallery)
         galleryViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it

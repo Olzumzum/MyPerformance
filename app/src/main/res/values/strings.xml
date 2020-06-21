@@ -1,20 +1,25 @@
 <resources>
+    <!--titile app -->
     <string name="app_name">MyPerformance</string>
-    <string name="start_counting_time">Старт</string>
-    <string name="pause_counting_time">Пауза</string>
-    <string name="stop_counting_time">Стоп</string>
+    <!-- Timer Activity -->
+    <string name="start_counting_time">Start</string>
+    <string name="pause_counting_time">Pause</string>
+    <string name="stop_counting_time">Stop</string>
+    <!--Chart Activity -->
     <string name="days_of_month_title_graph">Производительность по дням</string>
+    <!--ScrolBar -->
     <string name="title_activity_scrolbar">ScrolbarActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <!-- Scrolbar header -->
+    <string name="nav_header_title">Name User</string>
+    <string name="nav_header_subtitle">Profile ></string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
+    <!-- Scrolbar items -->
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_awards">Awards</string>
+    <string name="menu_app_info">Application information</string>
 
     <string name="home_second">Home Second</string>
 </resources>
