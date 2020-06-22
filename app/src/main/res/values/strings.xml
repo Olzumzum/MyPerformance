@@ -17,7 +17,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <!-- Scrolbar items -->
-    <string name="menu_home">Home</string>
+    <string name="menu_timer">Timer</string>
     <string name="menu_awards">Awards</string>
     <string name="menu_app_info">Application information</string>
 
