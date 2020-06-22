@@ -1,5 +1,6 @@
 package com.example.myperformance.ui.timer
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -26,7 +27,12 @@ class TimerFragment : Fragment(), View.OnClickListener {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        viewRoot = inflater.inflate(R.layout.fragment_timer, container, false)
+        val orientation = activity?.resources?.configuration?.orientation
+
+        if (orientation == Configuration.ORIENTATION_PORTRAIT)
+            viewRoot = inflater.inflate(R.layout.fragment_timer, container, false)
+        if(orientation == Configuration.ORIENTATION_LANDSCAPE)
+            viewRoot = inflater.inflate(R.layout.fragment_timer_horizontal, container, false)
 
 
         return viewRoot
