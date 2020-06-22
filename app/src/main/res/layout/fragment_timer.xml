@@ -93,11 +93,4 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp" />
 
-    <Button
-        android:id="@+id/grath_activity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="Button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
