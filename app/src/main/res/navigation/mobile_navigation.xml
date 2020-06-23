@@ -10,7 +10,9 @@
         android:name="com.example.myperformance.ui.timer.TimerFragment"
         android:label="@string/menu_timer"
         tools:layout="@layout/fragment_timer">
-
+        <action
+            android:id="@+id/action_nav_timer_to_nav_chart"
+            app:destination="@id/nav_chart" />
     </fragment>
 
     <fragment
@@ -24,10 +26,16 @@
         android:name="com.example.myperformance.ui.appinfo.AppInfoFragment"
         android:label="@string/menu_app_info"
         tools:layout="@layout/fragment_app_info" />
-    <activity
-        android:id="@+id/dailyProductivityActivity"
-        android:name="com.example.myperformance.presenters.DailyProductivityActivity"
+
+    <fragment
+        android:id="@+id/nav_chart"
+        android:name="com.example.myperformance.ui.chart.DailyProductivityFragment"
         android:label="daily_productivity"
-        tools:layout="@layout/daily_productivity" />
+        tools:layout="@layout/daily_productivity" >
+        <action
+            android:id="@+id/action_nav_chart_to_nav_timer"
+            app:destination="@id/nav_timer" />
+    </fragment>
+
 
 </navigation>

@@ -23,7 +23,7 @@
         <activity android:name=".presenters.MainActivity">
 
         </activity>
-        <activity android:name=".presenters.DailyProductivityActivity"></activity>
+        <activity android:name=".ui.chart.DailyProductivityFragment"></activity>
     </application>
 
 </manifest>

@@ -1,9 +1,13 @@
-package com.example.myperformance.presenters;
+package com.example.myperformance.ui.chart;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -19,18 +23,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DailyProductivityActivity extends AppCompatActivity {
+public class DailyProductivityFragment extends Fragment {
 
     private List<? extends Number> keyDate = new ArrayList<>();
     private List<Integer> valueTime = new ArrayList<>();
     private XYPlot plot1;
 
+    @Nullable
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.daily_productivity);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.daily_productivity, container, false);
 
-        plot1 = findViewById(R.id.plot);
+        plot1 = view.findViewById(R.id.plot);
         final ReturningDataChart rDataChart = new ChartDataHolder();
 
         //viewModel retrieving stored data from a database
@@ -49,7 +53,7 @@ public class DailyProductivityActivity extends AppCompatActivity {
             }
         });
 
-
+        return view;
     }
 
 }
