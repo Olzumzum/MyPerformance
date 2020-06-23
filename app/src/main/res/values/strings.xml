@@ -21,8 +21,7 @@
     <string name="menu_awards">Awards</string>
     <string name="menu_app_info">Application information</string>
 
-    <string name="home_second">Home Second</string>
+    <!-- Bottom nav bar -->
+    <string name="menu_chart">Chart</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

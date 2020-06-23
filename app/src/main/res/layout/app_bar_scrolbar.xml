@@ -22,4 +22,20 @@
 
     <include layout="@layout/content_scrolbar" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:layout_alignParentBottom="true"
+        app:popupTheme="@style/AppTheme.PopupOverlay"
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_menu_drawer"
+
+        app:itemRippleColor="@color/colorAccent"
+        app:labelVisibilityMode="labeled"
+        app:itemIconTint="@color/ap_white"
+
+        />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
