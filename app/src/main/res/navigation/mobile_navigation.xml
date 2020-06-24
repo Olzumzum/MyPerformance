@@ -9,11 +9,7 @@
         android:id="@+id/nav_timer"
         android:name="com.example.myperformance.ui.timer.TimerFragment"
         android:label="@string/menu_timer"
-        tools:layout="@layout/fragment_timer">
-        <action
-            android:id="@+id/action_nav_timer_to_nav_chart"
-            app:destination="@id/nav_chart" />
-    </fragment>
+        tools:layout="@layout/fragment_timer"/>
 
     <fragment
         android:id="@+id/nav_awards"
@@ -31,11 +27,12 @@
         android:id="@+id/nav_chart"
         android:name="com.example.myperformance.ui.chart.DailyProductivityFragment"
         android:label="daily_productivity"
-        tools:layout="@layout/daily_productivity" >
-        <action
-            android:id="@+id/action_nav_chart_to_nav_timer"
-            app:destination="@id/nav_timer" />
-    </fragment>
+        tools:layout="@layout/daily_productivity" />
+    <activity
+        android:id="@+id/nav_tab_chart"
+        android:name="com.example.myperformance.TabChartActivity"
+        android:label="activity_tab_chart"
+        tools:layout="@layout/activity_tab_chart" />
 
 
 </navigation>
