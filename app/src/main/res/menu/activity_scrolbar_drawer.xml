@@ -9,7 +9,7 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_timer" />
         <item
-            android:id="@+id/nav_awards"
+            android:id="@+id/nav_chart"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_awards" />
         <item
