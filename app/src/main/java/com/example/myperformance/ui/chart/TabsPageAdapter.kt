@@ -13,7 +13,7 @@ import java.lang.Exception
 class TabsPageAdapter(fm: FragmentManager, private val countItems: Int): FragmentStatePagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
         when(position){
-            0 -> return EmptyFragment1()
+            0 -> return DailyProductivityFragment()
             1 -> return EmptyFragment2()
             2 -> return EmptyFragment3()
             else -> throw Exception("Error in selection of fragment")
