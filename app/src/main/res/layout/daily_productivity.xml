@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/plot_layout"
     tools:context="com.example.myperformance.ui.chart.DailyProductivityFragment">
 
@@ -12,11 +13,7 @@
         android:id="@+id/plot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:paddingTop="10dp"
-        app:titleTextSize="16sp"
-        app:renderMode="use_background_thread"
-        app:title="@string/days_of_month_title_graph"
-        style="@style/APDefacto.Light"
-        />
+        android:background="#FFEB3B"
+        tools:layout_editor_absoluteY="0dp" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

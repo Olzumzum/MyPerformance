@@ -28,6 +28,15 @@ public class DailyProductivityFragment extends Fragment {
     private List<? extends Number> keyDate = new ArrayList<>();
     private List<Integer> valueTime = new ArrayList<>();
     private XYPlot plot1;
+    private String criterion;
+
+    DailyProductivityFragment(){
+        criterion = null;
+    }
+
+    DailyProductivityFragment(String criterion){
+        this.criterion = criterion;
+    }
 
     @Nullable
     @Override

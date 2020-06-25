@@ -14,8 +14,8 @@ class TabsPageAdapter(fm: FragmentManager, private val countItems: Int): Fragmen
     override fun getItem(position: Int): Fragment {
         when(position){
             0 -> return DailyProductivityFragment()
-            1 -> return EmptyFragment2()
-            2 -> return EmptyFragment3()
+            1 -> return DailyProductivityFragment()
+            2 -> return DailyProductivityFragment()
             else -> throw Exception("Error in selection of fragment")
         }
     }
