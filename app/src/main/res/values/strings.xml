@@ -8,9 +8,6 @@
     <!--Chart Activity -->
     <string name="days_of_month_title_graph">Производительность по дням</string>
     <!--ScrolBar -->
-    <string name="title_activity_scrolbar">ScrolbarActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <!-- Scrolbar header -->
     <string name="nav_header_title">Name User</string>
     <string name="nav_header_subtitle">Profile ></string>
