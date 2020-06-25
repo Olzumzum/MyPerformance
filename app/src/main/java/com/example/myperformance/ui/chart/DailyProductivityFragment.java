@@ -16,6 +16,7 @@ import com.example.myperformance.R;
 import com.example.myperformance.model.TimePerform;
 import com.example.myperformance.viewModel.TimePerformViewModel;
 import com.example.myperformance.workCharts.ChartDataHolder;
+import com.example.myperformance.workCharts.CriterionChart;
 import com.example.myperformance.workCharts.GraphicPainter;
 import com.example.myperformance.workCharts.ReturningDataChart;
 
@@ -28,13 +29,13 @@ public class DailyProductivityFragment extends Fragment {
     private List<? extends Number> keyDate = new ArrayList<>();
     private List<Integer> valueTime = new ArrayList<>();
     private XYPlot plot1;
-    private String criterion;
+    private CriterionChart criterion;
 
     DailyProductivityFragment(){
         criterion = null;
     }
 
-    DailyProductivityFragment(String criterion){
+    DailyProductivityFragment(CriterionChart criterion){
         this.criterion = criterion;
     }
 
