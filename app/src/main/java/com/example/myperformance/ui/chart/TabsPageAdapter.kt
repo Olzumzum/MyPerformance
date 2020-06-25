@@ -4,9 +4,6 @@ package com.example.myperformance.ui.chart
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.example.myperformance.EmptyFragment1
-import com.example.myperformance.EmptyFragment2
-import com.example.myperformance.EmptyFragment3
 import com.example.myperformance.workCharts.CriterionChart
 import java.lang.Exception
 
