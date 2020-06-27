@@ -8,5 +8,5 @@
     <color name="MyPerfDark">#1B46AB</color>
     <color name="MyPerfBackground">#FFFFFF</color>
     <color name="MyPerfAccent">#7413AA</color>
-    <color name="MyPerfMainShadow">#BFA838</color>
+    <color name="MyPerfBottomBarItem">#FFE87B</color>
 </resources>

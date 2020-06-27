@@ -9,7 +9,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/MyPerf">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -26,15 +26,15 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:theme="@style/MyPerf"
         android:background="?attr/colorPrimary"
-        android:layout_alignParentBottom="true"
-        app:popupTheme="@style/AppTheme.PopupOverlay"
         android:layout_gravity="bottom"
         app:menu="@menu/bottom_menu_drawer"
-
-        app:itemRippleColor="@color/colorAccent"
+        app:itemIconTint="@xml/bottom_navigation_selector"
         app:labelVisibilityMode="labeled"
-        app:itemIconTint="@color/ap_white"
+        app:itemTextColor="@xml/bottom_navigation_text_selector"
+
+
 
         />
 
