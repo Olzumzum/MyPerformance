@@ -8,6 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MyPerf" parent="Theme.AppCompat">
+        <item name="colorOnBackground">@color/MyPerfBackground</item>
+        <item name="colorPrimary">@color/MyPerfMain</item>
+        <item name="colorAccent">@color/MyPerfAccent</item>
+        <item name="colorPrimaryDark">@color/MyPerfDark</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
