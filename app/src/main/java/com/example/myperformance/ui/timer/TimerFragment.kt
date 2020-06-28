@@ -1,8 +1,6 @@
 package com.example.myperformance.ui.timer
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.ObjectAnimator
+import android.animation.*
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
@@ -13,6 +11,7 @@ import android.provider.CalendarContract
 import android.util.Log
 import android.view.*
 import android.view.animation.AnimationUtils
+import android.view.animation.LinearInterpolator
 import android.widget.Button
 import android.widget.Chronometer
 import androidx.annotation.RequiresApi
@@ -84,18 +83,11 @@ class TimerFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     }
 
     private fun colorize(v: View) {
-        val c = context?.let { ContextCompat.getColor(it, R.color.button_pressure) }
-        val k = context?.let { ContextCompat.getColor(it, R.color.MyPerfDark) }
-
-        if (c != null && k != null) {
-            val animator = ObjectAnimator.ofInt(v, "backgroundColor",
-                    c, k)
-            animator.duration = 200
-            animator.repeatCount = 1
-            animator.repeatMode = ObjectAnimator.REVERSE
-//        animator.disableViewDuringAnimation(startCoutingTime)
-            animator.start()
-        }
+        val set: Animator? = AnimatorInflater.loadAnimator(context, R.animator.button_pressure_animator)
+                .apply {
+                    setTarget(v)
+                    start()
+                }
         Log.d("MyLog", "Мы были в анимации")
     }
 
@@ -127,7 +119,9 @@ class TimerFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
                 coutingTime.stopCounting()
                 colorize(v)
             }
+
         }
+
 
 
     }
