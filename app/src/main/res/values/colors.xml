@@ -5,9 +5,10 @@
     <color name="colorAccent">#03DAC5</color>
     
     <color name="MyPerfMain">#FCD00D</color>
-    <color name="MyPerfDark">#1B46AB</color>
+    <color name="MyPerfDark">#2A53B5</color>
     <color name="MyPerfBackground">#FFFFFF</color>
     <color name="MyPerfAccent">#7413AA</color>
     <color name="MyPerfBottomBarItem">#FFE87B</color>
     <color name="shadow_icons">#9C8305</color>
+    <color name="button_pressure">#9792A7</color>
 </resources>

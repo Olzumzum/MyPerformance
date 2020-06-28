@@ -30,12 +30,9 @@
         android:background="?attr/colorPrimary"
         android:layout_gravity="bottom"
         app:menu="@menu/bottom_menu_drawer"
-        app:itemIconTint="@xml/bottom_navigation_selector"
+        app:itemIconTint="@drawable/bottom_navigation_selector"
         app:labelVisibilityMode="labeled"
-        app:itemTextColor="@xml/bottom_navigation_text_selector"
-
-
-
+        app:itemTextColor="@drawable/bottom_navigation_text_selector"
         />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

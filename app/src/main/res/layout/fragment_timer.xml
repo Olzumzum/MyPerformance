@@ -13,6 +13,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="52dp"
         android:layout_marginRight="52dp"
+
         android:text="@string/stop_counting_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/start_countring_time" />
@@ -46,6 +47,8 @@
         android:layout_width="123dp"
         android:layout_height="64dp"
         android:layout_marginTop="24dp"
+        android:textColor="@color/MyPerfBackground"
+        android:background="@drawable/button_background"
         android:text="@string/start_counting_time"
         app:layout_constraintEnd_toEndOf="@+id/chronometer_employment"
         app:layout_constraintStart_toStartOf="@+id/chronometer_employment"
