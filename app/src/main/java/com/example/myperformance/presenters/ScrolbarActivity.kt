@@ -13,6 +13,8 @@ import androidx.navigation.ui.*
 import com.example.myperformance.R
 import com.example.myperformance.ui.timer.TimerFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_scrolbar.*
+import kotlinx.android.synthetic.main.app_bar_scrolbar.*
 
 class ScrolbarActivity : AppCompatActivity() {
 
@@ -21,11 +23,8 @@ class ScrolbarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scrolbar)
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.nav_view)
         //nav controller
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
@@ -36,12 +35,9 @@ class ScrolbarActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         //bottom navigation mconnection
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         NavigationUI.setupWithNavController(bottomNavigationView, navController)
 
     }
-
-
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
