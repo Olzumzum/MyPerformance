@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:state_checked="true"
-        android:color="@color/MyPerfBackground"
+        android:color="@color/icon_checked_bottom_bar"
         />
-    <item android:color="@color/MyPerfBottomBarItem"/>
+    <item android:color="@color/icon_unchecked_bottom_bar"/>
 </selector>
