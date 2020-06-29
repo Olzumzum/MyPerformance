@@ -19,4 +19,6 @@
     <color name="icon_unchecked_bottom_bar">#FFE87B</color>
     <color name="shadow_icons">#9C8305</color>
 
+    <color name="default_text_color">#4A4848</color>
+
 </resources>
