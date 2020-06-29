@@ -15,6 +15,14 @@
         <item name="colorPrimaryDark">@color/MyPerfDark</item>
     </style>
 
+    <style name="MyPerf.Button">
+        <item name="android:layout_width">@dimen/button_width</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:background">@drawable/button_style</item>
+        <item name="android:textColor">@color/text_button</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

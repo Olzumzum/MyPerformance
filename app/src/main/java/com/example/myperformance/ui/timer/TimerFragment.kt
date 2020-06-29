@@ -20,7 +20,7 @@ import androidx.fragment.app.Fragment
 import com.example.myperformance.R
 import com.example.myperformance.worktime.CoutingTime
 
-class TimerFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
+class TimerFragment : Fragment(), View.OnClickListener{
     private val FLAG_TIMER_COUNT = "TimerCount"
     private val FLAG_RUNNING_TIMER = "RunningTimer"
 
@@ -82,42 +82,21 @@ class TimerFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
 
     }
 
-    private fun colorize(v: View) {
-        val set: Animator? = AnimatorInflater.loadAnimator(context, R.animator.button_pressure_animator)
-                .apply {
-                    setTarget(v)
-                    start()
-                }
-        Log.d("MyLog", "Мы были в анимации")
-    }
-
-    private fun ObjectAnimator.disableViewDuringAnimation(view: View) {
-        addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationStart(animation: Animator?) {
-                view.isEnabled = false
-            }
-
-            override fun onAnimationEnd(animation: Animator?) {
-                view.isEnabled = true
-            }
-        })
-    }
-
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.start_countring_time -> {
                 coutingTime.startCount()
-                colorize(v)
+//                colorize(v)
 
             }
             R.id.pause_countring_time -> {
 
                 coutingTime.pauseCounting()
-                colorize(v)
+//                colorize(v)
             }
             R.id.stop_countring_time -> {
                 coutingTime.stopCounting()
-                colorize(v)
+//                colorize(v)
             }
 
         }
@@ -141,23 +120,6 @@ class TimerFragment : Fragment(), View.OnClickListener, View.OnTouchListener {
     }
 
 
-    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-        val scaleUp = AnimationUtils.loadAnimation(this.activity, R.anim.button_up)
-        val scaleDown = AnimationUtils.loadAnimation(this.activity, R.anim.button_down)
-
-        when (event?.action) {
-            MotionEvent.ACTION_UP -> {
-                v?.startAnimation(scaleUp)
-
-
-            }
-            MotionEvent.ACTION_BUTTON_RELEASE -> {
-                v?.startAnimation(scaleDown)
-
-            }
-        }
-        return true
-    }
 
 
 }

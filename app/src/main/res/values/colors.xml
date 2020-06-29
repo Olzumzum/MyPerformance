@@ -10,5 +10,10 @@
     <color name="MyPerfAccent">#7413AA</color>
     <color name="MyPerfBottomBarItem">#FFE87B</color>
     <color name="shadow_icons">#9C8305</color>
-    <color name="button_pressure">#9792A7</color>
+    
+    <!-- Button colors -->
+    <color name="button_pressure">#8E59AB</color>
+    <color name="text_button">#FFFFFF</color>
+    <color name="button_border">#24499E</color>
+    <color name="button_border_pressed">#784991</color>
 </resources>
