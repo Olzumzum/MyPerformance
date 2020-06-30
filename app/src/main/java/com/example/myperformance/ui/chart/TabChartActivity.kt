@@ -25,6 +25,7 @@ class TabChartActivity : AppCompatActivity() {
         pager.adapter = TabsPageAdapter(supportFragmentManager, tabs.tabCount)
         pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
 
+
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabReselected(tab: TabLayout.Tab?) {
 
