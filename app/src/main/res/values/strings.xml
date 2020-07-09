@@ -26,5 +26,8 @@
     <string name="tab_week_chart">Week</string>
     <string name="tab_all_time_chart">All Time</string>
 
+    <!-- Error message -->
+    <string name="error_loading_data">Error loading data</string>
+
 
 </resources>
