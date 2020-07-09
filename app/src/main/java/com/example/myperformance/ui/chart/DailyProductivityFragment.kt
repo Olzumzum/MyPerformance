@@ -9,13 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.androidplot.xy.XYPlot
 import com.example.myperformance.R
-import com.example.myperformance.model.TimePerform
 import com.example.myperformance.viewModel.TimePerformViewModel
 import com.example.myperformance.workCharts.ChartDataHolder
-import com.example.myperformance.workCharts.CriterionChart
-import com.example.myperformance.workCharts.GraphicPainter
+import com.example.myperformance.model.CriterionChart
+import com.example.myperformance.workCharts.ReturningDataChart
 import kotlinx.android.synthetic.main.daily_productivity.*
 import java.lang.Exception
 
@@ -23,10 +21,10 @@ class DailyProductivityFragment() : Fragment() {
 
     lateinit var criteria: CriterionChart
 
-    val rDataChart: ChartDataHolder<Any>
+    val rDataChart: ReturningDataChart<Any>
 
     init {
-        rDataChart = ChartDataHolder()
+        rDataChart = ChartDataHolder<Any>()
     }
     private lateinit var viewModel: TimePerformViewModel
 
@@ -55,10 +53,11 @@ class DailyProductivityFragment() : Fragment() {
         }
     }
 
-    private fun loadData(list: List<TimePerform>){
+    private fun <E> loadData(list: List<E>){
         rDataChart.setList(list)
         val keyDate: List<Number> = rDataChart.listDayOfWeek as List<Number>
         val valueTime = rDataChart.listTimeValue
+        GraphicPainter().paint(plot, keyDate, valueTime)
     }
 
     private fun showError(context: Context){

@@ -4,7 +4,7 @@ package com.example.myperformance.ui.chart
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.example.myperformance.workCharts.CriterionChart
+import com.example.myperformance.model.CriterionChart
 import java.lang.Exception
 
 

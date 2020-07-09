@@ -1,4 +1,4 @@
-package com.example.myperformance.workCharts
+package com.example.myperformance.model
 
 enum class CriterionChart {
     TODAY,

@@ -1,4 +1,4 @@
-package com.example.myperformance.workCharts;
+package com.example.myperformance.ui.chart;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
