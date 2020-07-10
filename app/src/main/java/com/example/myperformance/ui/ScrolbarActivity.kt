@@ -1,4 +1,4 @@
-package com.example.myperformance.presenters
+package com.example.myperformance.ui
 
 import android.os.Bundle
 import android.util.Log

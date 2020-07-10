@@ -10,10 +10,10 @@ import java.lang.Exception
 
 class TabsPageAdapter(fm: FragmentManager, private val countItems: Int): FragmentStatePagerAdapter(fm) {
     override fun getItem(position: Int): Fragment {
-        when(position){
-            0 -> return DailyProductivityFragment(CriterionChart.TODAY)
-            1 -> return DailyProductivityFragment(CriterionChart.WEEK)
-            2 -> return DailyProductivityFragment()
+        return when(position){
+            0 -> DailyProductivityFragment(CriterionChart.TODAY)
+            1 -> DailyProductivityFragment(CriterionChart.WEEK)
+            2 -> DailyProductivityFragment(CriterionChart.ALL)
             else -> throw Exception("Error in selection of fragment")
         }
     }

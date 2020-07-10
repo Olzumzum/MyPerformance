@@ -2,5 +2,6 @@ package com.example.myperformance.model
 
 enum class CriterionChart {
     TODAY,
-    WEEK
+    WEEK,
+    ALL
 }

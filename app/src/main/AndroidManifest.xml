@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.chart.TabChartActivity" />
         <activity
-            android:name=".presenters.ScrolbarActivity"
+            android:name=".ui.ScrolbarActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />

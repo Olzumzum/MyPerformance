@@ -1,4 +1,4 @@
-package com.example.myperformance.workCharts;
+package com.example.myperformance.presenters.workCharts;
 
 import android.util.Log;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * Prepares data for presentation on a chart
  * @param <E>
  */
-public class ChartDataHolder <E> implements ReturningDataChart {
+public class ChartDataHolder <E> implements ReturningDataChart<E> {
 
     //list of dates on which the count was made
     private List<E> valueDate = new ArrayList<>();
@@ -46,7 +46,7 @@ public class ChartDataHolder <E> implements ReturningDataChart {
      * @return list of days
      */
     @Override
-    public  List<?> getListDayOfWeek() {
+    public  List<E> getListDayOfWeek() {
         return valueDate;
     }
 
