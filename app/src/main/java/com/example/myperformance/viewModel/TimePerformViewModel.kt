@@ -38,8 +38,8 @@ class TimePerformViewModel(application: Application) : AndroidViewModel(applicat
     private fun getDataByPeriod(): LiveData<List<TimePerform>> {
         return when (criterionChart) {
             CriterionChart.ALL -> repository.getAllData()
-            CriterionChart.TODAY -> repository.getAllData()
-            CriterionChart.WEEK -> repository.getAllData()
+            CriterionChart.TODAY -> repository.getDataToday()
+            CriterionChart.WEEK -> repository.getDataPeriod()
         }
     }
 
