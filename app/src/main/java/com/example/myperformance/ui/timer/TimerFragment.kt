@@ -54,6 +54,7 @@ class TimerFragment : Fragment(), View.OnClickListener{
         val pauseCoutingTime = viewRoot?.findViewById<Button>(R.id.pause_countring_time)
         val stopCoutingTime = viewRoot?.findViewById<Button>(R.id.stop_countring_time)
 
+
         val chronometerEmployment = viewRoot?.findViewById<Chronometer>(R.id.chronometer_employment)
 
         coutingTime = CoutingTime(chronometerEmployment)
@@ -86,17 +87,15 @@ class TimerFragment : Fragment(), View.OnClickListener{
         when (v?.id) {
             R.id.start_countring_time -> {
                 coutingTime.startCount()
-//                colorize(v)
 
             }
             R.id.pause_countring_time -> {
 
                 coutingTime.pauseCounting()
-//                colorize(v)
             }
             R.id.stop_countring_time -> {
                 coutingTime.stopCounting()
-//                colorize(v)
+
             }
 
         }
