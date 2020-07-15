@@ -1,4 +1,4 @@
-package com.example.myperformance.worktime;
+package com.example.myperformance.ui.timer;
 
 import android.os.SystemClock;
 import android.widget.Chronometer;
@@ -6,7 +6,7 @@ import android.widget.Chronometer;
 /**
  * provides an action timer
  */
-public class CoutingTime {
+public class CoutingTimeView {
     //action time counter
     private Chronometer chronometerEmployment;
     //flag indicating whether the timer has been started
@@ -30,7 +30,7 @@ public class CoutingTime {
         this.pauseOffset = pauseOffset;
     }
 
-    public CoutingTime(Chronometer chronometerEmployment) {
+    public CoutingTimeView(Chronometer chronometerEmployment) {
         this.chronometerEmployment = chronometerEmployment;
     }
 
