@@ -16,7 +16,7 @@ class TimePerformViewModel(application: Application) : AndroidViewModel(applicat
     lateinit var criterionChart: CriterionChart
 
     init {
-        val timePerformDao = TimePerformRoomDatabase.getDatabase(application, viewModelScope)
+        val timePerformDao = TimePerformRoomDatabase.getDatabase(application)
                 .timePerformDao()
         repository = TimePerformRepository(timePerformDao)
 

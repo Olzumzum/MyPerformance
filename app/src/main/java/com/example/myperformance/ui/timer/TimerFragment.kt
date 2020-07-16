@@ -90,6 +90,7 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
             }
             R.id.stop_countring_time -> {
                 coutingTimeView.stopCounting()
+                timerPresenter.saveTime(coutingTimeView.finishTimeValue)
 
             }
 

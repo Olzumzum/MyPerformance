@@ -64,7 +64,7 @@ public class CoutingTimeView {
     public void stopCounting() {
         chronometerEmployment.stop();
         running = false;
-        finishTimeValue = pauseOffset;
+        finishTimeValue = chronometerEmployment.getBase();
         pauseOffset = 0;
         chronometerEmployment.setBase(SystemClock.elapsedRealtime());
     }

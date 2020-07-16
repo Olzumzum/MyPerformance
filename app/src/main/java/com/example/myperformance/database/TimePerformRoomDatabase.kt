@@ -7,8 +7,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.myperformance.model.TimePerform
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.util.*
 
 
@@ -100,12 +99,15 @@ abstract class TimePerformRoomDatabase : RoomDatabase() {
         private var INSTANCE: TimePerformRoomDatabase? = null
 
         fun getDatabase(
-                context: Context,
-                scope: CoroutineScope
+                context: Context
         ): TimePerformRoomDatabase {
 
             val tempInstance = INSTANCE
             if (tempInstance != null) return tempInstance
+
+            val handler = CoroutineExceptionHandler { _, exception ->
+                println("Caught during database creation --> $exception")
+            }
 
             synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -113,7 +115,7 @@ abstract class TimePerformRoomDatabase : RoomDatabase() {
                         TimePerformRoomDatabase::class.java,
                         "timePerf_database"
                 )
-                        .addCallback(TimePerformDatabaseCallback(scope))
+                        .addCallback(TimePerformDatabaseCallback(CoroutineScope(Dispatchers.IO)))
                         .build()
 
                 INSTANCE = instance
