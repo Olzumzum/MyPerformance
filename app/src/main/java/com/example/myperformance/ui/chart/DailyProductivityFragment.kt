@@ -13,8 +13,8 @@ import com.example.myperformance.R
 import com.example.myperformance.viewModel.TimePerformViewModel
 
 import com.example.myperformance.model.CriterionChart
-import com.example.myperformance.presenters.workCharts.ChartDataHolder
-import com.example.myperformance.presenters.workCharts.ReturningDataChart
+import com.example.myperformance.presenters.ChartDataHolder
+import com.example.myperformance.presenters.ReturningDataChart
 
 import kotlinx.android.synthetic.main.daily_productivity.*
 import java.lang.Exception
