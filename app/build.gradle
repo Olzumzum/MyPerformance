@@ -90,8 +90,7 @@ dependencies {
     //Moxy
     implementation "com.github.moxy-community:moxy:$moxyVersion"
     kapt "com.github.moxy-community:moxy-compiler:$moxyVersion"
-    implementation "com.github.moxy-community:moxy-app-compat:$moxyVersion"
-
+    implementation "com.github.moxy-community:moxy-androidx:$moxyVersion"
 }
 repositories {
     mavenCentral()

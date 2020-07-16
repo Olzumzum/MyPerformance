@@ -5,14 +5,21 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Button
 import android.widget.Chronometer
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.myperformance.R
+import com.example.myperformance.presenters.TimerPresenter
+import moxy.MvpAppCompatFragment
+import moxy.presenter.InjectPresenter
 
-class TimerFragment : Fragment(), View.OnClickListener {
+class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
     private val FLAG_TIMER_COUNT = "TimerCount"
     private val FLAG_RUNNING_TIMER = "RunningTimer"
 
     private var viewRoot: View? = null
+
+    @InjectPresenter
+    lateinit var timerPresenter: TimerPresenter
 
 
     //provides a time
@@ -103,6 +110,10 @@ class TimerFragment : Fragment(), View.OnClickListener {
         outState.putLong(FLAG_TIMER_COUNT, coutingTimeView.pauseOffset)
         outState.putBoolean(FLAG_RUNNING_TIMER, coutingTimeView.running)
         super.onSaveInstanceState(outState)
+    }
+
+    override fun showError() {
+        Toast.makeText(this.context, "Error saving data", Toast.LENGTH_SHORT).show()
     }
 
 

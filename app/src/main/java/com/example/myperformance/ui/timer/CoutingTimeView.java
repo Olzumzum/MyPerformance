@@ -6,7 +6,7 @@ import android.widget.Chronometer;
 /**
  * provides an action timer
  */
-public class CoutingTimeView implements TimerView {
+public class CoutingTimeView {
     //action time counter
     private Chronometer chronometerEmployment;
     //flag indicating whether the timer has been started
@@ -67,7 +67,6 @@ public class CoutingTimeView implements TimerView {
         finishTimeValue = pauseOffset;
         pauseOffset = 0;
         chronometerEmployment.setBase(SystemClock.elapsedRealtime());
-        saveTimeData();
     }
 
     /**
@@ -86,8 +85,8 @@ public class CoutingTimeView implements TimerView {
             pauseOffset = SystemClock.elapsedRealtime() - chronometerEmployment.getBase();
     }
 
-    @Override
-    public long saveTimeData() {
+
+    public long getFinishTimeValue() {
         return finishTimeValue;
     }
 }
