@@ -11,6 +11,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.ui.*
 import com.example.myperformance.R
+import com.example.myperformance.di.ApplicationComponent
 import com.example.myperformance.ui.timer.TimerFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_scrolbar.*

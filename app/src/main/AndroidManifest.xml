@@ -3,6 +3,7 @@
     package="com.example.myperformance">
 
     <application
+        android:name=".di.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,7 +20,6 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.chart.DailyProductivityFragment" />
     </application>
 
 </manifest>
