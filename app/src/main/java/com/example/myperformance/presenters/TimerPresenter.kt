@@ -12,6 +12,7 @@ import java.util.*
 class TimerPresenter: MvpPresenter<TimerView>() {
     private val TAG = "MyLog"
 
+
     fun saveTime(time: Long){
         if(time < 0)
             viewState.showError()

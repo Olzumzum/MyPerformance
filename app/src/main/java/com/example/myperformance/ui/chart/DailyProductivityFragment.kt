@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.myperformance.R
+import com.example.myperformance.app.App
 import com.example.myperformance.viewModel.TimePerformViewModel
 
 import com.example.myperformance.model.CriterionChart
@@ -66,7 +67,9 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment()
     }
 
 
-
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+    }
 
 
 }

@@ -1,13 +1,12 @@
 package com.example.myperformance.di
 
-import com.example.myperformance.ui.ScrolbarActivity
+import com.example.myperformance.ui.chart.DailyProductivityFragment
 import com.example.myperformance.ui.timer.TimerFragment
 import dagger.Component
-import javax.inject.Singleton
 
-@Singleton
 @Component(modules = [ApplicationModule::class])
-interface ApplicationComponent {
+interface AppComponent {
     fun inject(fragment: TimerFragment)
+    fun inject(fragment: DailyProductivityFragment)
 
 }

@@ -1,17 +1,15 @@
-package com.example.myperformance.ui.chart
+package com.example.myperformance.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toolbar
 import androidx.navigation.ui.AppBarConfiguration
 
 import com.example.myperformance.R
+import com.example.myperformance.ui.chart.TabsPageAdapter
 import com.google.android.material.tabs.TabLayout
 
 
 import kotlinx.android.synthetic.main.activity_tab_chart.*
-import kotlinx.android.synthetic.main.app_bar_scrolbar.*
 
 
 class TabChartActivity : AppCompatActivity() {

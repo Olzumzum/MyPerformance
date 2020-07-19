@@ -7,9 +7,8 @@ import android.view.*
 import android.widget.Button
 import android.widget.Chronometer
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.example.myperformance.R
-import com.example.myperformance.di.App
+import com.example.myperformance.app.App
 import com.example.myperformance.presenters.TimerPresenter
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -120,7 +119,7 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
     }
 
     override fun onAttach(context: Context) {
-        (context.applicationContext as App).applicationComponent().inject(this)
+        (context.applicationContext as App).appComponent().inject(this)
         super.onAttach(context)
     }
 
