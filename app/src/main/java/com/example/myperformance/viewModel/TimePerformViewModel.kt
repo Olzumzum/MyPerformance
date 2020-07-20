@@ -1,13 +1,17 @@
 package com.example.myperformance.viewModel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
+import com.example.myperformance.app.App
+import com.example.myperformance.database.TimePerformDao
 import com.example.myperformance.database.TimePerformRoomDatabase
 import com.example.myperformance.model.CriterionChart
 import com.example.myperformance.model.TimePerform
 import com.example.myperformance.repository.TimePerformRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
 class TimePerformViewModel(application: Application) : AndroidViewModel(application) {
@@ -16,10 +20,7 @@ class TimePerformViewModel(application: Application) : AndroidViewModel(applicat
     lateinit var criterionChart: CriterionChart
 
     init {
-        val timePerformDao = TimePerformRoomDatabase.getDatabase(application)
-                .timePerformDao()
-        repository = TimePerformRepository(timePerformDao)
-
+        repository = (application as App).appComponent().getTimePerformRepository()
     }
 
     fun initialization() {

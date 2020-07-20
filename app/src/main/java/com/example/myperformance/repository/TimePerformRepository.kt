@@ -6,9 +6,10 @@ import com.example.myperformance.database.TimePerformDao
 import com.example.myperformance.model.CriterionChart
 import com.example.myperformance.model.TimePerform
 import java.util.*
+import javax.inject.Inject
 
 
-class TimePerformRepository(private val timePerformDao: TimePerformDao) {
+class TimePerformRepository (private val timePerformDao: TimePerformDao) {
 
     lateinit var criterionChart: CriterionChart
     val allTimePerform = timePerformDao.getAllDataAboutTime()

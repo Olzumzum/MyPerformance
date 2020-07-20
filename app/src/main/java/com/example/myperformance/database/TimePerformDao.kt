@@ -11,6 +11,7 @@ import com.example.myperformance.model.TimePerform
 /**
  * Dao to get performance table data
  */
+
 @Dao
 interface TimePerformDao{
     @Query("SELECT * FROM timeperform_table")
