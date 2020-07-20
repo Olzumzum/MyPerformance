@@ -24,14 +24,18 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment()
 
     private val rDataChart: ReturningDataChart<Any>
     private lateinit var viewModel: TimePerformViewModel
+    private val dateFromat: String
 
     init {
         rDataChart = ChartDataHolder<Any>()
-
+        when (criterionChart) {
+            CriterionChart.TODAY -> dateFromat = "h:mm a"
+            else -> dateFromat = "dd.MM"
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.daily_productivity,container, false)
+        val view = inflater.inflate(R.layout.daily_productivity, container, false)
 
         return view
     }
@@ -44,7 +48,7 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment()
         viewModel.initialization()
 
         viewModel.allTimePerform.observeForever {
-            if(it.size != 0){
+            if (it.size != 0) {
                 try {
                     loadData(it)
                 } catch (ex: Exception) {
@@ -54,14 +58,16 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment()
         }
     }
 
-    private fun <E> loadData(list: List<E>){
+    private fun <E> loadData(list: List<E>) {
         rDataChart.setList(list)
         val keyDate: List<Number> = rDataChart.listDayOfWeek as List<Number>
         val valueTime = rDataChart.listTimeValue
-        GraphicPainter().paint(plot, keyDate, valueTime)
+        val painer = GraphicPainter()
+        painer.setFormat(dateFromat)
+        painer.paint(plot, keyDate, valueTime)
     }
 
-    private fun showError(context: Context){
+    private fun showError(context: Context) {
         Log.d("MyLog", "Error message")
         Toast.makeText(context, R.string.error_loading_data, Toast.LENGTH_LONG).show()
     }

@@ -1,6 +1,5 @@
 package com.example.myperformance.ui.chart;
 
-import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
@@ -41,6 +40,8 @@ final public class GraphicPainter {
     private SimpleXYSeries series;
     private List<? extends Number> keyDate = new ArrayList<>();
     private List<? extends Number> valueTime = new ArrayList<>();
+
+    private SimpleDateFormat dateFormat;
 
     /**
      * call chart rendering functions
@@ -118,8 +119,8 @@ final public class GraphicPainter {
 
         plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).
                 setFormat(new Format() {
-                    @SuppressLint("SimpleDateFormat")
-                    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM");
+
+
 
                     @Override
                     public StringBuffer format(Object obj,
@@ -172,6 +173,10 @@ final public class GraphicPainter {
         series1Format.setFillPaint(lineFill);
 
         plot.addSeries(series, series1Format);
+    }
+
+    public void setFormat(String dateFormat){
+        this.dateFormat = new SimpleDateFormat(dateFormat);
     }
 
 }
