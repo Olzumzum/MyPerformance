@@ -19,6 +19,7 @@ class TimePerformViewModel(application: Application) : AndroidViewModel(applicat
         repository = (getApplication() as App).appComponent().timePerformRepository()
     }
 
+    //ЧТО СО СКОУПОМ???????????????
     fun initialization() {
         allTimePerform = getDataByPeriod()
     }
@@ -28,6 +29,10 @@ class TimePerformViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     fun deleteAll() = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteAll()
+    }
+
+    fun getDataToday()= viewModelScope.launch(Dispatchers.IO) {
         repository.deleteAll()
     }
 

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Button
 import android.widget.Chronometer
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.myperformance.R
 import com.example.myperformance.app.App
@@ -23,6 +24,7 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
     lateinit var startCoutingTime: Button
     lateinit var pauseCoutingTime: Button
     lateinit var stopCoutingTime: Button
+    lateinit var progressBarTimer: ProgressBar
 
     @InjectPresenter
     lateinit var timerPresenter: TimerPresenter
@@ -56,6 +58,7 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
         startCoutingTime = viewRoot?.findViewById<Button>(R.id.start_countring_time)!!
         pauseCoutingTime = viewRoot?.findViewById<Button>(R.id.pause_countring_time)!!
         stopCoutingTime = viewRoot?.findViewById<Button>(R.id.stop_countring_time)!!
+        progressBarTimer = viewRoot?.findViewById(R.id.progressBarTimer)!!
 
         // getting the application to initialize the repository
         timerPresenter.application = activity?.application
@@ -131,9 +134,15 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
         startCoutingTime.isEnabled = false
         pauseCoutingTime.isEnabled = false
         stopCoutingTime.isEnabled = false
+        progressBarTimer.visibility = View.VISIBLE
     }
 
     override fun showButton() {
+        startCoutingTime.isEnabled = true
+        pauseCoutingTime.isEnabled = true
+        stopCoutingTime.isEnabled = true
+        progressBarTimer.visibility = View.GONE
+
     }
 
     override fun onAttach(context: Context) {
