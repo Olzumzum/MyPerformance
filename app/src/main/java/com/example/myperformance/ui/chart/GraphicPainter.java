@@ -18,7 +18,6 @@ import com.androidplot.xy.XYGraphWidget;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.ZoomEstimator;
 
-import java.text.DecimalFormat;
 import java.text.FieldPosition;
 import java.text.Format;
 import java.text.ParsePosition;
@@ -100,8 +99,8 @@ final public class GraphicPainter {
     private void paintChart() {
         addSeries();
 
-        plot.setRangeBoundaries(0, 10, BoundaryMode.AUTO);
-        plot.setDomainBoundaries(0, 7, BoundaryMode.FIXED);
+        plot.setRangeBoundaries(0, 16, BoundaryMode.AUTO);
+        plot.setDomainBoundaries(0, 16, BoundaryMode.AUTO);
         plot.setBorderStyle(Plot.BorderStyle.NONE, null, null);
 
         plot.getGraph().setPaddingRight(2);
@@ -114,14 +113,11 @@ final public class GraphicPainter {
         plot.setRangeLabel(NAME_AXIS_Y);
 
         //axis iteration format
-        plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.LEFT).
-                setFormat(new DecimalFormat("0"));
+//        plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.LEFT).
+//                setFormat(new DecimalFormat("0"));
 
         plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).
                 setFormat(new Format() {
-
-
-
                     @Override
                     public StringBuffer format(Object obj,
                                                @NonNull StringBuffer toAppendTo,

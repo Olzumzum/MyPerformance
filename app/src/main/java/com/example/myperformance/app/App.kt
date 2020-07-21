@@ -15,7 +15,7 @@ class App: Application() {
 
     fun appComponent() = appComponent
 
-    fun createAppComponent() {
+    private fun createAppComponent() {
        appComponent = DaggerAppComponent.builder()
                .applicationModule(ApplicationModule(this))
                .build()

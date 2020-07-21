@@ -10,8 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.myperformance.R
-import com.example.myperformance.app.App
-import com.example.myperformance.viewModel.TimePerformViewModel
+import com.example.myperformance.presenters.viewModel.TimePerformViewModel
 
 import com.example.myperformance.model.CriterionChart
 import com.example.myperformance.presenters.ChartDataHolder
@@ -59,9 +58,17 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment()
     }
 
     private fun <E> loadData(list: List<E>) {
+//        list as List<TimePerform>
+//        Log.e("MyLog", "criteria $criterionChart")
+//        list.forEach {
+//            val date = GregorianCalendar()
+//            date.timeInMillis = it.datePerform
+//
+//            Log.e("MyLog", "value ${date.time} ${it.timePerf}")
+//        }
         rDataChart.setList(list)
         val keyDate: List<Number> = rDataChart.listDayOfWeek as List<Number>
-        val valueTime = rDataChart.listTimeValue
+        val valueTime: List<Number> = rDataChart.listTimeValue as List<Number>
         val painer = GraphicPainter()
         painer.setFormat(dateFromat)
         painer.paint(plot, keyDate, valueTime)

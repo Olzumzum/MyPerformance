@@ -23,7 +23,7 @@ class TimePerformRepository(private val timePerformDao: TimePerformDao) {
         timePerformDao.deleteAll()
     }
 
-    fun getAllData() = timePerformDao.getAllDataAboutTime()
+    fun getAllData(): LiveData<List<TimePerform>> = timePerformDao.getAllDataAboutTime()
 
     fun getDataByPeriod(): LiveData<List<TimePerform>> {
         val start = GregorianCalendar(2020, 5, 10).timeInMillis
@@ -31,18 +31,13 @@ class TimePerformRepository(private val timePerformDao: TimePerformDao) {
         return timePerformDao.getDataByPeriod(start, finish)
     }
 
-    fun getDataByOneDay(date: Long): LiveData<List<TimePerform>> {
-        val tomorrow = getListOneDay()
-        return timePerformDao.getDataByOneDay(date, tomorrow)
-    }
-
     fun getDataToday(): LiveData<List<TimePerform>> {
         val tommorow = getListOneDay()
 
-        return timePerformDao.getDataByOneDay(today = GregorianCalendar().timeInMillis, tomorrow = tommorow)
+        return timePerformDao.getDataByPeriod(GregorianCalendar().timeInMillis, tommorow)
     }
 
-    fun getListOneDay(): Long {
+    private fun getListOneDay(): Long {
         val tomorrow = GregorianCalendar()
         tomorrow.add(Calendar.DATE, 1)
         return tomorrow.timeInMillis

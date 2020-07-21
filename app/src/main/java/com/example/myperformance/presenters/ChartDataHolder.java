@@ -1,7 +1,5 @@
 package com.example.myperformance.presenters;
 
-import android.util.Log;
-
 import com.example.myperformance.model.TimePerform;
 
 import java.util.ArrayList;
@@ -18,7 +16,7 @@ public class ChartDataHolder <E> implements ReturningDataChart<E> {
     //list of dates on which the count was made
     private List<E> valueDate = new ArrayList<>();
     //time count list
-    private List<Integer> valueTime = new ArrayList<>();
+    private List<E> valueTime = new ArrayList<>();
 
 
     /**
@@ -31,14 +29,9 @@ public class ChartDataHolder <E> implements ReturningDataChart<E> {
             Calendar infoDate = new GregorianCalendar();
             infoDate.setTimeInMillis(el.getDatePerform());
             //записываем в список
-
-            Log.d("DaysMap", "день " + infoDate.get(Calendar.DAY_OF_MONTH) + "."
-                    + infoDate.get(Calendar.MONTH) + " время " + el.getTimePerf());
-
-
             valueDate.add((E) infoDate.getTime());
             //записываем в список данные о времени
-            valueTime.add(el.getTimePerf());
+            valueTime.add((E) Integer.valueOf(el.getTimePerf()));
         }
     }
 
@@ -55,7 +48,7 @@ public class ChartDataHolder <E> implements ReturningDataChart<E> {
      * @return time value list
      */
     @Override
-    public List<Integer> getListTimeValue() {
+    public List<E> getListTimeValue() {
         return valueTime;
     }
 

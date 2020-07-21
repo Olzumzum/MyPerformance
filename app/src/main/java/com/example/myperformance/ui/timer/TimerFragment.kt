@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.example.myperformance.R
 import com.example.myperformance.app.App
 import com.example.myperformance.presenters.TimerPresenter
+import com.example.myperformance.view.TimerView
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 
@@ -19,12 +20,17 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
 
     private var viewRoot: View? = null
 
+    lateinit var startCoutingTime: Button
+    lateinit var pauseCoutingTime: Button
+    lateinit var stopCoutingTime: Button
+
     @InjectPresenter
     lateinit var timerPresenter: TimerPresenter
 
 
     //provides a time
     lateinit var coutingTimeView: CoutingTimeView
+
 
 
     override fun onCreateView(
@@ -40,16 +46,19 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
             viewRoot = inflater.inflate(R.layout.fragment_timer_horizontal, container, false)
 
 
+
         return viewRoot
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val startCoutingTime = viewRoot?.findViewById<Button>(R.id.start_countring_time)
-        val pauseCoutingTime = viewRoot?.findViewById<Button>(R.id.pause_countring_time)
-        val stopCoutingTime = viewRoot?.findViewById<Button>(R.id.stop_countring_time)
+        startCoutingTime = viewRoot?.findViewById<Button>(R.id.start_countring_time)!!
+        pauseCoutingTime = viewRoot?.findViewById<Button>(R.id.pause_countring_time)!!
+        stopCoutingTime = viewRoot?.findViewById<Button>(R.id.stop_countring_time)!!
 
+        // getting the application to initialize the repository
+        timerPresenter.application = activity?.application
 
         val chronometerEmployment = viewRoot?.findViewById<Chronometer>(R.id.chronometer_employment)
 
@@ -72,9 +81,9 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
             coutingTimeView.restartChronometr()
         }
 
-        startCoutingTime?.setOnClickListener(this)
-        pauseCoutingTime?.setOnClickListener(this)
-        stopCoutingTime?.setOnClickListener(this)
+        startCoutingTime.setOnClickListener(this)
+        pauseCoutingTime.setOnClickListener(this)
+        stopCoutingTime.setOnClickListener(this)
 
 
     }
@@ -116,6 +125,15 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
 
     override fun showError() {
         Toast.makeText(this.context, "Error saving data", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun saveData() {
+        startCoutingTime.isEnabled = false
+        pauseCoutingTime.isEnabled = false
+        stopCoutingTime.isEnabled = false
+    }
+
+    override fun showButton() {
     }
 
     override fun onAttach(context: Context) {

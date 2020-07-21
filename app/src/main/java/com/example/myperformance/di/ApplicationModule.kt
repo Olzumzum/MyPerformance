@@ -26,6 +26,5 @@ class ApplicationModule(private val application: Application) {
     }
 
     @Provides
-    fun provideTimePerformRepository(timePerformeDao: TimePerformDao): TimePerformRepository
-            = TimePerformRepository(timePerformDao = timePerformeDao)
+    fun provideTimePerformRepository(timePerformeDao: TimePerformDao): TimePerformRepository = TimePerformRepository(timePerformDao = timePerformeDao)
 }
