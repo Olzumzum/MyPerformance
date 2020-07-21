@@ -4,7 +4,6 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.myperformance.app.App
-import com.example.myperformance.database.TimePerformDao
 import com.example.myperformance.database.TimePerformRoomDatabase
 import com.example.myperformance.model.CriterionChart
 import com.example.myperformance.model.TimePerform
@@ -20,6 +19,7 @@ class TimePerformViewModel(application: Application) : AndroidViewModel(applicat
     lateinit var criterionChart: CriterionChart
 
     init {
+
         repository = (application as App).appComponent().getTimePerformRepository()
     }
 
@@ -40,7 +40,7 @@ class TimePerformViewModel(application: Application) : AndroidViewModel(applicat
         return when (criterionChart) {
             CriterionChart.ALL -> repository.getAllData()
             CriterionChart.TODAY -> repository.getDataToday()
-            CriterionChart.WEEK -> repository.getDataPeriod()
+            CriterionChart.WEEK -> repository.getDataByPeriod()
         }
     }
 

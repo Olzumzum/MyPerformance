@@ -26,6 +26,6 @@ interface TimePerformDao{
     @Query("SELECT * FROM timeperform_table where date_perf BETWEEN :start and :finish")
      fun getDataByPeriod(start: Long, finish: Long): LiveData<List<TimePerform>>
 
-    @Query("SELECT * FROM timeperform_table where date_perf Like :today")
-    fun getDataToday(today: Long): LiveData<List<TimePerform>>
+    @Query("SELECT * FROM timeperform_table where date_perf BETWEEN :today and :tomorrow")
+    fun getDataByOneDay(today: Long, tomorrow: Long): LiveData<List<TimePerform>>
 }

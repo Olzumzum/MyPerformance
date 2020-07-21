@@ -11,7 +11,7 @@ import java.util.*
 @InjectViewState
 class TimerPresenter: MvpPresenter<TimerView>() {
     private val TAG = "MyLog"
-
+//    private val
 
     fun saveTime(time: Long){
         if(time < 0)
@@ -19,6 +19,10 @@ class TimerPresenter: MvpPresenter<TimerView>() {
 
         val countDate = GregorianCalendar()
         Log.e(TAG, "time value = $time and date = ${countDate.time}")
+
+
+
+
 
     }
 }
