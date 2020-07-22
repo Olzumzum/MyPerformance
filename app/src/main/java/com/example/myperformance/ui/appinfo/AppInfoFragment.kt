@@ -11,21 +11,14 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.myperformance.R
 
 class AppInfoFragment : Fragment() {
-
-    private lateinit var slideshowViewModel: AppInfoViewModel
-
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        slideshowViewModel =
-                ViewModelProviders.of(this).get(AppInfoViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_app_info, container, false)
         val textView: TextView = root.findViewById(R.id.text_slideshow)
-        slideshowViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
+
         return root
     }
 }

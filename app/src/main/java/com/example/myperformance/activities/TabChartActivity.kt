@@ -2,6 +2,7 @@ package com.example.myperformance.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toolbar
 import androidx.navigation.ui.AppBarConfiguration
 
 import com.example.myperformance.R
@@ -11,14 +12,19 @@ import com.google.android.material.tabs.TabLayout
 
 import kotlinx.android.synthetic.main.activity_tab_chart.*
 
-
+/**
+ * activity storing tabs with graphs
+ */
 class TabChartActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tab_chart)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         pager.adapter = TabsPageAdapter(supportFragmentManager, tabs.tabCount)
         pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))

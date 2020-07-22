@@ -28,6 +28,8 @@
 
     <!-- Error message -->
     <string name="error_loading_data">Error loading data</string>
+    <string name="app_version">"Version 2020.07.2 #5 "</string>
+    <string name="developer_contacts">Developer - Olzumzum \n https://github.com/Olzumzum</string>
 
 
 </resources>

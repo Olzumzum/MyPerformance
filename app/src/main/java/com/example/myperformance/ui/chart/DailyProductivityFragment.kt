@@ -19,10 +19,18 @@ import com.example.myperformance.presenters.ReturningDataChart
 import kotlinx.android.synthetic.main.daily_productivity.*
 import java.lang.Exception
 
+/**
+ *fragment display plotting performance data
+ */
 class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment() {
 
+    // stores a link to a class that prepares data for plotting
     private val rDataChart: ReturningDataChart<Any>
+
     private lateinit var viewModel: TimePerformViewModel
+
+    // initialized depending on the type of graph, indicates the format
+    // of data output along the x axis
     private val dateFromat: String
 
     init {
