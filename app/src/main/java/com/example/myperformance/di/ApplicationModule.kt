@@ -1,15 +1,11 @@
 package com.example.myperformance.di
 
 import android.app.Application
-import androidx.lifecycle.viewModelScope
 import com.example.myperformance.database.TimePerformDao
 import com.example.myperformance.database.TimePerformRoomDatabase
-import com.example.myperformance.presenters.TimerPresenter
 import com.example.myperformance.repository.TimePerformRepository
-import com.example.myperformance.ui.timer.CoutingTimeView
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 
 @Module
@@ -25,6 +21,8 @@ class ApplicationModule(private val application: Application) {
                 .timePerformDao()
     }
 
+
     @Provides
-    fun provideTimePerformRepository(timePerformeDao: TimePerformDao): TimePerformRepository = TimePerformRepository(timePerformDao = timePerformeDao)
+    fun provideTimePerformRepository(timePerformeDao: TimePerformDao): TimePerformRepository =
+            TimePerformRepository(timePerformDao = timePerformeDao)
 }

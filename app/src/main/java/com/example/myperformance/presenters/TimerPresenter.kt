@@ -1,12 +1,12 @@
 package com.example.myperformance.presenters
 
 import android.app.Application
-import android.util.Log
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.myperformance.app.App
+import com.example.myperformance.model.TimePerform
 import com.example.myperformance.presenters.viewModel.TimePerformViewModel
 import com.example.myperformance.repository.TimePerformRepository
-import com.example.myperformance.ui.timer.TimerFragment
 import com.example.myperformance.view.TimerView
 import moxy.InjectViewState
 import moxy.MvpPresenter
@@ -15,26 +15,26 @@ import java.util.*
 @InjectViewState
 class TimerPresenter() : MvpPresenter<TimerView>() {
     private val TAG = "MyLog"
-    var application: Application? = null
+    lateinit var application: Application
     private lateinit var viewModel: TimePerformViewModel
+    lateinit var fragmentOwner: Fragment
 
     //repository
     private lateinit var repository: TimePerformRepository
 
-    fun saveTime(time: Long) {
+    fun saveTime(time: Long){
         application.let {
             repository = (application as App).appComponent().timePerformRepository()
             if (time < 0)
                 viewState.showError()
             else {
                 viewState.saveData()
-            val countDate = GregorianCalendar()
-            Log.e(TAG, "time value = $time and date = ${countDate.time}")
-            val timePerformList = repository.getDataToday()
-//                viewModel = ViewModelProvider(application.applicationContext).get(TimePerformViewModel::class.java)
-                //check
-                //logic
-//            repository.insert()
+
+                val date = GregorianCalendar()
+                val timePerform = TimePerform(date.timeInMillis, time.toInt())
+
+                viewModel = ViewModelProvider(fragmentOwner).get(TimePerformViewModel::class.java)
+                viewModel.insert(timePerform)
             }
         }
         viewState.showButton()

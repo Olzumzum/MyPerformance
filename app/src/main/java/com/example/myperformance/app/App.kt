@@ -5,6 +5,7 @@ import com.example.myperformance.di.AppComponent
 import com.example.myperformance.di.ApplicationModule
 import com.example.myperformance.di.DaggerAppComponent
 
+
 class App: Application() {
     private lateinit var appComponent: AppComponent
 

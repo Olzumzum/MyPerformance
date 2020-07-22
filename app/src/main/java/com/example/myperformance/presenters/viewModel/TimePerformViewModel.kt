@@ -8,12 +8,14 @@ import com.example.myperformance.model.TimePerform
 import com.example.myperformance.repository.TimePerformRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.NullPointerException
 
 
 class TimePerformViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: TimePerformRepository
     lateinit var allTimePerform: LiveData<List<TimePerform>>
-    lateinit var criterionChart: CriterionChart
+    var criterionChart: CriterionChart? = null
+    var todayList: LiveData<List<TimePerform>>? = null
 
     init {
         repository = (getApplication() as App).appComponent().timePerformRepository()
@@ -32,9 +34,10 @@ class TimePerformViewModel(application: Application) : AndroidViewModel(applicat
         repository.deleteAll()
     }
 
-    fun getDataToday()= viewModelScope.launch(Dispatchers.IO) {
-        repository.deleteAll()
+    fun getDataToday(){
+        todayList = repository.getDataToday()
     }
+
 
 
     private fun getDataByPeriod(): LiveData<List<TimePerform>> {
@@ -42,6 +45,7 @@ class TimePerformViewModel(application: Application) : AndroidViewModel(applicat
             CriterionChart.ALL -> repository.getAllData()
             CriterionChart.TODAY -> repository.getDataToday()
             CriterionChart.WEEK -> repository.getDataByPeriod()
+            else -> throw NullPointerException("CriterionChart hasn't been initialized")
         }
     }
 

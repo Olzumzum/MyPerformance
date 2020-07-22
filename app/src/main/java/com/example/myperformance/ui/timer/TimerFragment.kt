@@ -61,7 +61,8 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
         progressBarTimer = viewRoot?.findViewById(R.id.progressBarTimer)!!
 
         // getting the application to initialize the repository
-        timerPresenter.application = activity?.application
+        timerPresenter.application = activity?.application!!
+        timerPresenter.fragmentOwner = this
 
         val chronometerEmployment = viewRoot?.findViewById<Chronometer>(R.id.chronometer_employment)
 

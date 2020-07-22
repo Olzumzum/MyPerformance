@@ -6,6 +6,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.myperformance.model.TimePerform
+import io.reactivex.Flowable
+import io.reactivex.Observable
 
 
 /**
@@ -25,5 +27,6 @@ interface TimePerformDao{
 
     @Query("SELECT * FROM timeperform_table where date_perf BETWEEN :start and :finish")
      fun getDataByPeriod(start: Long, finish: Long): LiveData<List<TimePerform>>
+
 
 }

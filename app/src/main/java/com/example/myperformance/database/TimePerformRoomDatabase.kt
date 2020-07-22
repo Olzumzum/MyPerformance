@@ -48,11 +48,11 @@ abstract class TimePerformRoomDatabase : RoomDatabase() {
             timePerformDao.insert(valuePerform)
 
             valuePerform = TimePerform(
-                    GregorianCalendar(2020, 6, 21).timeInMillis, 4)
+                    GregorianCalendar(2020, 6, 22).timeInMillis, 8)
             timePerformDao.insert(valuePerform)
 
             valuePerform = TimePerform(
-                    GregorianCalendar(2020, 6, 21).timeInMillis,
+                    GregorianCalendar(2020, 6, 23).timeInMillis,
                     0)
             timePerformDao.insert(valuePerform)
 
