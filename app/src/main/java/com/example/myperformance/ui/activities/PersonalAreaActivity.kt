@@ -1,4 +1,4 @@
-package com.example.myperformance.activities
+package com.example.myperformance.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -1,8 +1,7 @@
-package com.example.myperformance.activities
+package com.example.myperformance.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toolbar
 import androidx.navigation.ui.AppBarConfiguration
 
 import com.example.myperformance.R

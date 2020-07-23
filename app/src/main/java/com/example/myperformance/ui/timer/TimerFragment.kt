@@ -8,9 +8,11 @@ import android.widget.Button
 import android.widget.Chronometer
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.example.myperformance.R
 import com.example.myperformance.app.App
 import com.example.myperformance.presenters.TimerPresenter
+import com.example.myperformance.presenters.viewModel.TimePerformViewModel
 import com.example.myperformance.view.TimerView
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -62,7 +64,7 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
 
         // getting the application to initialize the repository
         timerPresenter.application = activity?.application!!
-        timerPresenter.fragmentOwner = this
+        timerPresenter.viewModel = ViewModelProvider(this).get(TimePerformViewModel::class.java)
 
         val chronometerEmployment = viewRoot?.findViewById<Chronometer>(R.id.chronometer_employment)
 

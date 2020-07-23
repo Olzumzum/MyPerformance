@@ -1,6 +1,7 @@
 package com.example.myperformance.presenters
 
 import android.app.Application
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.myperformance.app.App
@@ -16,8 +17,8 @@ import java.util.*
 class TimerPresenter() : MvpPresenter<TimerView>() {
     private val TAG = "MyLog"
     lateinit var application: Application
-    private lateinit var viewModel: TimePerformViewModel
-    lateinit var fragmentOwner: Fragment
+    lateinit var viewModel: TimePerformViewModel
+
 
     //repository
     private lateinit var repository: TimePerformRepository
@@ -33,8 +34,8 @@ class TimerPresenter() : MvpPresenter<TimerView>() {
                 val date = GregorianCalendar()
                 val timePerform = TimePerform(date.timeInMillis, time.toInt())
 
-                viewModel = ViewModelProvider(fragmentOwner).get(TimePerformViewModel::class.java)
                 viewModel.insert(timePerform)
+                Log.e(TAG, "Success")
             }
         }
         viewState.showButton()
