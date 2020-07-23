@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.myperformance.R
@@ -26,19 +27,23 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : MvpAppComp
     @InjectPresenter
     lateinit var presenter: DailyProductivityPresenter
 
+    lateinit var progressBarLoading: ProgressBar
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.daily_productivity, container, false)
-
         return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        progressBarLoading = view?.findViewById(R.id.progressBar_loading_chart)!!
 
         presenter.viewModel = ViewModelProvider(this).get(TimePerformViewModel::class.java)
         presenter.criterionChart = criterionChart
         presenter.observe()
+
+        loadData()
     }
 
 
@@ -55,7 +60,12 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : MvpAppComp
     }
 
     override fun loadData() {
-        TODO("Not yet implemented")
+        progressBarLoading.visibility = View.VISIBLE
+
+    }
+
+    override fun endLoading() {
+        progressBarLoading.visibility = View.GONE
     }
 
 

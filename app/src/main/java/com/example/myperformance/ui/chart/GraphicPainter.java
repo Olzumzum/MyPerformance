@@ -152,8 +152,8 @@ final public class GraphicPainter {
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, MONTH_TITLE_SERIAS);
 
         LineAndPointFormatter series1Format =
-                new LineAndPointFormatter(Color.rgb(0, 200, 0),
-                        Color.rgb(0, 100, 0),
+                new LineAndPointFormatter(Color.rgb(0, 0, 250),
+                        Color.rgb(0, 0, 250),
                         Color.CYAN,
                         null);
 
@@ -164,7 +164,7 @@ final public class GraphicPainter {
         Paint lineFill = new Paint();
         lineFill.setAlpha(200);
         lineFill.setShader(new LinearGradient
-                (0, 0, 0, 250, Color.WHITE, Color.GREEN, Shader.TileMode.MIRROR));
+                (0, 0, 0, 400, Color.WHITE, Color.BLUE, Shader.TileMode.MIRROR));
 
         series1Format.setFillPaint(lineFill);
 

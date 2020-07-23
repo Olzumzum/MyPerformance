@@ -9,4 +9,5 @@ interface DailyProductivityView: MvpView {
     fun showError()
     fun showData(keyDate: List<Number>, valueTime: List<Number>)
     fun loadData()
+    fun endLoading()
 }
