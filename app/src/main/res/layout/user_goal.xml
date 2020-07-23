@@ -59,6 +59,7 @@
                     android:layout_margin="@dimen/value_goal_user_container_margin">
 
                     <TextView
+                        android:id="@+id/value_user_goal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/field_time_goal_user_margin"
@@ -69,6 +70,7 @@
                         android:layout_marginEnd="@dimen/field_time_goal_user_margin" />
 
                     <TextView
+                        android:id="@+id/dimen_user_goal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/dimen_time_goal_user_size"
