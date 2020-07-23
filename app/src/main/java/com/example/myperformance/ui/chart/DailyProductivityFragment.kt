@@ -16,6 +16,10 @@ import com.example.myperformance.presenters.DailyProductivityPresenter
 import com.example.myperformance.view.DailyProductivityView
 
 import kotlinx.android.synthetic.main.daily_productivity.*
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 
@@ -30,6 +34,7 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : MvpAppComp
     lateinit var progressBarLoading: ProgressBar
 
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.daily_productivity, container, false)
         return view
@@ -42,8 +47,6 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : MvpAppComp
         presenter.viewModel = ViewModelProvider(this).get(TimePerformViewModel::class.java)
         presenter.criterionChart = criterionChart
         presenter.observe()
-
-        loadData()
     }
 
 
@@ -54,18 +57,31 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : MvpAppComp
     }
 
     override fun showData(keyDate: List<Number>, valueTime: List<Number>) {
-        val painer = GraphicPainter()
-        painer.setFormat(presenter.dateFormat)
-        painer.paint(plot, keyDate, valueTime)
+        Log.e("MyLog", "Получение")
+        runBlocking {
+          val j = launch {
+              val painter: GraphicPainter = GraphicPainter()
+              painter.setFormat(presenter.dateFormat)
+              painter.paint(plot, keyDate, valueTime)
+          }
+            j.join()
+        }
+        endLoading()
+        Log.e("MyLog", "Конец функции")
+
     }
 
+
+
     override fun loadData() {
+        plot.visibility = View.GONE
         progressBarLoading.visibility = View.VISIBLE
 
     }
 
     override fun endLoading() {
         progressBarLoading.visibility = View.GONE
+        plot.visibility = View.VISIBLE
     }
 
 

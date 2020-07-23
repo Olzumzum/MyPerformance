@@ -1,10 +1,15 @@
 package com.example.myperformance.presenters
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.example.myperformance.R
 import com.example.myperformance.data.model.CriterionChart
+import com.example.myperformance.data.model.TimePerform
 import com.example.myperformance.presenters.viewModel.TimePerformViewModel
 import com.example.myperformance.view.DailyProductivityView
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import moxy.InjectViewState
 import moxy.MvpPresenter
 import java.lang.Exception
@@ -22,7 +27,7 @@ class DailyProductivityPresenter() : MvpPresenter<DailyProductivityView>() {
     lateinit var dateFormat: String
 
 
-    private fun setFormat(){
+    private fun setFormat() {
         criterionChart.let {
             when (it) {
                 CriterionChart.TODAY -> {
@@ -40,76 +45,59 @@ class DailyProductivityPresenter() : MvpPresenter<DailyProductivityView>() {
         }
     }
 
-    fun observe(){
+    fun observe() {
         when (criterionChart) {
             CriterionChart.TODAY -> {
-                observeTodayData()
-        }
+                observeAllData()
+            }
             CriterionChart.WEEK -> {
-            observeWeekData()
+                observeAllData()
 
-        }
+            }
             CriterionChart.ALL -> {
-            observeAllData()
-        }
+                observeAllData()
+            }
         }
     }
 
 
     private fun observeAllData() {
-        viewModel.criterionChart = criterionChart
-
-        viewModel.allTimePerform.observeForever {
-            Log.e("MyLog", "Мы грузили")
-            if (it.isNotEmpty()) {
-                try {
-                    loadData(it)
-                } catch (ex: Exception) {
-                    viewState.showError(idResource =  R.string.error_loading_data)
-                }
-            }
-        }
+        load(viewModel.allTimePerform)
     }
 
     private fun observeWeekData() {
-        viewModel.criterionChart = criterionChart
+        load(viewModel.weekTimePerform)
+    }
 
-        viewModel.weekTimePerform.observeForever {
-            Log.e("MyLog", "Мы грузили")
+    private fun observeTodayData() {
+        load(viewModel.todayTimePerform)
+
+    }
+
+    private fun load(liveData: LiveData<List<TimePerform>>) {
+
+        liveData.observeForever {
             if (it.isNotEmpty()) {
                 try {
                     loadData(it)
                 } catch (ex: Exception) {
-                    viewState.showError(idResource =  R.string.error_loading_data)
+                    viewState.showError(idResource = R.string.error_loading_data)
                 }
+            } else {
+                viewState.loadData()
+                viewState.showError(idResource = R.string.error_empty_data_chart)
             }
         }
     }
-
-    private fun observeTodayData(){
-        viewModel.criterionChart = criterionChart
-
-        viewModel.todayTimePerform.observeForever {
-            Log.e("MyLog", "Мы грузили")
-            if (it.isNotEmpty()) {
-                try {
-                    loadData(it)
-                } catch (ex: Exception) {
-                    viewState.showError(idResource =  R.string.error_loading_data)
-                }
-            }
-        }
-    }
-
 
 
     private fun <E> loadData(list: List<E>) {
+        Log.e("MyLog", "Начало форматирования")
         setFormat()
-        Log.e("MyLog", "Мы были в установке данных")
         rDataChart.setList(list)
         val keyDate: List<Number> = rDataChart.listDayOfWeek as List<Number>
         val valueTime: List<Number> = rDataChart.listTimeValue as List<Number>
-        Log.e("MyLog", "данные ${keyDate.size} ${valueTime.size}")
+        Log.e("MyLog", "отправка")
         viewState.showData(keyDate, valueTime)
     }
 }

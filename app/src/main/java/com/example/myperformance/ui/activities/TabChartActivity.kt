@@ -10,6 +10,8 @@ import com.google.android.material.tabs.TabLayout
 
 
 import kotlinx.android.synthetic.main.activity_tab_chart.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 /**
  * activity storing tabs with graphs
@@ -25,9 +27,13 @@ class TabChartActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        pager.adapter = TabsPageAdapter(supportFragmentManager, tabs.tabCount)
+        runBlocking {
+            val j = launch {
+                pager.adapter = TabsPageAdapter(supportFragmentManager, tabs.tabCount)
+            }
+            j.join()
+        }
         pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
-
 
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -39,10 +45,10 @@ class TabChartActivity : AppCompatActivity() {
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
-
                 pager.currentItem = tab?.position!!
             }
 
         })
+
     }
 }

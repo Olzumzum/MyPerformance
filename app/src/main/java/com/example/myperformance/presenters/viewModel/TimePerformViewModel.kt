@@ -18,9 +18,6 @@ class TimePerformViewModel(application: Application) : AndroidViewModel(applicat
     var weekTimePerform: LiveData<List<TimePerform>>
     var todayTimePerform: LiveData<List<TimePerform>>
 
-    var criterionChart: CriterionChart? = null
-
-
     init {
         allTimePerform = repository.getAllData()
         weekTimePerform = repository.getDataByPeriod()
@@ -33,20 +30,6 @@ class TimePerformViewModel(application: Application) : AndroidViewModel(applicat
 
     fun deleteAll() = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteAll()
-    }
-
-
-
-    private fun getDataByPeriod(): LiveData<List<TimePerform>> {
-        return when (criterionChart) {
-            CriterionChart.ALL -> allTimePerform
-
-            CriterionChart.TODAY -> todayTimePerform
-
-            CriterionChart.WEEK -> weekTimePerform
-
-            else -> throw NullPointerException("CriterionChart hasn't been initialized")
-        }
     }
 
 

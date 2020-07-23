@@ -28,11 +28,12 @@
 
     <!-- Error message -->
     <string name="error_loading_data">Error loading data</string>
-    <string name="app_version">"Version 2020.07.2 #5 "</string>
+    <string name="error_empty_data_chart">No data for this period</string>
 
     <!-- App information -->
     <string name="developer_contacts">Developer - Olzumzum </string>
     <string name="developer_contacts_git">github.com/Olzumzum</string>
+    <string name="app_version">"Version 2020.07.2 #5 "</string>
 
     <!-- Personal Area -->
     <string name="user_login">Username</string>

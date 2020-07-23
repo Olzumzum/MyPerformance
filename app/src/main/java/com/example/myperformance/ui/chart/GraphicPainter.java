@@ -37,11 +37,15 @@ final public class GraphicPainter {
 
     private XYPlot plot;
     private SimpleXYSeries series;
+    private LineAndPointFormatter series1Format;
     private List<? extends Number> keyDate = new ArrayList<>();
     private List<? extends Number> valueTime = new ArrayList<>();
 
     private SimpleDateFormat dateFormat;
 
+    GraphicPainter(){
+        constructSeries();
+    }
     /**
      * call chart rendering functions
      *@param plot - transfer space for plotting
@@ -151,7 +155,18 @@ final public class GraphicPainter {
         series = new SimpleXYSeries(valueTime,
                 SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, MONTH_TITLE_SERIAS);
 
-        LineAndPointFormatter series1Format =
+
+
+        plot.addSeries(series, series1Format);
+    }
+
+    public void setFormat(String dateFormat){
+        this.dateFormat = new SimpleDateFormat(dateFormat);
+    }
+
+    //оформление
+    private void constructSeries(){
+        series1Format =
                 new LineAndPointFormatter(Color.rgb(0, 0, 250),
                         Color.rgb(0, 0, 250),
                         Color.CYAN,
@@ -168,11 +183,6 @@ final public class GraphicPainter {
 
         series1Format.setFillPaint(lineFill);
 
-        plot.addSeries(series, series1Format);
-    }
-
-    public void setFormat(String dateFormat){
-        this.dateFormat = new SimpleDateFormat(dateFormat);
     }
 
 }
