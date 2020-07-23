@@ -12,18 +12,19 @@ import java.lang.NullPointerException
 
 
 class TimePerformViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: TimePerformRepository
-    lateinit var allTimePerform: LiveData<List<TimePerform>>
+    private val repository: TimePerformRepository = (getApplication() as App).appComponent().timePerformRepository()
+
+    var allTimePerform: LiveData<List<TimePerform>>
+    var weekTimePerform: LiveData<List<TimePerform>>
+    var todayTimePerform: LiveData<List<TimePerform>>
+
     var criterionChart: CriterionChart? = null
-    var todayList: LiveData<List<TimePerform>>? = null
+
 
     init {
-        repository = (getApplication() as App).appComponent().timePerformRepository()
-    }
-
-    //ЧТО СО СКОУПОМ???????????????
-    fun initialization() {
-        allTimePerform = getDataByPeriod()
+        allTimePerform = repository.getAllData()
+        weekTimePerform = repository.getDataByPeriod()
+        todayTimePerform = repository.getDataToday()
     }
 
     fun insert(timePerform: TimePerform) = viewModelScope.launch(Dispatchers.IO) {
@@ -34,17 +35,16 @@ class TimePerformViewModel(application: Application) : AndroidViewModel(applicat
         repository.deleteAll()
     }
 
-    fun getDataToday(){
-        todayList = repository.getDataToday()
-    }
-
 
 
     private fun getDataByPeriod(): LiveData<List<TimePerform>> {
         return when (criterionChart) {
-            CriterionChart.ALL -> repository.getAllData()
-            CriterionChart.TODAY -> repository.getDataToday()
-            CriterionChart.WEEK -> repository.getDataByPeriod()
+            CriterionChart.ALL -> allTimePerform
+
+            CriterionChart.TODAY -> todayTimePerform
+
+            CriterionChart.WEEK -> weekTimePerform
+
             else -> throw NullPointerException("CriterionChart hasn't been initialized")
         }
     }

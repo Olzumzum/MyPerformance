@@ -61,12 +61,13 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
         pauseCoutingTime = viewRoot?.findViewById<Button>(R.id.pause_countring_time)!!
         stopCoutingTime = viewRoot?.findViewById<Button>(R.id.stop_countring_time)!!
         progressBarTimer = viewRoot?.findViewById(R.id.progressBarTimer)!!
+        val chronometerEmployment = viewRoot?.findViewById<Chronometer>(R.id.chronometer_employment)
 
         // getting the application to initialize the repository
         timerPresenter.application = activity?.application!!
         timerPresenter.viewModel = ViewModelProvider(this).get(TimePerformViewModel::class.java)
 
-        val chronometerEmployment = viewRoot?.findViewById<Chronometer>(R.id.chronometer_employment)
+
 
         coutingTimeView = CoutingTimeView(chronometerEmployment)
 
