@@ -48,9 +48,9 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : MvpAppComp
 
 
 
-    override fun showError() {
+    override fun showError(idResource: Int) {
         Log.d("MyLog", "Error message")
-        Toast.makeText(context, R.string.error_loading_data, Toast.LENGTH_LONG).show()
+        Toast.makeText(context, getString(idResource), Toast.LENGTH_LONG).show()
     }
 
     override fun showData(keyDate: List<Number>, valueTime: List<Number>) {

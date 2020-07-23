@@ -1,6 +1,7 @@
 package com.example.myperformance.presenters
 
 import android.util.Log
+import com.example.myperformance.R
 import com.example.myperformance.data.model.CriterionChart
 import com.example.myperformance.presenters.viewModel.TimePerformViewModel
 import com.example.myperformance.view.DailyProductivityView
@@ -64,7 +65,7 @@ class DailyProductivityPresenter() : MvpPresenter<DailyProductivityView>() {
                 try {
                     loadData(it)
                 } catch (ex: Exception) {
-                    viewState.showError()
+                    viewState.showError(idResource =  R.string.error_loading_data)
                 }
             }
         }
@@ -79,7 +80,7 @@ class DailyProductivityPresenter() : MvpPresenter<DailyProductivityView>() {
                 try {
                     loadData(it)
                 } catch (ex: Exception) {
-                    viewState.showError()
+                    viewState.showError(idResource =  R.string.error_loading_data)
                 }
             }
         }
@@ -94,7 +95,7 @@ class DailyProductivityPresenter() : MvpPresenter<DailyProductivityView>() {
                 try {
                     loadData(it)
                 } catch (ex: Exception) {
-                    viewState.showError()
+                    viewState.showError(idResource =  R.string.error_loading_data)
                 }
             }
         }
