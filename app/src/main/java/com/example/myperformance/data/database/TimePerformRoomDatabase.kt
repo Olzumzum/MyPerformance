@@ -1,4 +1,4 @@
-package com.example.myperformance.database
+package com.example.myperformance.data.database
 
 import android.content.Context
 
@@ -6,7 +6,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.example.myperformance.model.TimePerform
+import com.example.myperformance.data.model.TimePerform
 import kotlinx.coroutines.*
 import java.util.*
 

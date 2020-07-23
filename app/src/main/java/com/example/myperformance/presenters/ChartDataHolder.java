@@ -1,6 +1,6 @@
 package com.example.myperformance.presenters;
 
-import com.example.myperformance.model.TimePerform;
+import com.example.myperformance.data.model.TimePerform;
 
 import java.util.ArrayList;
 import java.util.Calendar;

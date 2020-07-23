@@ -2,7 +2,7 @@ package com.example.myperformance.providers
 
 import android.app.Application
 import com.example.myperformance.app.App
-import com.example.myperformance.repository.TimePerformRepository
+import com.example.myperformance.data.repository.TimePerformRepository
 
 class TimeCounterProvider(application: Application) {
     private val repository: TimePerformRepository

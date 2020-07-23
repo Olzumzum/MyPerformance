@@ -1,4 +1,4 @@
-package com.example.myperformance.model
+package com.example.myperformance.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

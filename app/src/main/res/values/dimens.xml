@@ -26,4 +26,38 @@
     <dimen name="image_size">130dp</dimen>
     <dimen name="app_name_title">20sp</dimen>
     <dimen name="app_information_txt">14sp</dimen>
+
+    <!-- User profile -->
+    <dimen name="hat_marginBottom">3dp</dimen>
+    <dimen name="user_info_marginBottom">1dp</dimen>
+    <!--User information -->
+    <dimen name="info_container_margin">8dp</dimen>
+    <dimen name="field_info_user_margin">2dp</dimen>
+    <dimen name="title_info_user_size">16sp</dimen>
+    <dimen name="text_info_user_size">14sp</dimen>
+    <dimen name="container_info_user_paddingLeft">10dp</dimen>
+
+    <!--User goal -->
+    <dimen name="goal_container_margin">8dp</dimen>
+    <dimen name="goal_container_padding">8dp</dimen>
+    <dimen name="title_goal_user_margin">2dp</dimen>
+    <dimen name="title_goal_user_size">18sp</dimen>
+    <dimen name="img_goal_size">85dp</dimen>
+    <dimen name="img_goal_margin">10dp</dimen>
+    <dimen name="subtitle_goal_user_margin">4dp</dimen>
+    <dimen name="subtitle_goal_user_size">17sp</dimen>
+    <dimen name="field_time_goal_user_margin">6dp</dimen>
+    <dimen name="value_time_goal_user_size">15sp</dimen>
+    <dimen name="dimen_time_goal_user_size">14sp</dimen>
+    <dimen name="value_goal_user_container_margin">4dp</dimen>
+    <dimen name="marign_between_elements">8dp</dimen>
+    
+    <!-- Heat user information -->
+    <dimen name="avatar_user_info_size">100dp</dimen>
+    <dimen name="user_name_user_info_margin">1dp</dimen>
+    <dimen name="user_name_user_info_size">20sp</dimen>
+    <dimen name="nickname_user_info_margin">2dp</dimen>
+    <dimen name="nickname_user_info_size">15sp</dimen>
+    <dimen name="hat_user_info_container_padding">10dp</dimen>
+    <dimen name="text_hat_user_info_container_margin">5dp</dimen>
 </resources>

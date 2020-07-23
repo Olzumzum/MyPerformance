@@ -1,9 +1,9 @@
 package com.example.myperformance.di
 
 import android.app.Application
-import com.example.myperformance.database.TimePerformDao
-import com.example.myperformance.database.TimePerformRoomDatabase
-import com.example.myperformance.repository.TimePerformRepository
+import com.example.myperformance.data.database.TimePerformDao
+import com.example.myperformance.data.database.TimePerformRoomDatabase
+import com.example.myperformance.data.repository.TimePerformRepository
 import dagger.Module
 import dagger.Provides
 

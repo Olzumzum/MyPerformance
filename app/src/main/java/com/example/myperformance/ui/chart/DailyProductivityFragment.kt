@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.myperformance.R
 import com.example.myperformance.presenters.viewModel.TimePerformViewModel
 
-import com.example.myperformance.model.CriterionChart
+import com.example.myperformance.data.model.CriterionChart
 import com.example.myperformance.presenters.ChartDataHolder
 import com.example.myperformance.presenters.ReturningDataChart
 

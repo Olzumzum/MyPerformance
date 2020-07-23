@@ -1,13 +1,11 @@
-package com.example.myperformance.repository
+package com.example.myperformance.data.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 
-import com.example.myperformance.database.TimePerformDao
-import com.example.myperformance.model.CriterionChart
-import com.example.myperformance.model.TimePerform
+import com.example.myperformance.data.database.TimePerformDao
+import com.example.myperformance.data.model.CriterionChart
+import com.example.myperformance.data.model.TimePerform
 import java.util.*
-import javax.inject.Inject
 
 
 class TimePerformRepository(private val timePerformDao: TimePerformDao) {

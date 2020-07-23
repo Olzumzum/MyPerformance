@@ -21,4 +21,16 @@
 
     <color name="default_text_color">#4A4848</color>
 
+    <!-- User goal -->
+    <color name="title_user_goal">#0B5FA5</color>
+    <color name="subtitle_user_goal">#FFAE00</color>
+    <color name="value_user_goal">#66A1D2</color>
+    <color name="dimen_user_goal">#66A1D2</color>
+
+    <!--Hat user information -->
+    <color name="user_information_background">#FFFFFF</color>
+    <color name="user_goal_background">#FFFFFF</color>
+    <color name="user_name_color">#FFFFFF</color>
+    <color name="nickuser_name_color">#E6E5E3</color>
+
 </resources>

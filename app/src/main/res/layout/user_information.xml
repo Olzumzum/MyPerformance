@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/container_info_user_paddingLeft"
+
+        android:background="@color/user_information_background">
+
+        <TextView
+            android:id="@+id/user_email_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/field_info_user_margin"
+            android:textSize="@dimen/title_info_user_size"
+            android:text="@string/user_email" />
+
+        <TextView
+            android:id="@+id/user_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/field_info_user_margin"
+            android:textSize="@dimen/text_info_user_size"
+            android:text="@string/user_email" />
+
+        <TextView
+            android:id="@+id/phone_number_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/field_info_user_margin"
+            android:textSize="@dimen/title_info_user_size"
+            android:text="@string/phone_number" />
+
+        <TextView
+            android:id="@+id/phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/field_info_user_margin"
+            android:textSize="@dimen/text_info_user_size"
+
+            android:text="@string/phone_number"
+            />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

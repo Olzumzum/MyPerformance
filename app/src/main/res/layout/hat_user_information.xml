@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/hat_background"
+    android:padding="@dimen/hat_user_info_container_padding">
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="@dimen/avatar_user_info_size"
+        android:layout_height="@dimen/avatar_user_info_size"
+        android:layout_weight="1"
+        android:src="@drawable/icon" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_margin="@dimen/text_hat_user_info_container_margin"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/user_name_user_info_margin"
+            android:textSize="@dimen/user_name_user_info_size"
+            android:textStyle="bold"
+            android:textColor="@color/user_name_color"
+            android:text="@string/nav_header_title" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/nickname_user_info_margin"
+            android:textSize="@dimen/nickname_user_info_size"
+            android:textColor="@color/nickuser_name_color"
+            android:text="@string/user_login" />
+    </LinearLayout>
+</LinearLayout>

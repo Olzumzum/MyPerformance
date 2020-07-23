@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.myperformance.app.App
-import com.example.myperformance.model.TimePerform
+import com.example.myperformance.data.model.TimePerform
 import com.example.myperformance.presenters.viewModel.TimePerformViewModel
-import com.example.myperformance.repository.TimePerformRepository
+import com.example.myperformance.data.repository.TimePerformRepository
 import com.example.myperformance.view.TimerView
 import moxy.InjectViewState
 import moxy.MvpPresenter

@@ -3,9 +3,9 @@ package com.example.myperformance.presenters.viewModel
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.myperformance.app.App
-import com.example.myperformance.model.CriterionChart
-import com.example.myperformance.model.TimePerform
-import com.example.myperformance.repository.TimePerformRepository
+import com.example.myperformance.data.model.CriterionChart
+import com.example.myperformance.data.model.TimePerform
+import com.example.myperformance.data.repository.TimePerformRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.NullPointerException

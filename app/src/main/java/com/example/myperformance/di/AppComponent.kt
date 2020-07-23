@@ -1,6 +1,6 @@
 package com.example.myperformance.di
 
-import com.example.myperformance.repository.TimePerformRepository
+import com.example.myperformance.data.repository.TimePerformRepository
 import com.example.myperformance.ui.chart.DailyProductivityFragment
 import com.example.myperformance.ui.timer.TimerFragment
 import dagger.Component

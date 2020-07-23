@@ -29,8 +29,22 @@
     <!-- Error message -->
     <string name="error_loading_data">Error loading data</string>
     <string name="app_version">"Version 2020.07.2 #5 "</string>
+
+    <!-- App information -->
     <string name="developer_contacts">Developer - Olzumzum </string>
     <string name="developer_contacts_git">github.com/Olzumzum</string>
+
+    <!-- Personal Area -->
+    <string name="user_login">Username</string>
+    <string name="user_email">Email</string>
+    <string name="goal_title">Your Goal</string>
+    <string name="phone_number">Phone number</string>
+
+    <!-- User goal -->
+    <string name="user_goal_title">Your goal</string>
+    <string name="user_goal_value">000</string>
+    <string name="user_goal_subtitle">One the day</string>
+    <string name="user_goal_dimension">hours</string>
 
 
 </resources>

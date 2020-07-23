@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/goal_container_padding"
+        android:layout_gravity="center"
+        android:background="@color/user_goal_background"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/user_goal_title"
+            android:layout_margin="@dimen/title_goal_user_margin"
+            android:textSize="@dimen/title_goal_user_size"
+            android:textColor="@color/title_user_goal"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/img_goal_size"
+                android:layout_height="@dimen/img_goal_size"
+                android:src="@drawable/chalice_img"
+                android:layout_margin="@dimen/img_goal_margin"
+                />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/marign_between_elements"
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/marign_between_elements">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/subtitle_goal_user_margin"
+                    android:textSize="@dimen/subtitle_goal_user_size"
+                    android:textColor="@color/subtitle_user_goal"
+                    android:textStyle="bold"
+                    android:text="@string/user_goal_subtitle" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/value_goal_user_container_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/field_time_goal_user_margin"
+                        android:textSize="@dimen/value_time_goal_user_size"
+                        android:textColor="@color/value_user_goal"
+                        android:textStyle="bold"
+                        android:text="@string/user_goal_value"
+                        android:layout_marginEnd="@dimen/field_time_goal_user_margin" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/dimen_time_goal_user_size"
+                        android:textColor="@color/dimen_user_goal"
+                        android:textStyle="bold"
+                        android:text="@string/user_goal_dimension" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
