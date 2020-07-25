@@ -35,7 +35,7 @@ class TimerPresenter() : MvpPresenter<TimerView>() {
                 val timePerform = TimePerform(date.timeInMillis, time.toInt())
 
                 viewModel.insert(timePerform)
-                Log.e(TAG, "Success")
+                Log.e(TAG, "Success value ($time) added")
             }
         }
         viewState.showButton()

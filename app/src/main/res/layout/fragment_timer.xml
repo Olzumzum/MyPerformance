@@ -11,7 +11,7 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="visible"
+        android:visibility="gone"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,8 +21,8 @@
     <Button
         android:id="@+id/stop_countring_time"
         style="@style/MyPerf.Button"
-        android:layout_marginEnd="56dp"
-        android:layout_marginRight="56dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginRight="84dp"
         android:text="@string/stop_counting_time"
         app:layout_constraintBottom_toBottomOf="@+id/pause_countring_time"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,10 +32,10 @@
     <Button
         android:id="@+id/pause_countring_time"
         style="@style/MyPerf.Button"
+        android:layout_marginStart="84dp"
+        android:layout_marginLeft="84dp"
         android:layout_marginTop="176dp"
         android:text="@string/pause_counting_time"
-        app:layout_constraintEnd_toStartOf="@+id/start_countring_time"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/timer_employment" />
 
@@ -43,10 +43,10 @@
         android:id="@+id/timer_employment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
-        android:text="timer"
+        android:layout_marginTop="148dp"
         android:textSize="@dimen/chronometer_text_size"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
