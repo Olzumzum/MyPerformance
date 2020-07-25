@@ -11,42 +11,41 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="visible"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="gone"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/stop_countring_time"
         style="@style/MyPerf.Button"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginRight="80dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
         android:text="@string/stop_counting_time"
+        app:layout_constraintBottom_toBottomOf="@+id/pause_countring_time"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_countring_time" />
+        app:layout_constraintTop_toTopOf="@+id/pause_countring_time"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/pause_countring_time"
         style="@style/MyPerf.Button"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="176dp"
         android:text="@string/pause_counting_time"
-        app:layout_constraintBottom_toBottomOf="@+id/stop_countring_time"
-        app:layout_constraintEnd_toStartOf="@+id/stop_countring_time"
-        app:layout_constraintHorizontal_bias="0.68"
+        app:layout_constraintEnd_toStartOf="@+id/start_countring_time"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_countring_time"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/timer_employment" />
 
-    <Chronometer
-        android:id="@+id/chronometer_employment"
+    <TextView
+        android:id="@+id/timer_employment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="240dp"
+        android:text="timer"
         android:textSize="@dimen/chronometer_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/start_countring_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -54,52 +53,12 @@
     <Button
         android:id="@+id/start_countring_time"
         style="@style/MyPerf.Button"
-        android:layout_marginTop="24dp"
+        android:layout_marginBottom="36dp"
         android:text="@string/start_counting_time"
-        app:layout_constraintEnd_toEndOf="@+id/chronometer_employment"
-        app:layout_constraintStart_toStartOf="@+id/chronometer_employment"
-        app:layout_constraintTop_toBottomOf="@+id/chronometer_employment" />
+        app:layout_constraintBottom_toTopOf="@+id/pause_countring_time"
+        app:layout_constraintEnd_toEndOf="@+id/timer_employment"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="@+id/timer_employment" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="-35dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/barrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left"
-        tools:layout_editor_absoluteX="411dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="-10dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="205dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

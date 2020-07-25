@@ -6,7 +6,7 @@ import android.widget.Chronometer;
 /**
  * provides an action timer
  */
-public class CoutingTimeView {
+public class CountingTimeView {
     //action time counter
     private Chronometer chronometerEmployment;
     //flag indicating whether the timer has been started
@@ -32,7 +32,7 @@ public class CoutingTimeView {
         this.pauseOffset = pauseOffset;
     }
 
-    public CoutingTimeView(Chronometer chronometerEmployment) {
+    public CountingTimeView(Chronometer chronometerEmployment) {
         this.chronometerEmployment = chronometerEmployment;
     }
 
