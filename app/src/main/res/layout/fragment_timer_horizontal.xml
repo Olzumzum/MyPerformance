@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
+    <ProgressBar
+        android:id="@+id/progressBarTimer"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/stop_countring_time"
         style="@style/MyPerf.Button"
@@ -26,11 +38,11 @@
         android:layout_marginBottom="108dp"
         android:text="@string/pause_counting_time"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/chronometer_employment"
-        app:layout_constraintStart_toStartOf="@+id/chronometer_employment" />
+        app:layout_constraintEnd_toEndOf="@+id/timer_employment"
+        app:layout_constraintStart_toStartOf="@+id/timer_employment" />
 
-    <Chronometer
-        android:id="@+id/chronometer_employment"
+    <TextView
+        android:id="@+id/timer_employment"
         android:textSize="@dimen/chronometer_text_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
