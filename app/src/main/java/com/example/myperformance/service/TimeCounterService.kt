@@ -81,13 +81,12 @@ class TimeCounterService : Service() {
     override fun onDestroy() {
 
         stopTimer()
-        var intent = Intent(TIMER_INTENT_ACTION)
-        intent.putExtra(FINISH_TIME_VALUE, timeValue)
-        this.sendBroadcast(intent)
-        intent = Intent("restartservice")
-        intent.setClass(this, Restarter::class.java)
-        this.sendBroadcast(intent)
 
+        if(timer != null) {
+            val intent = Intent("restartservice")
+            intent.setClass(this, Restarter::class.java)
+            this.sendBroadcast(intent)
+        }
 
         timeValue = 0;
 
@@ -119,6 +118,8 @@ class TimeCounterService : Service() {
             timer?.cancel()
             timer = null
         }
-        onDestroy()
+        var intent = Intent(TIMER_INTENT_ACTION)
+        intent.putExtra(FINISH_TIME_VALUE, timeValue)
+        this.sendBroadcast(intent)
     }
 }

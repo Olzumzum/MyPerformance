@@ -26,7 +26,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <service android:name=".service.TimeCounterService" android:enabled="true"/>
+        <service android:name=".service.TimeCounterService" android:enabled="true" />
         <receiver android:name=".broadcast.Restarter" android:enabled="true" android:exported="true">
             <intent-filter>
                 <action android:name="restartservice" />

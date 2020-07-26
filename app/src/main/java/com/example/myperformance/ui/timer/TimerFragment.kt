@@ -46,7 +46,6 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
     lateinit var progressBarTimer: ProgressBar
     lateinit var timerTextView: TextView
 
-    private lateinit var timeCounterService: TimeCounterService
 
     @InjectPresenter
     lateinit var timerPresenter: TimerPresenter
@@ -79,8 +78,6 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
         pauseCoutingTime.setOnClickListener(this)
         stopCoutingTime.setOnClickListener(this)
 
-        timeCounterService = TimeCounterService()
-
         val intentFilter = IntentFilter(TIMER_INTENT_ACTION)
 
         val broadcastReceiver = object : BroadcastReceiver() {
@@ -94,63 +91,40 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
                         timerPresenter.saveTime(it)
                         finishTimevalue = 0
                     }
-
                 }
-
-//                Log.e("MyLog", "finishvalue $finishTimevalue")
             }
-
 
         }
 
         activity?.applicationContext?.registerReceiver(broadcastReceiver, intentFilter)
-
+        Log.e("MyLog", "finish value $finishTimevalue")
 
 
         return viewRoot
     }
 
-    fun isTimeCounterServer(serviceClass: Class<*>): Boolean {
-        val manager: ActivityManager = context?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        for (servise in manager.getRunningServices(Int.MAX_VALUE)) {
-            if (serviceClass.name == servise.service.className) {
-                Log.e("MyLog", "Running")
-                return true
-            }
-        }
-        Log.e("MyLog", "Not running")
-        return false
-    }
+
 
 
     override fun onClick(v: View?) {
+        val intent = Intent(context, TimeCounterService::class.java)
         when (v?.id) {
             R.id.start_countring_time -> {
-
-                val intent = Intent(context, TimeCounterService::class.java)
                 intent.putExtra(BUTTON_ACTION_FLAG, BUTTON_ACTION_START)
-//                if (!isTimeCounterServer(timeCounterService.javaClass))
                     context?.startService(intent)
 
             }
             R.id.pause_countring_time -> {
-                val intent = Intent(context, TimeCounterService::class.java)
                 intent.putExtra(BUTTON_ACTION_FLAG, BUTTON_ACTION_PAUSE)
                     context?.startService(intent)
-
-//                    context?.sendBroadcast(intent)
             }
             R.id.stop_countring_time -> {
-                val intent = Intent(context, TimeCounterService::class.java)
                 intent.putExtra(BUTTON_ACTION_FLAG, BUTTON_ACTION_STOP)
                 context?.stopService(intent)
 
                 timerTextView.text = 0.toString()
             }
-
         }
-
-
     }
 
     override fun onDestroy() {
