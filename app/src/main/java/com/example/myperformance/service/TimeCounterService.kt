@@ -63,8 +63,6 @@ class TimeCounterService : Service() {
 
         val intentExtra = intent?.extras
         val flag = intentExtra?.get(BUTTON_ACTION_FLAG)
-        Log.e("MyLog", "flag $flag")
-
         when (flag) {
             BUTTON_ACTION_START -> startTimer()
             BUTTON_ACTION_PAUSE -> pauseTimer()
@@ -89,8 +87,6 @@ class TimeCounterService : Service() {
         }
 
         timeValue = 0;
-
-//        Log.e("MyLog", "Destroy")
         super.onDestroy()
     }
 

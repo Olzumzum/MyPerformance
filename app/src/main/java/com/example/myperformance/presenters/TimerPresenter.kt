@@ -7,6 +7,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.myperformance.R
 import com.example.myperformance.app.App
 import com.example.myperformance.data.model.TimePerform
 import com.example.myperformance.presenters.viewModel.TimePerformViewModel
@@ -24,7 +25,6 @@ class TimerPresenter() : MvpPresenter<TimerView>() {
     private val TAG = "MyLog"
     lateinit var application: Application
     lateinit var viewModel: TimePerformViewModel
-
     private val TIME_VALUE_EXTRA = "TimerValue"
     private val FINISH_TIME_VALUE = "finishTimeValue"
 
@@ -32,11 +32,14 @@ class TimerPresenter() : MvpPresenter<TimerView>() {
     //repository
     private lateinit var repository: TimePerformRepository
 
+    /**
+     * save data
+     */
     fun saveTime(time: Long) {
         application.let {
             repository = (application as App).appComponent().timePerformRepository()
             if (time < 0)
-                viewState.showError()
+                viewState.showError(R.string.error_saving_data)
             else {
                 viewState.saveData()
 
@@ -50,15 +53,22 @@ class TimerPresenter() : MvpPresenter<TimerView>() {
         viewState.showButton()
     }
 
+    /**
+     * show data on view
+     */
     fun showTime(timeValue: Long?) {
         if (timeValue != null) {
             val timeValueString = timeFormater(timeValue)
 
             viewState.showTime(timeValue = timeValueString)
         } else
-            viewState.showError()
+            viewState.showError(R.string.error_time_display)
     }
 
+    /**
+     * receives seconds from the service timer,
+     * store the value if the stop button was pressed
+     */
     fun timerListen(): BroadcastReceiver {
         var finishTimevalue: Long? = 0
         return object : BroadcastReceiver() {
@@ -78,6 +88,9 @@ class TimerPresenter() : MvpPresenter<TimerView>() {
         }
     }
 
+    /**
+     * converts the received seconds into a format for display
+     */
     private fun timeFormater(timeValue: Long): String {
 
         val time = GregorianCalendar()

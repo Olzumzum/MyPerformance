@@ -6,7 +6,7 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(value = OneExecutionStateStrategy::class)
 interface TimerView: MvpView {
-    fun showError()
+    fun showError(resourceId: Int)
     fun saveData()
     fun showButton()
     fun showTime(timeValue: String)

@@ -29,13 +29,11 @@ import java.sql.Time
 class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
     //intent action flag
     private val TIMER_INTENT_ACTION = "example.myperformance"
-
     private val BUTTON_ACTION_FLAG = "buttonFlag"
     private val BUTTON_ACTION_START = "start"
     private val BUTTON_ACTION_PAUSE = "pause"
     private val BUTTON_ACTION_STOP = "stope"
-
-    private var finishTimevalue: Long? = 0
+    private val RESTART_SERVICE = "restartservice"
 
     private var viewRoot: View? = null
 
@@ -72,15 +70,13 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
         timerPresenter.viewModel = ViewModelProvider(this).get(TimePerformViewModel::class.java)
 
 
-
         startCoutingTime.setOnClickListener(this)
         pauseCoutingTime.setOnClickListener(this)
         stopCoutingTime.setOnClickListener(this)
 
+        //subscription to receive time from the service
         val intentFilter = IntentFilter(TIMER_INTENT_ACTION)
-
         val broadcastReceiver = timerPresenter.timerListen()
-
         activity?.applicationContext?.registerReceiver(broadcastReceiver, intentFilter)
 
 
@@ -112,14 +108,14 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
     }
 
     override fun onDestroy() {
-        val intent = Intent("restartservice")
+        val intent = Intent(RESTART_SERVICE)
         this.context?.let { intent.setClass(it, Restarter::class.java) }
         context?.sendBroadcast(intent)
         super.onDestroy()
     }
 
-    override fun showError() {
-        Toast.makeText(this.context, R.string.error_saving_data, Toast.LENGTH_SHORT).show()
+    override fun showError(resourceId: Int) {
+        Toast.makeText(this.context, getString(resourceId), Toast.LENGTH_SHORT).show()
     }
 
     override fun saveData() {
