@@ -14,6 +14,9 @@ import com.example.myperformance.data.repository.TimePerformRepository
 import com.example.myperformance.view.TimerView
 import moxy.InjectViewState
 import moxy.MvpPresenter
+import java.sql.Time
+import java.time.LocalDateTime
+import java.time.LocalTime
 import java.util.*
 
 @InjectViewState
@@ -24,7 +27,6 @@ class TimerPresenter() : MvpPresenter<TimerView>() {
 
     private val TIME_VALUE_EXTRA = "TimerValue"
     private val FINISH_TIME_VALUE = "finishTimeValue"
-
 
 
     //repository
@@ -50,12 +52,16 @@ class TimerPresenter() : MvpPresenter<TimerView>() {
 
     fun showTime(timeValue: Long?) {
         if (timeValue != null) {
-            viewState.showTime(timeValue = timeValue.toString())
+            val timeValueString = timeFormater(timeValue)
+
+            viewState.showTime(
+                    timeValue = timeValueString
+            )
         } else
             viewState.showError()
     }
 
-    fun timerListen() : BroadcastReceiver{
+    fun timerListen(): BroadcastReceiver {
         var finishTimevalue: Long? = 0
         return object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
@@ -72,5 +78,43 @@ class TimerPresenter() : MvpPresenter<TimerView>() {
             }
 
         }
+    }
+
+    fun timeFormater(timeValue: Long): String {
+
+        val time = GregorianCalendar()
+        time.set(Calendar.HOUR, 0)
+        time.set(Calendar.MINUTE, 0)
+        time.set(Calendar.SECOND, timeValue.toInt())
+        Log.e("MyLog", "time value ${time.time}")
+
+        val hour = time.get(Calendar.HOUR)
+        val minute = time.get(Calendar.MINUTE)
+        val second = time.get(Calendar.SECOND)
+
+        var timeValueString = ""
+
+        if (hour == 0)
+            timeValueString += "00"
+        else
+            if (hour < 10)
+                timeValueString += "0$hour"
+            else timeValueString += "$hour"
+
+        if (minute == 0)
+            timeValueString += ":00"
+        else
+            if (minute < 10)
+                timeValueString += ":0$minute"
+            else timeValueString += ":$minute"
+
+        if (second == 0)
+            timeValueString += ":00"
+        else
+            if (second < 10)
+                timeValueString += ":0$second"
+            else timeValueString += ":$second"
+
+        return timeValueString
     }
 }

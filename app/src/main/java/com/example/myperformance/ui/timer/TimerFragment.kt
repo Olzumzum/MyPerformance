@@ -82,7 +82,6 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
         val broadcastReceiver = timerPresenter.timerListen()
 
         activity?.applicationContext?.registerReceiver(broadcastReceiver, intentFilter)
-        Log.e("MyLog", "finish value $finishTimevalue")
 
 
         return viewRoot
@@ -107,7 +106,7 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
                 intent.putExtra(BUTTON_ACTION_FLAG, BUTTON_ACTION_STOP)
                 context?.stopService(intent)
 
-                timerTextView.text = 0.toString()
+                timerTextView.text = "00:00"
             }
         }
     }
