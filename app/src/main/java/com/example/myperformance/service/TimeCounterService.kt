@@ -15,20 +15,24 @@ import com.example.myperformance.broadcast.Restarter
 import java.util.*
 import kotlin.concurrent.timerTask
 
-
+/**
+ * Timer service.
+ * Ensures that the timer operates in background
+ */
 class TimeCounterService : Service() {
-    private var timeValue: Long = 0
-    private var timer: Timer? = null
-
     private val TIMER_INTENT_ACTION = "example.myperformance"
     private val TIME_VALUE_EXTRA = "TimerValue"
     private val FINISH_TIME_VALUE = "finishTimeValue"
     private val BUTTON_ACTION_FLAG = "buttonFlag"
     private val BUTTON_ACTION_START = "start"
     private val BUTTON_ACTION_PAUSE = "pause"
-    private val BUTTON_ACTION_STOP = "stope"
+    private val BUTTON_ACTION_STOP = "stop"
     val NOTIFICATION_CHANEL_ID = "example.myperformance"
+    private val RESTART_SERVICE = "restartservice"
     val chanelName = "Background Service"
+
+    private var timeValue: Long = 0
+    private var timer: Timer? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -81,7 +85,7 @@ class TimeCounterService : Service() {
         stopTimer()
 
         if(timer != null) {
-            val intent = Intent("restartservice")
+            val intent = Intent(RESTART_SERVICE)
             intent.setClass(this, Restarter::class.java)
             this.sendBroadcast(intent)
         }
@@ -96,7 +100,6 @@ class TimeCounterService : Service() {
             override fun run() {
                 val intent = Intent(TIMER_INTENT_ACTION)
                 timeValue++
-                Log.e("MyLog", timeValue.toString())
 
                 intent.putExtra(TIME_VALUE_EXTRA, timeValue)
                 application.applicationContext.sendBroadcast(intent)
@@ -114,7 +117,7 @@ class TimeCounterService : Service() {
             timer?.cancel()
             timer = null
         }
-        var intent = Intent(TIMER_INTENT_ACTION)
+        val intent = Intent(TIMER_INTENT_ACTION)
         intent.putExtra(FINISH_TIME_VALUE, timeValue)
         this.sendBroadcast(intent)
     }

@@ -32,7 +32,7 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
     private val BUTTON_ACTION_FLAG = "buttonFlag"
     private val BUTTON_ACTION_START = "start"
     private val BUTTON_ACTION_PAUSE = "pause"
-    private val BUTTON_ACTION_STOP = "stope"
+    private val BUTTON_ACTION_STOP = "stop"
     private val RESTART_SERVICE = "restartservice"
 
     private var viewRoot: View? = null
@@ -69,7 +69,6 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
         timerPresenter.application = activity?.application!!
         timerPresenter.viewModel = ViewModelProvider(this).get(TimePerformViewModel::class.java)
 
-
         startCoutingTime.setOnClickListener(this)
         pauseCoutingTime.setOnClickListener(this)
         stopCoutingTime.setOnClickListener(this)
@@ -79,11 +78,8 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
         val broadcastReceiver = timerPresenter.timerListen()
         activity?.applicationContext?.registerReceiver(broadcastReceiver, intentFilter)
 
-
         return viewRoot
     }
-
-
 
 
     override fun onClick(v: View?) {
@@ -92,7 +88,6 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
             R.id.start_countring_time -> {
                 intent.putExtra(BUTTON_ACTION_FLAG, BUTTON_ACTION_START)
                     context?.startService(intent)
-
             }
             R.id.pause_countring_time -> {
                 intent.putExtra(BUTTON_ACTION_FLAG, BUTTON_ACTION_PAUSE)
