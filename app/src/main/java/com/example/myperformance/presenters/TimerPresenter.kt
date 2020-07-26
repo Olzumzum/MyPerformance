@@ -54,9 +54,7 @@ class TimerPresenter() : MvpPresenter<TimerView>() {
         if (timeValue != null) {
             val timeValueString = timeFormater(timeValue)
 
-            viewState.showTime(
-                    timeValue = timeValueString
-            )
+            viewState.showTime(timeValue = timeValueString)
         } else
             viewState.showError()
     }
@@ -80,7 +78,7 @@ class TimerPresenter() : MvpPresenter<TimerView>() {
         }
     }
 
-    fun timeFormater(timeValue: Long): String {
+    private fun timeFormater(timeValue: Long): String {
 
         val time = GregorianCalendar()
         time.set(Calendar.HOUR, 0)

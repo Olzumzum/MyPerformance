@@ -5,6 +5,7 @@
     <string name="start_counting_time">Start</string>
     <string name="pause_counting_time">Pause</string>
     <string name="stop_counting_time">Stop</string>
+    <string name="timer_default_time">00:00:00</string>
     <!--Chart Activity -->
     <string name="days_of_month_title_graph">Производительность по дням</string>
     <!--ScrolBar -->

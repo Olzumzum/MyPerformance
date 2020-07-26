@@ -106,7 +106,7 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
                 intent.putExtra(BUTTON_ACTION_FLAG, BUTTON_ACTION_STOP)
                 context?.stopService(intent)
 
-                timerTextView.text = "00:00"
+                timerTextView.text = getString(R.string.timer_default_time)
             }
         }
     }
