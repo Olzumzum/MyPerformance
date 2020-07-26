@@ -29,6 +29,7 @@
     <!-- Error message -->
     <string name="error_loading_data">Error loading data</string>
     <string name="error_empty_data_chart">No data for this period</string>
+    <string name="error_saving_data">Error saving data</string>
 
     <!-- App information -->
     <string name="developer_contacts">Developer - Olzumzum </string>

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myperformance">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -25,6 +27,11 @@
             </intent-filter>
         </activity>
         <service android:name=".service.TimeCounterService" android:enabled="true"/>
+        <receiver android:name=".broadcast.Restarter" android:enabled="true" android:exported="true">
+            <intent-filter>
+                <action android:name="restartservice" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.example.myperformance.ui.timer
 
 import android.Manifest.permission.FOREGROUND_SERVICE
+import android.app.ActivityManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -15,6 +16,7 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.myperformance.R
 import com.example.myperformance.app.App
+import com.example.myperformance.broadcast.Restarter
 import com.example.myperformance.presenters.TimerPresenter
 import com.example.myperformance.presenters.viewModel.TimePerformViewModel
 import com.example.myperformance.service.TimeCounterService
@@ -22,10 +24,19 @@ import com.example.myperformance.view.TimerView
 import kotlinx.android.synthetic.main.nav_header_scrolbar.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
+import java.sql.Time
 
 class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
-    private val FLAG_TIMER_COUNT = "TimerCount"
-    private val FLAG_RUNNING_TIMER = "RunningTimer"
+    //intent action flag
+    private val TIMER_INTENT_ACTION = "example.myperformance"
+    private val TIME_VALUE_EXTRA = "TimerValue"
+    private val FINISH_TIME_VALUE = "finishTimeValue"
+    private val BUTTON_ACTION_FLAG = "buttonFlag"
+    private val BUTTON_ACTION_START = "start"
+    private val BUTTON_ACTION_PAUSE = "pause"
+    private val BUTTON_ACTION_STOP = "stope"
+
+    private var finishTimevalue: Long? = 0
 
     private var viewRoot: View? = null
 
@@ -35,11 +46,10 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
     lateinit var progressBarTimer: ProgressBar
     lateinit var timerTextView: TextView
 
+    private lateinit var timeCounterService: TimeCounterService
+
     @InjectPresenter
     lateinit var timerPresenter: TimerPresenter
-
-    private var finishTimevalue: Long? = 0
-
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -69,15 +79,16 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
         pauseCoutingTime.setOnClickListener(this)
         stopCoutingTime.setOnClickListener(this)
 
+        timeCounterService = TimeCounterService()
 
-        val intentFilter = IntentFilter("Counter")
+        val intentFilter = IntentFilter(TIMER_INTENT_ACTION)
 
         val broadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
-                val timeValue = intent?.getLongExtra("TimerValue", 0)
+                val timeValue = intent?.getLongExtra(TIME_VALUE_EXTRA, 0)
                 timerTextView.text = timeValue.toString()
 
-                finishTimevalue = intent?.getLongExtra("finishTimeValue", 0)
+                finishTimevalue = intent?.getLongExtra(FINISH_TIME_VALUE, 0)
                 finishTimevalue?.let {
                     if (it.compareTo(0) != 0) {
                         timerPresenter.saveTime(it)
@@ -94,26 +105,44 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
 
         activity?.applicationContext?.registerReceiver(broadcastReceiver, intentFilter)
 
+
+
         return viewRoot
+    }
+
+    fun isTimeCounterServer(serviceClass: Class<*>): Boolean {
+        val manager: ActivityManager = context?.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        for (servise in manager.getRunningServices(Int.MAX_VALUE)) {
+            if (serviceClass.name == servise.service.className) {
+                Log.e("MyLog", "Running")
+                return true
+            }
+        }
+        Log.e("MyLog", "Not running")
+        return false
     }
 
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.start_countring_time -> {
+
                 val intent = Intent(context, TimeCounterService::class.java)
-                intent.putExtra("buttonFlag", "start")
-                context?.startService(intent)
+                intent.putExtra(BUTTON_ACTION_FLAG, BUTTON_ACTION_START)
+//                if (!isTimeCounterServer(timeCounterService.javaClass))
+                    context?.startService(intent)
 
             }
             R.id.pause_countring_time -> {
                 val intent = Intent(context, TimeCounterService::class.java)
-                intent.putExtra("buttonFlag", "pause")
-                context?.startService(intent)
+                intent.putExtra(BUTTON_ACTION_FLAG, BUTTON_ACTION_PAUSE)
+                    context?.startService(intent)
+
+//                    context?.sendBroadcast(intent)
             }
             R.id.stop_countring_time -> {
                 val intent = Intent(context, TimeCounterService::class.java)
-                intent.putExtra("buttonFlag", "stop")
+                intent.putExtra(BUTTON_ACTION_FLAG, BUTTON_ACTION_STOP)
                 context?.stopService(intent)
 
                 timerTextView.text = 0.toString()
@@ -124,22 +153,15 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
 
     }
 
-    override fun onPause() {
-        super.onPause()
-//        //set the time elapsed since the start of the timer
-//        coutingTimeView.setCurrentTime()
-//        //change flag - timer execution is paused to restart
-//        coutingTimeView.running = false
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-//        outState.putLong(FLAG_TIMER_COUNT, coutingTimeView.pauseOffset)
-//        outState.putBoolean(FLAG_RUNNING_TIMER, coutingTimeView.running)
-        super.onSaveInstanceState(outState)
+    override fun onDestroy() {
+        val intent = Intent("restartservice")
+        this.context?.let { intent.setClass(it, Restarter::class.java) }
+        context?.sendBroadcast(intent)
+        super.onDestroy()
     }
 
     override fun showError() {
-        Toast.makeText(this.context, "Error saving data", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this.context, R.string.error_saving_data, Toast.LENGTH_SHORT).show()
     }
 
     override fun saveData() {
