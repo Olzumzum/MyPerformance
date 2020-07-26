@@ -29,8 +29,7 @@ import java.sql.Time
 class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
     //intent action flag
     private val TIMER_INTENT_ACTION = "example.myperformance"
-    private val TIME_VALUE_EXTRA = "TimerValue"
-    private val FINISH_TIME_VALUE = "finishTimeValue"
+
     private val BUTTON_ACTION_FLAG = "buttonFlag"
     private val BUTTON_ACTION_START = "start"
     private val BUTTON_ACTION_PAUSE = "pause"
@@ -80,21 +79,7 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
 
         val intentFilter = IntentFilter(TIMER_INTENT_ACTION)
 
-        val broadcastReceiver = object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                val timeValue = intent?.getLongExtra(TIME_VALUE_EXTRA, 0)
-                timerTextView.text = timeValue.toString()
-
-                finishTimevalue = intent?.getLongExtra(FINISH_TIME_VALUE, 0)
-                finishTimevalue?.let {
-                    if (it.compareTo(0) != 0) {
-                        timerPresenter.saveTime(it)
-                        finishTimevalue = 0
-                    }
-                }
-            }
-
-        }
+        val broadcastReceiver = timerPresenter.timerListen()
 
         activity?.applicationContext?.registerReceiver(broadcastReceiver, intentFilter)
         Log.e("MyLog", "finish value $finishTimevalue")
@@ -151,6 +136,10 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
         stopCoutingTime.isEnabled = true
         progressBarTimer.visibility = View.GONE
 
+    }
+
+    override fun showTime(timeValue: String) {
+        timerTextView.text = timeValue
     }
 
     override fun onAttach(context: Context) {

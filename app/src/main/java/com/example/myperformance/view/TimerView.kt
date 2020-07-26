@@ -9,4 +9,5 @@ interface TimerView: MvpView {
     fun showError()
     fun saveData()
     fun showButton()
+    fun showTime(timeValue: String)
 }
