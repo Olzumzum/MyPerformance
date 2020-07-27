@@ -3,6 +3,8 @@ package com.example.myperformance.service
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
@@ -48,7 +50,7 @@ class TimeCounterService : Service() {
         val chan: NotificationChannel = NotificationChannel(
                 NOTIFICATION_CHANEL_ID, chanelName, NotificationManager.IMPORTANCE_NONE
         )
-        chan.lightColor = Color.YELLOW
+        chan.lightColor = Color.BLUE
         chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
 
         val manager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -63,13 +65,14 @@ class TimeCounterService : Service() {
                 notificationIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT)
 
+
         val notificationBuilder: Notification.Builder = Notification.Builder(applicationContext, NOTIFICATION_CHANEL_ID)
         val notification = notificationBuilder.setOngoing(true)
                 .setContentTitle(getString(R.string.notification_title))
                 .setSmallIcon(R.drawable.round_more_time_black_18dp)
                 .setCategory(Notification.CATEGORY_SERVICE)
-                .setColor(getColor(R.color.notification_background))
                 .setContentIntent(contentIntent)
+                .setColor(Color.YELLOW)
                 .build()
         startForeground(2, notification)
     }
