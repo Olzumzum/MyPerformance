@@ -84,6 +84,7 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
 
     override fun onClick(v: View?) {
         val intent = Intent(context, TimeCounterService::class.java)
+        intent.putExtra("TimerFragmentContext", context.toString())
         when (v?.id) {
             R.id.start_countring_time -> {
                 intent.putExtra(BUTTON_ACTION_FLAG, BUTTON_ACTION_START)

@@ -50,5 +50,7 @@
     <string name="user_goal_subtitle">One the day</string>
     <string name="user_goal_dimension">hours</string>
 
+    <!--Notification-->
+    <string name="notification_title">Timer is running</string>
 
 </resources>

@@ -1,9 +1,6 @@
 package com.example.myperformance.service
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.Service
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -11,7 +8,10 @@ import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.annotation.RequiresApi
+import com.example.myperformance.R
 import com.example.myperformance.broadcast.Restarter
+import com.example.myperformance.ui.activities.ScrolbarActivity
+import com.example.myperformance.ui.timer.TimerFragment
 import java.util.*
 import kotlin.concurrent.timerTask
 
@@ -34,6 +34,7 @@ class TimeCounterService : Service() {
     private var timeValue: Long = 0
     private var timer: Timer? = null
 
+
     override fun onCreate() {
         super.onCreate()
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O)
@@ -53,11 +54,22 @@ class TimeCounterService : Service() {
         val manager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         manager.createNotificationChannel(chan)
 
-        val notificationBuilder: Notification.Builder = Notification.Builder(this, NOTIFICATION_CHANEL_ID)
+
+        //to open an activity with a timer
+        val notificationIntent: Intent = Intent(applicationContext, ScrolbarActivity::class.java)
+        val contentIntent = PendingIntent.getActivity(
+                this,
+                0,
+                notificationIntent,
+                PendingIntent.FLAG_CANCEL_CURRENT)
+
+        val notificationBuilder: Notification.Builder = Notification.Builder(applicationContext, NOTIFICATION_CHANEL_ID)
         val notification = notificationBuilder.setOngoing(true)
-                .setContentTitle("App is running in background")
-                .setPriority(Notification.PRIORITY_MIN)
+                .setContentTitle(getString(R.string.notification_title))
+                .setSmallIcon(R.drawable.round_more_time_black_18dp)
                 .setCategory(Notification.CATEGORY_SERVICE)
+                .setColor(getColor(R.color.notification_background))
+                .setContentIntent(contentIntent)
                 .build()
         startForeground(2, notification)
     }
@@ -84,7 +96,7 @@ class TimeCounterService : Service() {
 
         stopTimer()
 
-        if(timer != null) {
+        if (timer != null) {
             val intent = Intent(RESTART_SERVICE)
             intent.setClass(this, Restarter::class.java)
             this.sendBroadcast(intent)

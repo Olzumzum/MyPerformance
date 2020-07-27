@@ -33,4 +33,7 @@
     <color name="user_name_color">#FFFFFF</color>
     <color name="nickuser_name_color">#E6E5E3</color>
 
+    <!--Notification-->
+    <color name="notification_background">#FFAE00</color>
+
 </resources>
