@@ -32,4 +32,10 @@
         android:text="Button"
         app:layout_constraintBottom_toTopOf="@+id/text_gallery"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <include layout="@layout/bottom_nav"
+        android:id="@+id/bottombar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

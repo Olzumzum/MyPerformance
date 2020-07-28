@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myperformance">
 
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:name=".app.App"
@@ -13,21 +13,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.myperformance.ui.activities.PersonalAreaActivity"
-            android:parentActivityName="com.example.myperformance.ui.activities.ScrolbarActivity" />
+            android:name=".ui.activities.PersonalAreaActivity"
+            android:parentActivityName=".ui.activities.ScrolbarActivity" />
         <activity
-            android:name="com.example.myperformance.ui.activities.TabChartActivity"
-            android:parentActivityName="com.example.myperformance.ui.activities.ScrolbarActivity" />
+            android:name=".ui.activities.TabChartActivity"
+            android:parentActivityName=".ui.activities.ScrolbarActivity" />
         <activity
-            android:name="com.example.myperformance.ui.activities.ScrolbarActivity"
+            android:name=".ui.activities.ScrolbarActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <service android:name=".service.TimeCounterService" android:enabled="true" />
-        <receiver android:name=".broadcast.Restarter" android:enabled="true" android:exported="true">
+
+        <service
+            android:name=".service.TimeCounterService"
+            android:enabled="true" />
+
+        <receiver
+            android:name=".broadcast.Restarter"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="restartservice" />
             </intent-filter>

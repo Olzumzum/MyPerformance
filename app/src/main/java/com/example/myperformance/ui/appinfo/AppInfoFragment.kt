@@ -17,6 +17,7 @@ class AppInfoFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_app_info, container, false)
+        
         return root
     }
 }

@@ -27,7 +27,7 @@ class ScrolbarActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         //bottom navigation mconnection
-        NavigationUI.setupWithNavController(bottomNavigationView, navController)
+//        NavigationUI.setupWithNavController(bottomNavigationView, navController)
 
     }
 

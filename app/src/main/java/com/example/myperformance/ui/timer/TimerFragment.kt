@@ -14,6 +14,9 @@ import android.view.*
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.myperformance.R
 import com.example.myperformance.app.App
 import com.example.myperformance.broadcast.Restarter
@@ -21,6 +24,11 @@ import com.example.myperformance.presenters.TimerPresenter
 import com.example.myperformance.presenters.viewModel.TimePerformViewModel
 import com.example.myperformance.service.TimeCounterService
 import com.example.myperformance.view.TimerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.app_bar_scrolbar.*
+import kotlinx.android.synthetic.main.bottom_nav.*
+import kotlinx.android.synthetic.main.fragment_timer.*
+import kotlinx.android.synthetic.main.fragment_timer.view.*
 import kotlinx.android.synthetic.main.nav_header_scrolbar.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
@@ -78,8 +86,14 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
         val broadcastReceiver = timerPresenter.timerListen()
         activity?.applicationContext?.registerReceiver(broadcastReceiver, intentFilter)
 
+        val bottomBar = viewRoot?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        val nav = findNavController()
+        NavigationUI.setupWithNavController(bottomBar!!, nav)
+
         return viewRoot
     }
+
+
 
 
     override fun onClick(v: View?) {

@@ -28,11 +28,13 @@
         android:name="com.example.myperformance.ui.chart.DailyProductivityFragment"
         android:label="daily_productivity"
         tools:layout="@layout/daily_productivity" />
+
     <activity
         android:id="@+id/nav_tab_chart"
         android:name="com.example.myperformance.ui.activities.TabChartActivity"
         android:label="activity_tab_chart"
         tools:layout="@layout/activity_tab_chart" />
+
 
 
 </navigation>
