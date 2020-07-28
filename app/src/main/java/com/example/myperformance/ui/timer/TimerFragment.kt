@@ -43,6 +43,8 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
     private val BUTTON_ACTION_STOP = "stop"
     private val RESTART_SERVICE = "restartservice"
 
+    private var runningServiceFlag: Boolean = false
+
     private var viewRoot: View? = null
 
     lateinit var startCoutingTime: Button
@@ -86,6 +88,7 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
         val broadcastReceiver = timerPresenter.timerListen()
         activity?.applicationContext?.registerReceiver(broadcastReceiver, intentFilter)
 
+        //bottom bar
         val bottomBar = viewRoot?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val nav = findNavController()
         NavigationUI.setupWithNavController(bottomBar!!, nav)
@@ -94,33 +97,35 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
     }
 
 
-
-
     override fun onClick(v: View?) {
         val intent = Intent(context, TimeCounterService::class.java)
         intent.putExtra("TimerFragmentContext", context.toString())
         when (v?.id) {
             R.id.start_countring_time -> {
                 intent.putExtra(BUTTON_ACTION_FLAG, BUTTON_ACTION_START)
-                    context?.startService(intent)
+                context?.startService(intent)
+                runningServiceFlag = true
             }
             R.id.pause_countring_time -> {
                 intent.putExtra(BUTTON_ACTION_FLAG, BUTTON_ACTION_PAUSE)
-                    context?.startService(intent)
+                context?.startService(intent)
             }
             R.id.stop_countring_time -> {
                 intent.putExtra(BUTTON_ACTION_FLAG, BUTTON_ACTION_STOP)
                 context?.stopService(intent)
 
+                runningServiceFlag = false
                 timerTextView.text = getString(R.string.timer_default_time)
             }
         }
     }
 
     override fun onDestroy() {
-        val intent = Intent(RESTART_SERVICE)
-        this.context?.let { intent.setClass(it, Restarter::class.java) }
-        context?.sendBroadcast(intent)
+        if (runningServiceFlag) {
+            val intent = Intent(RESTART_SERVICE)
+            this.context?.let { intent.setClass(it, Restarter::class.java) }
+            context?.sendBroadcast(intent)
+        }
         super.onDestroy()
     }
 
