@@ -58,14 +58,11 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : MvpAppComp
 
     override fun showData(keyDate: List<Number>, valueTime: List<Number>) {
         Log.e("MyLog", "Получение")
-        runBlocking {
-          val j = launch {
+
               val painter: GraphicPainter = GraphicPainter()
               painter.setFormat(presenter.dateFormat)
               painter.paint(plot, keyDate, valueTime)
-          }
-            j.join()
-        }
+
         endLoading()
         Log.e("MyLog", "Конец функции")
 

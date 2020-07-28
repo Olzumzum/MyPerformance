@@ -7,12 +7,8 @@ import com.example.myperformance.data.model.CriterionChart
 import com.example.myperformance.data.model.TimePerform
 import com.example.myperformance.presenters.viewModel.TimePerformViewModel
 import com.example.myperformance.view.DailyProductivityView
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import moxy.InjectViewState
 import moxy.MvpPresenter
-import java.lang.Exception
 
 @InjectViewState
 class DailyProductivityPresenter() : MvpPresenter<DailyProductivityView>() {
@@ -48,10 +44,10 @@ class DailyProductivityPresenter() : MvpPresenter<DailyProductivityView>() {
     fun observe() {
         when (criterionChart) {
             CriterionChart.TODAY -> {
-                observeAllData()
+                observeTodayData()
             }
             CriterionChart.WEEK -> {
-                observeAllData()
+                observeWeekData()
 
             }
             CriterionChart.ALL -> {
@@ -100,4 +96,6 @@ class DailyProductivityPresenter() : MvpPresenter<DailyProductivityView>() {
         Log.e("MyLog", "отправка")
         viewState.showData(keyDate, valueTime)
     }
+
+
 }
