@@ -18,11 +18,13 @@ import com.androidplot.xy.XYGraphWidget;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.ZoomEstimator;
 
+import java.text.DecimalFormat;
 import java.text.FieldPosition;
 import java.text.Format;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 final public class GraphicPainter {
@@ -38,13 +40,21 @@ final public class GraphicPainter {
     private XYPlot plot;
     private SimpleXYSeries series;
     private LineAndPointFormatter series1Format;
-    private List<? extends Number> keyDate = new ArrayList<>();
-    private List<? extends Number> valueTime = new ArrayList<>();
+    private List<Number> keyDate = new ArrayList<>();
+    private List<Number> valueTime = new ArrayList<>();
 
     private SimpleDateFormat dateFormat;
 
     GraphicPainter(){
         constructSeries();
+    }
+
+    public void paint(XYPlot plot){
+        this.plot = plot;
+        f();
+        MAX_VALUE_X = keyDate.size();
+        MAX_VALUE_Y = searchMaxValue(valueTime);
+        paintChart();
     }
     /**
      * call chart rendering functions
@@ -52,9 +62,12 @@ final public class GraphicPainter {
      *@param domainData - data range on the X axis
      *@param rangeData - data range on the y axis
      */
-    public void paint(XYPlot plot, List<? extends Number> domainData, List<? extends Number> rangeData) {
+    public void paint(XYPlot plot, List<Number> domainData, List<Number> rangeData) {
         this.plot = plot;
         setDataChart(domainData, rangeData);
+//        f();
+        MAX_VALUE_X = keyDate.size();
+        MAX_VALUE_Y = searchMaxValue(valueTime);
         paintChart();
     }
 
@@ -63,16 +76,31 @@ final public class GraphicPainter {
      *@param keyDate - X-axis data
      *@param valueTime - data on the Y axis
      */
-    private void setDataChart(List<? extends Number> keyDate, List<? extends Number> valueTime) {
+    private void setDataChart(List<Number> keyDate, List<Number> valueTime) {
         this.keyDate = keyDate;
         this.valueTime = valueTime;
 
+//        f();
         //calculation of the range of the graph (minimum and maximum values)
         //to scale
-        MAX_VALUE_X = keyDate.size() -1;
+        MAX_VALUE_X = keyDate.size();
         MAX_VALUE_Y = searchMaxValue(valueTime);
     }
 
+    private void f(){
+        keyDate.add(new GregorianCalendar(2020, 06, 27).getTimeInMillis());
+        keyDate.add(new GregorianCalendar(2020, 06, 28).getTimeInMillis());
+        keyDate.add(new GregorianCalendar(2020, 06, 29).getTimeInMillis());
+        keyDate.add(new GregorianCalendar(2020, 06, 30).getTimeInMillis());
+        keyDate.add(new GregorianCalendar(2020, 06, 31).getTimeInMillis());
+
+        valueTime.add(12);
+        valueTime.add(2);
+        valueTime.add(3);
+        valueTime.add(23);
+        valueTime.add(0);
+
+    }
     /**
      * find the maximum item in the collection for proper scaling
      *@param list - collection in which maximum search is performed
@@ -103,22 +131,22 @@ final public class GraphicPainter {
     private void paintChart() {
         addSeries();
 
-        plot.setRangeBoundaries(0, 16, BoundaryMode.AUTO);
-        plot.setDomainBoundaries(0, 16, BoundaryMode.AUTO);
+        plot.setRangeBoundaries(0, MIN_VALUE_X, BoundaryMode.AUTO);
+        plot.setDomainBoundaries(0, MAX_VALUE_Y, BoundaryMode.AUTO);
         plot.setBorderStyle(Plot.BorderStyle.NONE, null, null);
 
         plot.getGraph().setPaddingRight(2);
 
         //X-axis step drawing
-        plot.setDomainStep(StepMode.SUBDIVIDE, 9);
+        plot.setDomainStep(StepMode.SUBDIVIDE, 15);
 
         //axis name
         plot.setDomainLabel(NAME_AXIS_X);
         plot.setRangeLabel(NAME_AXIS_Y);
 
-        //axis iteration format
-//        plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.LEFT).
-//                setFormat(new DecimalFormat("0"));
+//        axis iteration format
+        plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.LEFT).
+                setFormat(new DecimalFormat("0"));
 
         plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).
                 setFormat(new Format() {

@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.navigation.ui.AppBarConfiguration
 
 import com.example.myperformance.R
+import com.example.myperformance.data.model.CriterionChart
+import com.example.myperformance.ui.chart.DailyProductivityFragment
 import com.example.myperformance.ui.chart.TabsPageAdapter
 import com.google.android.material.tabs.TabLayout
 
@@ -25,30 +27,15 @@ class TabChartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tab_chart)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val pageAdapter = TabsPageAdapter( supportFragmentManager, 3)
+        pager.adapter = pageAdapter
+        tabs.setupWithViewPager(pager)
 
-        runBlocking {
-            val j = launch {
-                pager.adapter = TabsPageAdapter(supportFragmentManager, tabs.tabCount)
-            }
-            j.join()
-        }
-        pager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
 
-        tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
-            override fun onTabReselected(tab: TabLayout.Tab?) {
 
-            }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
 
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                pager.currentItem = tab?.position!!
-            }
-
-        })
 
     }
 }
