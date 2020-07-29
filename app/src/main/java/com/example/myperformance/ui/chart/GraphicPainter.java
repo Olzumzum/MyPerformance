@@ -24,7 +24,6 @@ import java.text.Format;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 final public class GraphicPainter {
@@ -38,24 +37,11 @@ final public class GraphicPainter {
     private int MAX_VALUE_Y = 0;
 
     private XYPlot plot;
-    private SimpleXYSeries series;
-    private LineAndPointFormatter series1Format;
     private List<Number> keyDate = new ArrayList<>();
     private List<Number> valueTime = new ArrayList<>();
 
     private SimpleDateFormat dateFormat;
 
-    GraphicPainter(){
-        constructSeries();
-    }
-
-    public void paint(XYPlot plot){
-        this.plot = plot;
-        f();
-        MAX_VALUE_X = keyDate.size();
-        MAX_VALUE_Y = searchMaxValue(valueTime);
-        paintChart();
-    }
     /**
      * call chart rendering functions
      *@param plot - transfer space for plotting
@@ -65,9 +51,6 @@ final public class GraphicPainter {
     public void paint(XYPlot plot, List<Number> domainData, List<Number> rangeData) {
         this.plot = plot;
         setDataChart(domainData, rangeData);
-//        f();
-        MAX_VALUE_X = keyDate.size();
-        MAX_VALUE_Y = searchMaxValue(valueTime);
         paintChart();
     }
 
@@ -80,27 +63,13 @@ final public class GraphicPainter {
         this.keyDate = keyDate;
         this.valueTime = valueTime;
 
-//        f();
         //calculation of the range of the graph (minimum and maximum values)
         //to scale
         MAX_VALUE_X = keyDate.size();
         MAX_VALUE_Y = searchMaxValue(valueTime);
     }
 
-    private void f(){
-        keyDate.add(new GregorianCalendar(2020, 06, 27).getTimeInMillis());
-        keyDate.add(new GregorianCalendar(2020, 06, 28).getTimeInMillis());
-        keyDate.add(new GregorianCalendar(2020, 06, 29).getTimeInMillis());
-        keyDate.add(new GregorianCalendar(2020, 06, 30).getTimeInMillis());
-        keyDate.add(new GregorianCalendar(2020, 06, 31).getTimeInMillis());
 
-        valueTime.add(12);
-        valueTime.add(2);
-        valueTime.add(3);
-        valueTime.add(23);
-        valueTime.add(0);
-
-    }
     /**
      * find the maximum item in the collection for proper scaling
      *@param list - collection in which maximum search is performed
@@ -180,21 +149,7 @@ final public class GraphicPainter {
      * define curve style
      */
     private void addSeries() {
-        series = new SimpleXYSeries(valueTime,
-                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, MONTH_TITLE_SERIAS);
-
-
-
-        plot.addSeries(series, series1Format);
-    }
-
-    public void setFormat(String dateFormat){
-        this.dateFormat = new SimpleDateFormat(dateFormat);
-    }
-
-    //оформление
-    private void constructSeries(){
-        series1Format =
+        LineAndPointFormatter series1Format =
                 new LineAndPointFormatter(Color.rgb(0, 0, 250),
                         Color.rgb(0, 0, 250),
                         Color.CYAN,
@@ -211,6 +166,16 @@ final public class GraphicPainter {
 
         series1Format.setFillPaint(lineFill);
 
+        SimpleXYSeries series = new SimpleXYSeries(valueTime,
+                SimpleXYSeries.ArrayFormat.Y_VALS_ONLY, MONTH_TITLE_SERIAS);
+
+
+
+        plot.addSeries(series, series1Format);
+    }
+
+    public void setFormat(String dateFormat){
+        this.dateFormat = new SimpleDateFormat(dateFormat);
     }
 
 }

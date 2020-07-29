@@ -21,14 +21,14 @@ import kotlinx.coroutines.runBlocking
 class TabChartActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    val countItems: Int = 3
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tab_chart)
 
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val pageAdapter = TabsPageAdapter( supportFragmentManager, 3)
+        val pageAdapter = TabsPageAdapter( supportFragmentManager, countItems)
         pager.adapter = pageAdapter
         tabs.setupWithViewPager(pager)
 

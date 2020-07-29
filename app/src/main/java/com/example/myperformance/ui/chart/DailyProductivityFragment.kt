@@ -24,13 +24,10 @@ import kotlinx.android.synthetic.main.daily_productivity.*
 /**
  *fragment display plotting performance data
  */
-class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment() {
-
-//    @InjectPresenter
-//    lateinit var presenter: DailyProductivityPresenter
+class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment(), DailyProductivityView {
 
     lateinit var progressBarLoading: ProgressBar
-//    lateinit var painter: GraphicPainter
+
 
     private val rDataChart: ReturningDataChart<Any> = ChartDataHolder()
 
@@ -61,11 +58,14 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment()
 
     }
 
+    /**
+     * specifies the format of the x-axis data
+     */
     private fun setFormat() {
         criterionChart.let {
             when (it) {
                 CriterionChart.TODAY -> {
-                    dateFormat = "h:mm a"
+                    dateFormat = "dd.MM"
 
                 }
                 CriterionChart.WEEK -> {
@@ -79,7 +79,7 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment()
         }
     }
 
-    fun observe() {
+    private fun observe() {
         when (criterionChart) {
             CriterionChart.TODAY -> {
                 load(viewModel.todayTimePerform)
@@ -111,24 +111,25 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment()
     }
 
 
-    fun showError(idResource: Int) {
+    override fun showError(idResource: Int) {
         Log.d("MyLog", "Error message")
         Toast.makeText(context, getString(idResource), Toast.LENGTH_LONG).show()
     }
 
-    fun showData(keyDate: List<Number>, valueTime: List<Number>) {
+    /**
+     * draws graphs
+     */
+    override fun showData(keyDate: List<Number>, valueTime: List<Number>) {
         val painter = GraphicPainter()
         painter.setFormat(dateFormat)
-
         painter.paint(plot, keyDate, valueTime)
 
-
         endLoading()
-        Log.e("MyLog", "Конец функции")
-
     }
 
-
+    /**
+     *formats data for display
+     */
     private fun <E> loadData(list: List<E>) {
         Log.e("MyLog", "Начало форматирования")
         setFormat()
@@ -139,13 +140,13 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment()
         showData(keyDate, valueTime)
     }
 
-    fun loadData() {
+    override fun loadData() {
         plot.visibility = View.GONE
         progressBarLoading.visibility = View.VISIBLE
 
     }
 
-    fun endLoading() {
+    override fun endLoading() {
         progressBarLoading.visibility = View.GONE
         plot.visibility = View.VISIBLE
     }
