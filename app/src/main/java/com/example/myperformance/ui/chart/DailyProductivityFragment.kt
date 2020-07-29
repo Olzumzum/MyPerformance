@@ -20,15 +20,16 @@ import com.example.myperformance.presenters.ReturningDataChart
 import com.example.myperformance.view.DailyProductivityView
 
 import kotlinx.android.synthetic.main.daily_productivity.*
+import java.lang.NullPointerException
 
 /**
  *fragment display plotting performance data
  */
-class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment(), DailyProductivityView {
+class DailyProductivityFragment : Fragment(), DailyProductivityView {
 
     lateinit var progressBarLoading: ProgressBar
 
-
+    lateinit var criterionChart: CriterionChart
     private val rDataChart: ReturningDataChart<Any> = ChartDataHolder()
 
     // initialized depending on the type of graph, indicates the format
@@ -36,16 +37,27 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment()
     lateinit var dateFormat: String
 
     lateinit var viewModel: TimePerformViewModel
+    var position: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TimePerformViewModel::class.java)
+        position = arguments?.getInt(ARG_SECTION_NUMBER)
+        Log.e("MyLog", "position $position")
+
+    }
+
+    fun criterion(position: Int?) {
+        when (position) {
+            0 -> criterionChart = CriterionChart.TODAY
+            1 -> criterionChart = CriterionChart.WEEK
+            2 -> criterionChart = CriterionChart.ALL
+        }
     }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.daily_productivity, container, false)
-        Log.e("eee", "fragment created")
         return view
     }
 
@@ -53,6 +65,8 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment()
         super.onActivityCreated(savedInstanceState)
         progressBarLoading = view?.findViewById(R.id.progressBar_loading_chart)!!
 
+        Toast.makeText(activity?.applicationContext, "Valuer $position", Toast.LENGTH_SHORT).show()
+        criterion(position)
         loadData()
         observe()
 
@@ -62,6 +76,7 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment()
      * specifies the format of the x-axis data
      */
     private fun setFormat() {
+        Log.e("MyLog", "$criterionChart")
         criterionChart.let {
             when (it) {
                 CriterionChart.TODAY -> {
@@ -91,6 +106,7 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment()
             CriterionChart.ALL -> {
                 load(viewModel.allTimePerform)
             }
+
         }
     }
 
@@ -131,12 +147,10 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment()
      *formats data for display
      */
     private fun <E> loadData(list: List<E>) {
-        Log.e("MyLog", "Начало форматирования")
         setFormat()
         rDataChart.setList(list)
         val keyDate: List<Number> = rDataChart.listDayOfWeek as List<Number>
         val valueTime: List<Number> = rDataChart.listTimeValue as List<Number>
-        Log.e("MyLog", "отправка")
         showData(keyDate, valueTime)
     }
 
@@ -152,10 +166,13 @@ class DailyProductivityFragment(val criterionChart: CriterionChart) : Fragment()
     }
 
     companion object {
+        private const val ARG_SECTION_NUMBER = "section_number"
 
-        fun newInstance(criterion: CriterionChart): DailyProductivityFragment {
-            return DailyProductivityFragment(criterionChart = criterion).apply {
-
+        fun newInstance(position: Int): DailyProductivityFragment {
+            return DailyProductivityFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(ARG_SECTION_NUMBER, position)
+                }
             }
         }
     }

@@ -40,34 +40,34 @@ abstract class TimePerformRoomDatabase : RoomDatabase() {
         private suspend fun fillDatabase(timePerformDao: TimePerformDao){
 
             var valuePerform = TimePerform(
-                    GregorianCalendar(2020, 6, 29).timeInMillis, 15)
+                    GregorianCalendar(2020, 6, 20).timeInMillis, 15)
             timePerformDao.insert(valuePerform)
 
             valuePerform = TimePerform(
-                    GregorianCalendar(2020, 6, 29).timeInMillis, 3)
+                    GregorianCalendar(2020, 6, 22).timeInMillis, 3)
             timePerformDao.insert(valuePerform)
 
             valuePerform = TimePerform(
-                    GregorianCalendar(2020, 6, 29).timeInMillis, 8)
+                    GregorianCalendar(2020, 6, 22).timeInMillis, 8)
             timePerformDao.insert(valuePerform)
 
             valuePerform = TimePerform(
-                    GregorianCalendar(2020, 6, 30).timeInMillis,
+                    GregorianCalendar(2020, 6, 23).timeInMillis,
                     0)
             timePerformDao.insert(valuePerform)
 
             valuePerform = TimePerform(
-                    GregorianCalendar(2006, 6, 30).timeInMillis,
+                    GregorianCalendar(2006, 0, 19).timeInMillis,
                     3)
             timePerformDao.insert(valuePerform)
 
             valuePerform = TimePerform(
-                    GregorianCalendar(2006, 6, 28).timeInMillis,
+                    GregorianCalendar(2006, 0, 20).timeInMillis,
                     5)
             timePerformDao.insert(valuePerform)
 
             valuePerform = TimePerform(
-                    GregorianCalendar(2006, 6, 28).timeInMillis,
+                    GregorianCalendar(2006, 0, 21).timeInMillis,
                     4)
             timePerformDao.insert(valuePerform)
 
