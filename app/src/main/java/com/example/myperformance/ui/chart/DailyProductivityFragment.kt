@@ -9,6 +9,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.myperformance.R
 import com.example.myperformance.presenters.viewModel.TimePerformViewModel
@@ -20,6 +21,10 @@ import com.example.myperformance.presenters.ReturningDataChart
 import com.example.myperformance.view.DailyProductivityView
 
 import kotlinx.android.synthetic.main.daily_productivity.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.lang.NullPointerException
 
 /**
@@ -64,8 +69,6 @@ class DailyProductivityFragment : Fragment(), DailyProductivityView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         progressBarLoading = view?.findViewById(R.id.progressBar_loading_chart)!!
-
-        Toast.makeText(activity?.applicationContext, "Valuer $position", Toast.LENGTH_SHORT).show()
         criterion(position)
         loadData()
         observe()
@@ -111,8 +114,8 @@ class DailyProductivityFragment : Fragment(), DailyProductivityView {
     }
 
     private fun load(liveData: LiveData<List<TimePerform>>) {
-
-        liveData.observeForever {
+        loadData()
+        liveData.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()) {
                 try {
                     loadData(it)
@@ -120,10 +123,13 @@ class DailyProductivityFragment : Fragment(), DailyProductivityView {
                     showError(idResource = R.string.error_loading_data)
                 }
             } else {
-                loadData()
+
+                endLoading()
                 showError(idResource = R.string.error_empty_data_chart)
             }
-        }
+
+        })
+
     }
 
 

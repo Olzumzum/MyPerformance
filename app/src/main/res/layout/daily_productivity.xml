@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ProgressBar
         android:id="@+id/progressBar_loading_chart"
         style="?android:attr/progressBarStyle"
-        android:visibility="visible"
-        android:layout_centerInParent="true"
-        android:layout_above="@id/plot_layout"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="visible" />
 
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/plot_layout"
-    tools:context="com.example.myperformance.ui.chart.DailyProductivityFragment">
-
-
-    <com.androidplot.xy.XYPlot
-        android:id="@+id/plot"
+    <LinearLayout
+        android:id="@+id/plot_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:renderMode="use_background_thread"
-        app:paddingBottom="20dp"
-        style="@style/APDefacto.Light"
-        />
+        android:orientation="vertical"
+        tools:context="com.example.myperformance.ui.chart.DailyProductivityFragment">
 
-</LinearLayout>
-</RelativeLayout>
+
+
+        <com.androidplot.xy.XYPlot
+            android:id="@+id/plot"
+            style="@style/APDefacto.Light"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:paddingBottom="20dp"
+            app:renderMode="use_background_thread" />
+
+
+    </LinearLayout>
+</FrameLayout>
