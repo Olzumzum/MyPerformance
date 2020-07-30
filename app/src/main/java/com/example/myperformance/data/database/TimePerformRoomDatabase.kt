@@ -39,25 +39,30 @@ abstract class TimePerformRoomDatabase : RoomDatabase() {
 
         private suspend fun fillDatabase(timePerformDao: TimePerformDao){
 
+            val data = GregorianCalendar(2020, 6, 30)
             var valuePerform = TimePerform(
-                    GregorianCalendar(2020, 6, 20).timeInMillis, 15)
+                    data.timeInMillis, 0)
             timePerformDao.insert(valuePerform)
 
             valuePerform = TimePerform(
-                    GregorianCalendar(2020, 6, 22).timeInMillis, 3)
+                    data.timeInMillis, 3)
             timePerformDao.insert(valuePerform)
 
             valuePerform = TimePerform(
-                    GregorianCalendar(2020, 6, 22).timeInMillis, 8)
+                    data.timeInMillis, 3)
             timePerformDao.insert(valuePerform)
 
             valuePerform = TimePerform(
-                    GregorianCalendar(2020, 6, 23).timeInMillis,
+                    data.timeInMillis, 8)
+            timePerformDao.insert(valuePerform)
+
+            valuePerform = TimePerform(
+                    data.timeInMillis,
                     0)
             timePerformDao.insert(valuePerform)
 
             valuePerform = TimePerform(
-                    GregorianCalendar(2006, 0, 19).timeInMillis,
+                    data.timeInMillis,
                     3)
             timePerformDao.insert(valuePerform)
 
@@ -88,12 +93,27 @@ abstract class TimePerformRoomDatabase : RoomDatabase() {
 
             valuePerform = TimePerform(
                     GregorianCalendar(2006, 0, 25).timeInMillis,
-                    11)
+                    22)
             timePerformDao.insert(valuePerform)
 
             valuePerform = TimePerform(
                     GregorianCalendar(2006, 0, 26).timeInMillis,
-                    11)
+                    7)
+            timePerformDao.insert(valuePerform)
+
+            valuePerform = TimePerform(
+                    GregorianCalendar(2006, 0, 26).timeInMillis,
+                    3)
+            timePerformDao.insert(valuePerform)
+
+            valuePerform = TimePerform(
+                    GregorianCalendar(2006, 0, 26).timeInMillis,
+                    2)
+            timePerformDao.insert(valuePerform)
+
+            valuePerform = TimePerform(
+                    GregorianCalendar(2006, 0, 26).timeInMillis,
+                    2)
             timePerformDao.insert(valuePerform)
         }
     }

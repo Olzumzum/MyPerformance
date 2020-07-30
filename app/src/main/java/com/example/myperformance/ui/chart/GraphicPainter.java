@@ -35,6 +35,7 @@ final public class GraphicPainter {
     private int MAX_VALUE_X;
     private int MIN_VALUE_Y = 0;
     private int MAX_VALUE_Y = 0;
+    private int DOMAIN_STEP = 0;
 
     private XYPlot plot;
     private List<Number> keyDate = new ArrayList<>();
@@ -67,6 +68,7 @@ final public class GraphicPainter {
         //to scale
         MAX_VALUE_X = keyDate.size();
         MAX_VALUE_Y = searchMaxValue(valueTime);
+        searchDomainStep(keyDate);
     }
 
 
@@ -92,6 +94,12 @@ final public class GraphicPainter {
         return max;
     }
 
+    private void searchDomainStep(List<? extends Number> domainList){
+        DOMAIN_STEP = domainList.size();
+        if (DOMAIN_STEP > 15)
+            DOMAIN_STEP = 15;
+    }
+
     /**
      * draw chart space
      * set the zoom range
@@ -107,7 +115,7 @@ final public class GraphicPainter {
         plot.getGraph().setPaddingRight(2);
 
         //X-axis step drawing
-        plot.setDomainStep(StepMode.SUBDIVIDE, 15);
+        plot.setDomainStep(StepMode.SUBDIVIDE, DOMAIN_STEP);
 
         //axis name
         plot.setDomainLabel(NAME_AXIS_X);

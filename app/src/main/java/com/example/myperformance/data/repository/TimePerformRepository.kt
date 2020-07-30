@@ -30,9 +30,9 @@ class TimePerformRepository(private val timePerformDao: TimePerformDao) {
     }
 
     fun getDataToday(): LiveData<List<TimePerform>> {
-        val tommorow = getListOneDay()
-        val start = GregorianCalendar(2020, 6, 29).timeInMillis
-        val finish = GregorianCalendar(2020, 6, 29).timeInMillis
+//        val tommorow = getListOneDay()
+        val start = GregorianCalendar(2020, 6, 30).timeInMillis
+        val finish = GregorianCalendar(2020, 6, 30).timeInMillis
         return timePerformDao.getDataByPeriod(start, finish)
     }
 

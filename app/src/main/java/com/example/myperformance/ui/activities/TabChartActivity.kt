@@ -28,6 +28,8 @@ class TabChartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tab_chart)
 
+        pager.offscreenPageLimit = 0
+
         val pageAdapter = TabsPageAdapter( supportFragmentManager, countItems)
         pager.adapter = pageAdapter
         tabs.setupWithViewPager(pager)
