@@ -123,7 +123,7 @@ final public class GraphicPainter {
 
 //        axis iteration format
         plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.LEFT).
-                setFormat(new DecimalFormat("0"));
+                setFormat(new DecimalFormat("0  "));
 
         plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).
                 setFormat(new Format() {
@@ -131,6 +131,7 @@ final public class GraphicPainter {
                     public StringBuffer format(Object obj,
                                                @NonNull StringBuffer toAppendTo,
                                                @NonNull FieldPosition pos) {
+
 
                         int yearIndex = (int) Math.round(((Number) obj).doubleValue());
                         return dateFormat.format(keyDate.get(yearIndex), toAppendTo, pos);

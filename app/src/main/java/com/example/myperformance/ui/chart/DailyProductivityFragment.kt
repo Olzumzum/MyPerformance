@@ -30,11 +30,9 @@ import java.lang.NullPointerException
 /**
  *fragment display plotting performance data
  */
-class DailyProductivityFragment : Fragment(), DailyProductivityView {
+class DailyProductivityFragment(private val criterionChart: CriterionChart) : Fragment(), DailyProductivityView {
 
     lateinit var progressBarLoading: ProgressBar
-
-    lateinit var criterionChart: CriterionChart
     private val rDataChart: ReturningDataChart<Any> = ChartDataHolder()
 
     // initialized depending on the type of graph, indicates the format
@@ -42,24 +40,12 @@ class DailyProductivityFragment : Fragment(), DailyProductivityView {
     lateinit var dateFormat: String
 
     lateinit var viewModel: TimePerformViewModel
-    var position: Int? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this).get(TimePerformViewModel::class.java)
-        position = arguments?.getInt(ARG_SECTION_NUMBER)
-        Log.e("MyLog", "position $position")
-
     }
-
-    fun criterion(position: Int?) {
-        when (position) {
-            0 -> criterionChart = CriterionChart.TODAY
-            1 -> criterionChart = CriterionChart.WEEK
-            2 -> criterionChart = CriterionChart.ALL
-        }
-    }
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.daily_productivity, container, false)
@@ -69,7 +55,6 @@ class DailyProductivityFragment : Fragment(), DailyProductivityView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         progressBarLoading = view?.findViewById(R.id.progressBar_loading_chart)!!
-        criterion(position)
         loadData()
         observe()
 
@@ -101,6 +86,7 @@ class DailyProductivityFragment : Fragment(), DailyProductivityView {
         when (criterionChart) {
             CriterionChart.TODAY -> {
                 load(viewModel.todayTimePerform)
+
             }
             CriterionChart.WEEK -> {
                 load(viewModel.weekTimePerform)
@@ -153,6 +139,7 @@ class DailyProductivityFragment : Fragment(), DailyProductivityView {
      *formats data for display
      */
     private fun <E> loadData(list: List<E>) {
+        Log.e("MyLog", list.size.toString())
         setFormat()
         rDataChart.setList(list)
         val keyDate: List<Number> = rDataChart.listDayOfWeek as List<Number>
@@ -170,17 +157,4 @@ class DailyProductivityFragment : Fragment(), DailyProductivityView {
         progressBarLoading.visibility = View.GONE
         plot.visibility = View.VISIBLE
     }
-
-    companion object {
-        private const val ARG_SECTION_NUMBER = "section_number"
-
-        fun newInstance(position: Int): DailyProductivityFragment {
-            return DailyProductivityFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_SECTION_NUMBER, position)
-                }
-            }
-        }
-    }
-
 }

@@ -39,7 +39,7 @@ abstract class TimePerformRoomDatabase : RoomDatabase() {
 
         private suspend fun fillDatabase(timePerformDao: TimePerformDao){
 
-            val data = GregorianCalendar()
+            val data = GregorianCalendar(2020, 6, 30)
             var valuePerform = TimePerform(
                     data.timeInMillis, 0)
             timePerformDao.insert(valuePerform)
