@@ -33,6 +33,7 @@
     <string name="error_saving_data">Error saving data</string>
     <string name="error_time_display">Time display error</string>
     <string name="empty_list">The list is empty</string>
+    <string name="error_cast_stopwatch_message">Error of casting the type of the received time value</string>
 
     <!-- App information -->
     <string name="developer_contacts">Developer - Olzumzum </string>
