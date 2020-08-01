@@ -33,7 +33,7 @@ import java.lang.NullPointerException
 class DailyProductivityFragment(private val criterionChart: CriterionChart) : Fragment(), DailyProductivityView {
 
     lateinit var progressBarLoading: ProgressBar
-    private val rDataChart: ReturningDataChart<Any> = ChartDataHolder()
+    private val rDataChart: ReturningDataChart<Any> = ChartDataHolder(criterionChart)
 
     // initialized depending on the type of graph, indicates the format
     // of data output along the x axis

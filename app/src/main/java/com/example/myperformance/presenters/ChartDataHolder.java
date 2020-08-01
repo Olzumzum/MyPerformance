@@ -1,5 +1,6 @@
 package com.example.myperformance.presenters;
 
+import com.example.myperformance.data.model.CriterionChart;
 import com.example.myperformance.data.model.TimePerform;
 
 import java.util.ArrayList;
@@ -18,13 +19,19 @@ public class ChartDataHolder<E> implements ReturningDataChart<E> {
     private List<E> valueDate = new ArrayList<>();
     //time count list
     private List<E> valueTime = new ArrayList<>();
+    private CriterionChart criterionChart;
+
+    public ChartDataHolder(CriterionChart criterionChart) {
+        this.criterionChart = criterionChart;
+    }
 
 
     /**
      * writing date and time data to lists for display in a graph
      */
     private void timeAndDateRecording(List<E> listValue) {
-        listValue = summatorTime((List<TimePerform>) listValue);
+        if (criterionChart != CriterionChart.TODAY)
+            listValue = summatorTime((List<TimePerform>) listValue);
 
         for (TimePerform el : (List<TimePerform>) listValue) {
             //get date - key
