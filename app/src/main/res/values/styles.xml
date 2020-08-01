@@ -23,7 +23,13 @@
         <item name="android:textSize">@dimen/button_text_size</item>
     </style>
 
-
+    <style name="MyPerf.Button_stopwatch">
+        <item name="android:layout_width">@dimen/stopwatch_button_width</item>
+        <item name="android:layout_height">@dimen/stopwatch_button_height</item>
+        <item name="android:background">@drawable/button_style</item>
+        <item name="android:textColor">@color/text_button</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+    </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

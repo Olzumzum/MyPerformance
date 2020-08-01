@@ -64,7 +64,6 @@ class DailyProductivityFragment(private val criterionChart: CriterionChart) : Fr
      * specifies the format of the x-axis data
      */
     private fun setFormat() {
-        Log.e("MyLog", "$criterionChart")
         criterionChart.let {
             when (it) {
                 CriterionChart.TODAY -> {
@@ -120,7 +119,6 @@ class DailyProductivityFragment(private val criterionChart: CriterionChart) : Fr
 
 
     override fun showError(idResource: Int) {
-        Log.d("MyLog", "Error message")
         Toast.makeText(context, getString(idResource), Toast.LENGTH_LONG).show()
     }
 
@@ -139,13 +137,18 @@ class DailyProductivityFragment(private val criterionChart: CriterionChart) : Fr
      *formats data for display
      */
     private fun <E> loadData(list: List<E>) {
-        Log.e("MyLog", list.size.toString())
+
+        if (list.isEmpty())
+            showError(R.string.empty_list)
+        if (criterionChart == CriterionChart.WEEK)
+
         setFormat()
         rDataChart.setList(list)
         val keyDate: List<Number> = rDataChart.listDayOfWeek as List<Number>
         val valueTime: List<Number> = rDataChart.listTimeValue as List<Number>
         showData(keyDate, valueTime)
     }
+
 
     override fun loadData() {
         plot.visibility = View.GONE

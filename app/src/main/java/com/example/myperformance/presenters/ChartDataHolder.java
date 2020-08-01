@@ -30,8 +30,8 @@ public class ChartDataHolder<E> implements ReturningDataChart<E> {
      * writing date and time data to lists for display in a graph
      */
     private void timeAndDateRecording(List<E> listValue) {
-        if (criterionChart != CriterionChart.TODAY)
-            listValue = summatorTime((List<TimePerform>) listValue);
+//        if (criterionChart == CriterionChart.ALL)
+//            listValue = summatorTime((List<TimePerform>) listValue);
 
         for (TimePerform el : (List<TimePerform>) listValue) {
             //get date - key

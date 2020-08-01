@@ -96,8 +96,8 @@ final public class GraphicPainter {
 
     private void searchDomainStep(List<? extends Number> domainList){
         DOMAIN_STEP = domainList.size();
-        if (DOMAIN_STEP > 15)
-            DOMAIN_STEP = 15;
+        if (DOMAIN_STEP > 10)
+            DOMAIN_STEP = 10;
     }
 
     /**
@@ -108,8 +108,8 @@ final public class GraphicPainter {
     private void paintChart() {
         addSeries();
 
-        plot.setRangeBoundaries(0, MIN_VALUE_X, BoundaryMode.AUTO);
-        plot.setDomainBoundaries(0, MAX_VALUE_Y, BoundaryMode.AUTO);
+        plot.setRangeBoundaries(0, valueTime.size(), BoundaryMode.AUTO);
+        plot.setDomainBoundaries(0, keyDate.size(), BoundaryMode.AUTO);
         plot.setBorderStyle(Plot.BorderStyle.NONE, null, null);
 
         plot.getGraph().setPaddingRight(2);
@@ -123,7 +123,7 @@ final public class GraphicPainter {
 
 //        axis iteration format
         plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.LEFT).
-                setFormat(new DecimalFormat("0  "));
+                setFormat(new DecimalFormat("0"));
 
         plot.getGraph().getLineLabelStyle(XYGraphWidget.Edge.BOTTOM).
                 setFormat(new Format() {

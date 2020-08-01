@@ -115,6 +115,46 @@ abstract class TimePerformRoomDatabase : RoomDatabase() {
                     GregorianCalendar(2006, 0, 26).timeInMillis,
                     2)
             timePerformDao.insert(valuePerform)
+
+            valuePerform = TimePerform(
+                    GregorianCalendar(20020, 0, 26).timeInMillis,
+                    6)
+            timePerformDao.insert(valuePerform)
+
+            valuePerform = TimePerform(
+                    GregorianCalendar(2006, 0, 27).timeInMillis,
+                    4)
+            timePerformDao.insert(valuePerform)
+
+            valuePerform = TimePerform(
+                    GregorianCalendar(2006, 0, 27).timeInMillis,
+                    4)
+            timePerformDao.insert(valuePerform)
+
+            valuePerform = TimePerform(
+                    GregorianCalendar(2006, 0, 27).timeInMillis,
+                    4)
+            timePerformDao.insert(valuePerform)
+
+            valuePerform = TimePerform(
+                    GregorianCalendar(2006, 0, 27).timeInMillis,
+                    4)
+            timePerformDao.insert(valuePerform)
+
+            valuePerform = TimePerform(
+                    GregorianCalendar(2006, 0, 27).timeInMillis,
+                    4)
+            timePerformDao.insert(valuePerform)
+
+            valuePerform = TimePerform(
+                    GregorianCalendar(2006, 0, 27).timeInMillis,
+                    4)
+            timePerformDao.insert(valuePerform)
+
+            valuePerform = TimePerform(
+                    GregorianCalendar(2006, 0, 27).timeInMillis,
+                    4)
+            timePerformDao.insert(valuePerform)
         }
     }
 

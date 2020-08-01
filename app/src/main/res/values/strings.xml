@@ -32,6 +32,7 @@
     <string name="error_empty_data_chart">No data for this period</string>
     <string name="error_saving_data">Error saving data</string>
     <string name="error_time_display">Time display error</string>
+    <string name="empty_list">The list is empty</string>
 
     <!-- App information -->
     <string name="developer_contacts">Developer - Olzumzum </string>
@@ -52,5 +53,9 @@
 
     <!--Notification-->
     <string name="notification_title">Timer is running</string>
+
+    <!-- Stopwatch -->
+    <string name="dimen_stopwatch">minutes</string>
+    <string name="text_button_stopwatch">Start</string>
 
 </resources>

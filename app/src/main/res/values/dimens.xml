@@ -60,4 +60,10 @@
     <dimen name="nickname_user_info_size">15sp</dimen>
     <dimen name="hat_user_info_container_padding">10dp</dimen>
     <dimen name="text_hat_user_info_container_margin">5dp</dimen>
+
+    <!-- Stopwatch -->
+    <dimen name="text_size_dimen_stopwatch">16sp</dimen>
+    <dimen name="stopwatch_button_width">150dp</dimen>
+    <dimen name="stopwatch_button_height">65dp</dimen>
+
 </resources>

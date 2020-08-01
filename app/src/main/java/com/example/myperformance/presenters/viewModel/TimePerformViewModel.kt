@@ -1,6 +1,7 @@
 package com.example.myperformance.presenters.viewModel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.myperformance.app.App
 import com.example.myperformance.data.model.CriterionChart
