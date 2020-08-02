@@ -1,6 +1,7 @@
 package com.example.myperformance.ui.stopwatch
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +17,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_stopwatch.*
 import org.w3c.dom.Text
 
-class StopWatchFragment : Fragment(), StopwatchView, View.OnClickListener {
+class StopWatchFragment : Fragment(), StopwatchView {
 
     private var timeValue: Int = 0
 
-    private var timeValueTextView: TextView? = null
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -33,23 +33,42 @@ class StopWatchFragment : Fragment(), StopwatchView, View.OnClickListener {
         val nav = findNavController()
         NavigationUI.setupWithNavController(bottomBar!!, nav)
 
-        timeValueTextView = view?.findViewById<TextView>(R.id.timeValueStopWatch)
-        val buttonStart = view?.findViewById<Button>(R.id.stopwatchButton)
-
-        buttonStart?.setOnClickListener(this)
 
         return viewRoot
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        stopwatchButton.setOnClickListener {
+            val value = timeValueStopWatch?.text.toString()
+            if(value.isNotEmpty()) {
+                try {
+                    timeValue = value.toInt()
+                } catch (e: ClassCastException) {
+                    showError(R.string.error_cast_stopwatch_message)
+                }
+
+                startStopwatch()
+            }
+        }
     }
 
     override fun showError(idResource: Int) {
         Toast.makeText(context, getString(idResource), Toast.LENGTH_LONG).show()
     }
 
-    override fun onClick(v: View?) {
-        try {
-            timeValue = timeValueTextView?.text as Int
-        } catch (e: ClassCastException) {
-            showError(R.string.error_cast_stopwatch_message)
-        }
+    override fun startStopwatch() {
+        timeValueStopWatch?.visibility = View.GONE
+        decrease_time_view?.visibility = View.VISIBLE
     }
+
+    override fun stopStopWatch() {
+    }
+
+    override fun showTime() {
+        TODO("Not yet implemented")
+    }
+
+
 }
