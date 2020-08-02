@@ -65,5 +65,6 @@
     <dimen name="text_size_dimen_stopwatch">16sp</dimen>
     <dimen name="stopwatch_button_width">150dp</dimen>
     <dimen name="stopwatch_button_height">65dp</dimen>
+    <dimen name="valuetime_text_size_stopwatch">30sp</dimen>
 
 </resources>
