@@ -22,20 +22,23 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_stopwatch.*
 import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
-import kotlin.time.TimedValue
 
 class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
 
-    private var timeValue: Int = 0
-    private var runningStopwatchFlag: Boolean = false
     private val RESTART_SERVICE = "restartservice"
     private val NAME_CLASS_SERVICE_FLAG:String = "NameClassService"
     private val TIMER_INTENT_ACTION = "example.myperformance"
     private val TIME_VALUE_EXTRA = "StopwatchValue"
+    private val START_BUTTON_STOPWATCH_FLAG = "startStopwatch"
+    private val STOP_BUTTON_STOPWATCH_FLAG = "stopStopwatch"
+
+    private var timeValue: Int = 0
+    private var runningStopwatchFlag: Boolean = false
 
     @InjectPresenter
     lateinit var presenter: StopwatchPresenter
 
+    lateinit var broadcastReceiver: BroadcastReceiver
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -49,7 +52,8 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
         NavigationUI.setupWithNavController(bottomBar!!, nav)
 
         val intentFilter = IntentFilter(TIMER_INTENT_ACTION)
-        val broadcastReceiver = stopwatchListen()
+        broadcastReceiver = stopwatchListen()
+
         activity?.applicationContext?.registerReceiver(broadcastReceiver, intentFilter)
 
 
@@ -60,12 +64,11 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
         super.onActivityCreated(savedInstanceState)
 
         stopwatchButton.setOnClickListener {
-            val intent = Intent(context, StopwatchService::class.java)
            if(runningStopwatchFlag){
-               displayStopwathcStop(intent)
+               displayStopwathcStop()
 
            } else {
-               displayStopwathcStars(intent)
+               displayStopwathcStart()
            }
         }
     }
@@ -96,7 +99,7 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
      * processing of entered data,
      * launch start UI
      */
-    private fun displayStopwathcStars(i: Intent){
+    private fun displayStopwathcStart(){
         val value = timeValueStopWatch?.text.toString()
         if(value.isNotEmpty()) {
             try {
@@ -110,9 +113,10 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
             runningStopwatchFlag = true
 
             startStopwatch()
-            val intent = Intent(context, StopwatchService::class.java)
 
+            val intent = Intent(context, StopwatchService::class.java)
             intent.putExtra("time", timeValue)
+            intent.putExtra("buttonFlag", START_BUTTON_STOPWATCH_FLAG)
             context?.startService(intent)
         }
 
@@ -121,9 +125,13 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
     /**
      * stop handing
      */
-    private fun displayStopwathcStop(intent: Intent){
+    private fun displayStopwathcStop(){
         //note that the stopwatch is stopped
         runningStopwatchFlag = false
+
+        val intent = Intent(context, StopwatchService::class.java)
+        intent.putExtra("buttonFlag", STOP_BUTTON_STOPWATCH_FLAG)
+        context?.sendBroadcast(intent)
 
         stopStopWatch()
         context?.stopService(intent)

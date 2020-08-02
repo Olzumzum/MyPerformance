@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.myperformance.R
 import com.example.myperformance.broadcast.Restarter
@@ -14,12 +15,25 @@ import java.util.*
 
 class StopwatchService : Service() {
     private val TIMER_INTENT_ACTION = "example.myperformance"
-    val NOTIFICATION_CHANEL_ID = "example.myperformance"
+    private val NOTIFICATION_CHANEL_ID = "example.myperformance"
     private val RESTART_SERVICE = "restartservice"
-    val chanelName = "Stopwatch Service"
+    private val chanelName = "Stopwatch Service"
     private val TIME_VALUE_EXTRA = "StopwatchValue"
-    private var runningStopwatchFrlag: Boolean = false
+    private val START_BUTTON_STOPWATCH_FLAG = "startStopwatch"
+    private val STOP_BUTTON_STOPWATCH_FLAG = "stopStopwatch"
+    private val START_STOPWATCH_NOTIF_ID = 3
+    private val FINISH_STOPWATCH_NOTIF_ID = 4
 
+
+    private lateinit var chan: NotificationChannel
+    private lateinit var notificationManager: NotificationManager
+    private lateinit var notificationBuilder: Notification.Builder
+    private lateinit var notificationIntent: Intent
+    private lateinit var contentIntent: PendingIntent
+
+    private var timer: Timer = Timer()
+    private var runningStopwatchFrlag: Boolean = false
+    private var time: Int = 0
 
     override fun onCreate() {
         super.onCreate()
@@ -29,51 +43,80 @@ class StopwatchService : Service() {
             startForeground(1, Notification())
     }
 
+    //настройки для таймера
     @RequiresApi(Build.VERSION_CODES.O)
-    fun startForeground() {
-        val chan: NotificationChannel = NotificationChannel(
+    fun notificationBuild() {
+        chan = NotificationChannel(
                 NOTIFICATION_CHANEL_ID, chanelName, NotificationManager.IMPORTANCE_NONE
         )
         chan.lightColor = Color.BLUE
         chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
 
-        val manager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        manager.createNotificationChannel(chan)
+        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(chan)
 
 
         //to open an activity with a timer
-        val notificationIntent: Intent = Intent(applicationContext, ScrolbarActivity::class.java)
-        val contentIntent = PendingIntent.getActivity(
+        notificationIntent = Intent(applicationContext, ScrolbarActivity::class.java)
+        contentIntent = PendingIntent.getActivity(
                 this,
                 0,
                 notificationIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT)
 
 
-        val notificationBuilder: Notification.Builder = Notification.Builder(applicationContext, NOTIFICATION_CHANEL_ID)
-        val notification = notificationBuilder.setOngoing(true)
-                .setContentTitle(getString(R.string.notification_title))
+        notificationBuilder = Notification.Builder(applicationContext, NOTIFICATION_CHANEL_ID)
+    }
+
+    //уведомить, что секундомер работает
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun startForeground() {
+        //настройка для работы таймера
+        notificationBuild()
+
+        //уведомление, что таймер работает
+        val notificationStart = notificationBuilder.setOngoing(true)
+                .setContentTitle(getString(R.string.stopwatch_title_notification))
                 .setSmallIcon(R.drawable.round_more_time_black_18dp)
                 .setCategory(Notification.CATEGORY_SERVICE)
                 .setContentIntent(contentIntent)
                 .setColor(Color.YELLOW)
                 .build()
-        startForeground(2, notification)
+        startForeground(START_STOPWATCH_NOTIF_ID, notificationStart)
+    }
+
+    //уведомить, что секундомер завершил работу
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun finishStopwatch() {
+        //отменить уведомление о том, что таймер считает
+        notificationManager.cancel(START_STOPWATCH_NOTIF_ID)
+
+        //уведомление о финише
+        val notificationFinish = notificationBuilder.setOngoing(true)
+                .setContentTitle(getString(R.string.stopwatch_finished_title_notification))
+                .setSmallIcon(R.drawable.round_more_time_black_18dp)
+                .setCategory(Notification.CATEGORY_SERVICE)
+                .setContentIntent(contentIntent)
+                .setColor(Color.YELLOW)
+                .build()
+        startForeground(FINISH_STOPWATCH_NOTIF_ID, notificationFinish)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val extras = intent?.extras
         val valueTime = extras?.getInt("time")
+        val buttonExtra = extras?.getString("buttonFlag")
+        when (buttonExtra) {
+            START_BUTTON_STOPWATCH_FLAG -> runningStopwatchFrlag = true
+            STOP_BUTTON_STOPWATCH_FLAG -> runningStopwatchFrlag = false
+        }
         startStopwatch(valueTime)
         return super.onStartCommand(intent, flags, startId)
     }
 
     private fun startStopwatch(valueTime: Int?) {
         if (valueTime != null) {
-            runningStopwatchFrlag = true
-
-            var time: Int = valueTime
-            val timer = Timer()
+            time = valueTime
             timer.scheduleAtFixedRate(object : TimerTask() {
                 override fun run() {
 
@@ -84,8 +127,7 @@ class StopwatchService : Service() {
                     application.applicationContext.sendBroadcast(intent)
 
                     if (time == 0) {
-                        timer.cancel()
-                        runningStopwatchFrlag = false
+                       stopStopwatch()
                     }
                 }
             }, 0, 1000)
@@ -93,16 +135,25 @@ class StopwatchService : Service() {
 
     }
 
-    override fun onDestroy() {
-        if (runningStopwatchFrlag) {
-            val intent = Intent(RESTART_SERVICE)
-            intent.setClass(this, Restarter::class.java)
-            this.sendBroadcast(intent)
+    fun stopStopwatch(){
+        timer.let {
+            timer.cancel()
+            runningStopwatchFrlag = false
         }
+    }
+
+    override fun onDestroy() {
+        stopStopwatch()
+//        if (runningStopwatchFrlag) {
+//            val intent = Intent(RESTART_SERVICE)
+//            intent.setClass(this, Restarter::class.java)
+//            this.sendBroadcast(intent)
+//        }
         super.onDestroy()
     }
 
     override fun onBind(intent: Intent?): IBinder? {
-        TODO("Not yet implemented")
+        Log.d("MyLog", "bind")
+        return null
     }
 }

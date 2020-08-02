@@ -3,19 +3,14 @@ package com.example.myperformance.service
 import android.app.*
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
-import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.myperformance.R
 import com.example.myperformance.broadcast.Restarter
 import com.example.myperformance.ui.activities.ScrolbarActivity
-import com.example.myperformance.ui.timer.TimerFragment
 import java.util.*
-import kotlin.concurrent.timerTask
 
 /**
  * Timer service.
@@ -70,7 +65,7 @@ class TimeCounterService : Service() {
 
         val notificationBuilder: Notification.Builder = Notification.Builder(applicationContext, NOTIFICATION_CHANEL_ID)
         val notification = notificationBuilder.setOngoing(true)
-                .setContentTitle(getString(R.string.notification_title))
+                .setContentTitle(getString(R.string.timer_title_notification))
                 .setSmallIcon(R.drawable.round_more_time_black_18dp)
                 .setCategory(Notification.CATEGORY_SERVICE)
                 .setContentIntent(contentIntent)
@@ -100,12 +95,12 @@ class TimeCounterService : Service() {
     override fun onDestroy() {
 
         stopTimer()
-
-        if (timer != null) {
-            val intent = Intent(RESTART_SERVICE)
-            intent.setClass(this, Restarter::class.java)
-            this.sendBroadcast(intent)
-        }
+//
+//        if (timer != null) {
+//            val intent = Intent(RESTART_SERVICE)
+//            intent.setClass(this, Restarter::class.java)
+//            this.sendBroadcast(intent)
+//        }
 
         timeValue = 0;
         super.onDestroy()

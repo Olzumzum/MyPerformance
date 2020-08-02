@@ -53,7 +53,9 @@
     <string name="user_goal_dimension">hours</string>
 
     <!--Notification-->
-    <string name="notification_title">Timer is running</string>
+    <string name="timer_title_notification">Timer is running</string>
+    <string name="stopwatch_title_notification">Stopwatch is running</string>
+    <string name="stopwatch_finished_title_notification">Stopwatch completed</string>
 
     <!-- Stopwatch -->
     <string name="dimen_stopwatch">minutes</string>
