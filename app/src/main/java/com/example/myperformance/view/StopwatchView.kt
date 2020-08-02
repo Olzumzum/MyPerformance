@@ -9,5 +9,5 @@ interface StopwatchView: MvpView {
     fun showError(idResource: Int)
     fun startStopwatch()
     fun stopStopWatch()
-    fun showTime()
+    fun showTime(timeValue: Int)
 }

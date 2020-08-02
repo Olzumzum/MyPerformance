@@ -42,6 +42,8 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
     private val BUTTON_ACTION_PAUSE = "pause"
     private val BUTTON_ACTION_STOP = "stop"
     private val RESTART_SERVICE = "restartservice"
+    private val NAME_CLASS_SERVICE_FLAG:String = "NameClassService"
+
 
     private var runningServiceFlag: Boolean = false
 
@@ -99,7 +101,6 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
 
     override fun onClick(v: View?) {
         val intent = Intent(context, TimeCounterService::class.java)
-        intent.putExtra("TimerFragmentContext", context.toString())
         when (v?.id) {
             R.id.start_countring_time -> {
                 intent.putExtra(BUTTON_ACTION_FLAG, BUTTON_ACTION_START)
@@ -123,6 +124,7 @@ class TimerFragment : MvpAppCompatFragment(), View.OnClickListener, TimerView {
     override fun onDestroy() {
         if (runningServiceFlag) {
             val intent = Intent(RESTART_SERVICE)
+            intent.putExtra(NAME_CLASS_SERVICE_FLAG, "TimeCounterService")
             this.context?.let { intent.setClass(it, Restarter::class.java) }
             context?.sendBroadcast(intent)
         }

@@ -59,5 +59,6 @@
     <string name="dimen_stopwatch">minutes</string>
     <string name="start_text_button_stopwatch">Start</string>
     <string name="stop_text_button_stopwatch">Stop</string>
+    <string name="time_getting_error">Time getting error</string>
 
 </resources>

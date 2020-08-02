@@ -31,6 +31,8 @@
         <service
             android:name=".service.TimeCounterService"
             android:enabled="true" />
+        <service android:name=".service.StopwatchService"
+            android:enabled="true"/>
 
         <receiver
             android:name=".broadcast.Restarter"

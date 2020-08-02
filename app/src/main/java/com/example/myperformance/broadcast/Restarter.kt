@@ -12,11 +12,16 @@ import com.example.myperformance.service.TimeCounterService
  * running on destroy
  */
 class Restarter : BroadcastReceiver() {
+    private val NAME_CLASS_SERVICE_FLAG:String = "NameClassService"
+
     override fun onReceive(context: Context?, intent: Intent?) {
+        val extras = intent?.extras
+        val nameService = extras?.getString(NAME_CLASS_SERVICE_FLAG)!!
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-            context?.startForegroundService(Intent(context, TimeCounterService::class.java))
+            context?.startForegroundService(Intent(context, nameService::class.java))
         else
-            context?.startService(Intent(context, TimeCounterService::class.java))
+            context?.startService(Intent(context, nameService::class.java))
     }
 
 
