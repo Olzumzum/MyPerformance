@@ -57,6 +57,7 @@
 
     <!-- Stopwatch -->
     <string name="dimen_stopwatch">minutes</string>
-    <string name="text_button_stopwatch">Start</string>
+    <string name="start_text_button_stopwatch">Start</string>
+    <string name="stop_text_button_stopwatch">Stop</string>
 
 </resources>

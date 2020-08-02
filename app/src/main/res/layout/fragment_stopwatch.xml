@@ -11,7 +11,7 @@
         android:id="@+id/stopwatchButton"
         style="@style/MyPerf.Button_stopwatch"
         android:layout_marginTop="288dp"
-        android:text="@string/text_button_stopwatch"
+        android:text="@string/start_text_button_stopwatch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
