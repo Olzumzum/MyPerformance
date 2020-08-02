@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/nav_awards"
         android:name="com.example.myperformance.ui.stopwatch.StopWatchFragment"
-        android:label="@string/menu_awards"
+        android:label="@string/menu_stopwatch"
         tools:layout="@layout/fragment_stopwatch" />
 
     <fragment

@@ -12,15 +12,20 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.myperformance.R
+import com.example.myperformance.presenters.StopwatchPresenter
 import com.example.myperformance.view.StopwatchView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_stopwatch.*
+import moxy.MvpAppCompatFragment
+import moxy.presenter.InjectPresenter
 
-class StopWatchFragment : Fragment(), StopwatchView {
+class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
 
     private var timeValue: Int = 0
     private var running_stopwatch: Boolean = false
 
+    @InjectPresenter
+    lateinit var presenter: StopwatchPresenter
 
 
     override fun onCreateView(
@@ -121,5 +126,7 @@ class StopWatchFragment : Fragment(), StopwatchView {
         val imm:InputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view?.windowToken, 0)
     }
+
+
 
 }
