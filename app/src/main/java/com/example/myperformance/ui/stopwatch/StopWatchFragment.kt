@@ -74,26 +74,31 @@ class StopWatchFragment : Fragment(), StopwatchView {
     }
 
     override fun startStopwatch() {
-        //отметить, что секундомер начал работу
+        //note that the stopwatch has started
         running_stopwatch = true
         //скрыть поле ввода
         timeValueStopWatch?.visibility = View.GONE
-        //отобразить счетчик
+        //hide input field
         decrease_time_view?.visibility = View.VISIBLE
-        //поменять текст на кнопке
+        //change the text on the button
         stopwatchButton.text = getString(R.string.stop_text_button_stopwatch)
-        //очистить поле ввода
+        //clear input field
         timeValueStopWatch.setText("")
-        //скрыть клавиатуру
+        //hide keyboard
         hideKeyboard(this.context, viewRoot )
 
     }
 
     override fun stopStopWatch() {
+        //note that the stopwatch is stopped
         running_stopwatch = false
+        //display time input field
         timeValueStopWatch?.visibility = View.VISIBLE
+        //remove counter
         decrease_time_view?.visibility = View.GONE
+        //change the text on the button
         stopwatchButton.text = getString(R.string.start_text_button_stopwatch)
+        //clear the counter field
         decrease_time_view.text = ""
     }
 
@@ -102,10 +107,11 @@ class StopWatchFragment : Fragment(), StopwatchView {
     }
 
 
+    /**
+     * hides the keyboard
+     */
     private fun hideKeyboard(context: Context?, view: View?){
         val imm:InputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-
-
         imm.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
