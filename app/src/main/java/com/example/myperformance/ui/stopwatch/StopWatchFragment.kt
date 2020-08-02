@@ -20,7 +20,7 @@ class StopWatchFragment : Fragment(), StopwatchView {
 
     private var timeValue: Int = 0
     private var running_stopwatch: Boolean = false
-    lateinit var viewRoot: View
+
 
 
     override fun onCreateView(
@@ -29,7 +29,7 @@ class StopWatchFragment : Fragment(), StopwatchView {
             savedInstanceState: Bundle?
     ): View? {
 
-        viewRoot = inflater.inflate(R.layout.fragment_stopwatch, container, false)
+        val viewRoot = inflater.inflate(R.layout.fragment_stopwatch, container, false)
         val bottomBar = viewRoot?.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         val nav = findNavController()
         NavigationUI.setupWithNavController(bottomBar!!, nav)
@@ -51,6 +51,10 @@ class StopWatchFragment : Fragment(), StopwatchView {
         }
     }
 
+    /**
+     * processing of entered data,
+     * launch start UI
+     */
     private fun displayStopwathcStars(){
         val value = timeValueStopWatch?.text.toString()
         if(value.isNotEmpty()) {
@@ -64,6 +68,9 @@ class StopWatchFragment : Fragment(), StopwatchView {
         }
     }
 
+    /**
+     * stop handing
+     */
     private fun displayStopwathcStop(){
         stopStopWatch()
 
@@ -85,7 +92,7 @@ class StopWatchFragment : Fragment(), StopwatchView {
         //clear input field
         timeValueStopWatch.setText("")
         //hide keyboard
-        hideKeyboard(this.context, viewRoot )
+        hideKeyboard(this.context, view )
 
     }
 
