@@ -56,7 +56,7 @@ class StopwatchService : Service() {
 
         //to open an activity with a timer
         notificationIntent = Intent(applicationContext, ScrolbarActivity::class.java)
-        notificationIntent.flags = (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP )
+        notificationIntent.flags = (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
         contentIntent = PendingIntent.getActivity(
                 this,
                 0,
@@ -141,10 +141,11 @@ class StopwatchService : Service() {
         timer.let {
             timer.cancel()
             runningStopwatchFrlag = false
-            val i = Intent(TIMER_INTENT_ACTION)
-            i.putExtra("runningStopwatchFrlag", runningStopwatchFrlag)
-            application.applicationContext.sendBroadcast(i)
+
         }
+        val i = Intent()
+        i.putExtra("runningStopwatchFrlag", runningStopwatchFrlag)
+        this.sendBroadcast(i)
     }
 
     override fun onDestroy() {

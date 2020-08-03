@@ -92,12 +92,11 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
             override fun onReceive(context: Context?, intent: Intent?) {
                 val timeValue = intent?.getIntExtra(TIME_VALUE_EXTRA, 0)
                 runningStopwatchFlag = intent?.getBooleanExtra("runningStopwatchFrlag", false)!!
-                if(runningStopwatchFlag){
-                    timeValueStopWatch?.visibility = View.GONE
-                    //hide input field
-                    decrease_time_view?.visibility = View.VISIBLE
-                    //change the text on the button
-                }
+//                if(runningStopwatchFlag){
+//
+//
+//                    //change the text on the button
+//                }
                 if (timeValue != null) {
                     showTime(timeValue)
                 } else
@@ -179,6 +178,11 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
 
     override fun showTime(timedValue: Int) {
         decrease_time_view?.setText(timedValue.toString())
+        stopwatchButton?.text = getString(R.string.stop_text_button_stopwatch)
+        timeValueStopWatch?.visibility = View.GONE
+        //hide input field
+        decrease_time_view?.visibility = View.VISIBLE
+
     }
 
 
