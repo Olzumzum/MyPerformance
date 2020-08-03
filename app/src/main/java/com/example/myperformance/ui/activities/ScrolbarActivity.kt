@@ -1,12 +1,18 @@
 package com.example.myperformance.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.Layout
+import android.util.Log
+import android.view.MotionEvent
+import android.view.View
 import androidx.navigation.findNavController
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.*
 import com.example.myperformance.R
 import kotlinx.android.synthetic.main.activity_scrolbar.*
 import kotlinx.android.synthetic.main.app_bar_scrolbar.*
+import kotlinx.android.synthetic.main.nav_header_scrolbar.view.*
 
 class ScrolbarActivity : AppCompatActivity() {
 
@@ -26,8 +32,18 @@ class ScrolbarActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        //bottom navigation mconnection
-//        NavigationUI.setupWithNavController(bottomNavigationView, navController)
+        val header = navView.getHeaderView(0)
+        header.setOnTouchListener(object: View.OnTouchListener{
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                when(event?.action){
+                    MotionEvent.ACTION_DOWN -> {
+                        startActivity(Intent(applicationContext, PersonalAreaActivity::class.java))
+                    }
+                }
+                return v?.onTouchEvent(event) ?: true
+            }
+        })
+
 
     }
 

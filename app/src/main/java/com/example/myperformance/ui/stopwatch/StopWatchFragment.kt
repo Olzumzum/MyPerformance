@@ -67,8 +67,8 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
 
         stopwatchButton.setOnClickListener {
            if(runningStopwatchFlag){
-               displayStopwathcStop()
-
+               displayStopwatchStop()
+               runningStopwatchFlag = false
            } else {
                displayStopwathcStart()
            }
@@ -96,8 +96,11 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
                     showTime(timeValue)
                 } else
                     showError(R.string.time_getting_error)
-                if(timeValue == 0)
-                    displayStopwathcStop()
+                if (timeValue == 0) {
+                    displayStopwatchStop()
+                    runningStopwatchFlag = false
+
+                }
             }
         }
     }
@@ -126,15 +129,15 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
     /**
      * stop handing
      */
-    private fun displayStopwathcStop(){
-        //note that the stopwatch is stopped
-        runningStopwatchFlag = false
+    private fun displayStopwatchStop(){
+        Log.e("ErrorContext", "context $context")
 
-        val intent = Intent(context, StopwatchService::class.java)
-        context?.sendBroadcast(intent)
-
+        val intent = Intent(activity?.applicationContext, StopwatchService::class.java)
         stopStopWatch()
         context?.stopService(intent)
+        //note that the stopwatch is stopped
+
+
     }
 
     override fun showError(idResource: Int) {

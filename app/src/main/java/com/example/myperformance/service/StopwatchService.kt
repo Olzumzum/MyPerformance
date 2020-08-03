@@ -97,6 +97,7 @@ class StopwatchService : Service() {
                 .setCategory(Notification.CATEGORY_SERVICE)
                 .setContentIntent(contentIntent)
                 .setColor(Color.YELLOW)
+                .setAutoCancel(true)
                 .build()
         notificationFinish.flags = Notification.FLAG_INSISTENT
         startForeground(FINISH_STOPWATCH_NOTIF_ID, notificationFinish)
@@ -143,9 +144,6 @@ class StopwatchService : Service() {
             runningStopwatchFrlag = false
 
         }
-        val i = Intent()
-        i.putExtra("runningStopwatchFrlag", runningStopwatchFrlag)
-        this.sendBroadcast(i)
     }
 
     override fun onDestroy() {
