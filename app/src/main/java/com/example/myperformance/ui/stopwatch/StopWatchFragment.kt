@@ -29,8 +29,6 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
     private val NAME_CLASS_SERVICE_FLAG:String = "NameClassService"
     private val TIMER_INTENT_ACTION = "example.myperformance"
     private val TIME_VALUE_EXTRA = "StopwatchValue"
-    private val START_BUTTON_STOPWATCH_FLAG = "startStopwatch"
-    private val STOP_BUTTON_STOPWATCH_FLAG = "stopStopwatch"
 
     private var timeValue: Int = 0
     private var runningStopwatchFlag: Boolean = false
@@ -91,6 +89,8 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
                     showTime(timeValue)
                 } else
                     showError(R.string.time_getting_error)
+                if(timeValue == 0)
+                    displayStopwathcStop()
             }
         }
     }
@@ -116,7 +116,6 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
 
             val intent = Intent(context, StopwatchService::class.java)
             intent.putExtra("time", timeValue)
-            intent.putExtra("buttonFlag", START_BUTTON_STOPWATCH_FLAG)
             context?.startService(intent)
         }
 
@@ -130,7 +129,6 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
         runningStopwatchFlag = false
 
         val intent = Intent(context, StopwatchService::class.java)
-        intent.putExtra("buttonFlag", STOP_BUTTON_STOPWATCH_FLAG)
         context?.sendBroadcast(intent)
 
         stopStopWatch()

@@ -19,8 +19,6 @@ class StopwatchService : Service() {
     private val RESTART_SERVICE = "restartservice"
     private val chanelName = "Stopwatch Service"
     private val TIME_VALUE_EXTRA = "StopwatchValue"
-    private val START_BUTTON_STOPWATCH_FLAG = "startStopwatch"
-    private val STOP_BUTTON_STOPWATCH_FLAG = "stopStopwatch"
     private val START_STOPWATCH_NOTIF_ID = 3
     private val FINISH_STOPWATCH_NOTIF_ID = 4
 
@@ -58,6 +56,7 @@ class StopwatchService : Service() {
 
         //to open an activity with a timer
         notificationIntent = Intent(applicationContext, ScrolbarActivity::class.java)
+        notificationIntent.flags = (Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP )
         contentIntent = PendingIntent.getActivity(
                 this,
                 0,
@@ -99,17 +98,13 @@ class StopwatchService : Service() {
                 .setContentIntent(contentIntent)
                 .setColor(Color.YELLOW)
                 .build()
+        notificationFinish.flags = Notification.FLAG_INSISTENT
         startForeground(FINISH_STOPWATCH_NOTIF_ID, notificationFinish)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val extras = intent?.extras
         val valueTime = extras?.getInt("time")
-        val buttonExtra = extras?.getString("buttonFlag")
-        when (buttonExtra) {
-            START_BUTTON_STOPWATCH_FLAG -> runningStopwatchFrlag = true
-            STOP_BUTTON_STOPWATCH_FLAG -> runningStopwatchFrlag = false
-        }
         startStopwatch(valueTime)
         return super.onStartCommand(intent, flags, startId)
     }
@@ -119,7 +114,7 @@ class StopwatchService : Service() {
             time = valueTime
             timer.scheduleAtFixedRate(object : TimerTask() {
                 override fun run() {
-
+                    runningStopwatchFrlag = true
                     val intent = Intent(TIMER_INTENT_ACTION)
                     time--
 
@@ -127,7 +122,11 @@ class StopwatchService : Service() {
                     application.applicationContext.sendBroadcast(intent)
 
                     if (time == 0) {
-                       stopStopwatch()
+                        stopStopwatch()
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+                            finishStopwatch()
+                        }
                     }
                 }
             }, 0, 1000)
@@ -135,7 +134,7 @@ class StopwatchService : Service() {
 
     }
 
-    fun stopStopwatch(){
+    fun stopStopwatch() {
         timer.let {
             timer.cancel()
             runningStopwatchFrlag = false
