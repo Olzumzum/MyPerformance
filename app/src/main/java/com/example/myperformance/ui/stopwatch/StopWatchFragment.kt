@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,8 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
 
     lateinit var broadcastReceiver: BroadcastReceiver
 
+
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -53,6 +56,7 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
         broadcastReceiver = stopwatchListen()
 
         activity?.applicationContext?.registerReceiver(broadcastReceiver, intentFilter)
+
 
 
         return viewRoot
@@ -72,6 +76,7 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
     }
 
     override fun onDestroy() {
+
         if(runningStopwatchFlag){
             val intent = Intent(RESTART_SERVICE)
             intent.putExtra(NAME_CLASS_SERVICE_FLAG, "StopwatchService")
@@ -81,10 +86,18 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
         super.onDestroy()
     }
 
+
     private fun stopwatchListen(): BroadcastReceiver {
         return object :BroadcastReceiver(){
             override fun onReceive(context: Context?, intent: Intent?) {
                 val timeValue = intent?.getIntExtra(TIME_VALUE_EXTRA, 0)
+                runningStopwatchFlag = intent?.getBooleanExtra("runningStopwatchFrlag", false)!!
+                if(runningStopwatchFlag){
+                    timeValueStopWatch?.visibility = View.GONE
+                    //hide input field
+                    decrease_time_view?.visibility = View.VISIBLE
+                    //change the text on the button
+                }
                 if (timeValue != null) {
                     showTime(timeValue)
                 } else
@@ -110,7 +123,7 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
 //            decrease_time_view.text = timeValue.toString()
 
             //note that the stopwatch has started
-            runningStopwatchFlag = true
+//            runningStopwatchFlag = true
 
             startStopwatch()
 
@@ -126,7 +139,7 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
      */
     private fun displayStopwathcStop(){
         //note that the stopwatch is stopped
-        runningStopwatchFlag = false
+//        runningStopwatchFlag = false
 
         val intent = Intent(context, StopwatchService::class.java)
         context?.sendBroadcast(intent)

@@ -111,6 +111,8 @@ class StopwatchService : Service() {
 
     private fun startStopwatch(valueTime: Int?) {
         if (valueTime != null) {
+
+
             time = valueTime
             timer.scheduleAtFixedRate(object : TimerTask() {
                 override fun run() {
@@ -119,6 +121,7 @@ class StopwatchService : Service() {
                     time--
 
                     intent.putExtra(TIME_VALUE_EXTRA, time)
+                    intent.putExtra("runningStopwatchFrlag", runningStopwatchFrlag)
                     application.applicationContext.sendBroadcast(intent)
 
                     if (time == 0) {
@@ -138,6 +141,9 @@ class StopwatchService : Service() {
         timer.let {
             timer.cancel()
             runningStopwatchFrlag = false
+            val i = Intent(TIMER_INTENT_ACTION)
+            i.putExtra("runningStopwatchFrlag", runningStopwatchFrlag)
+            application.applicationContext.sendBroadcast(i)
         }
     }
 
