@@ -129,8 +129,5 @@ class TimeCounterService : Service() {
             timer?.cancel()
             timer = null
         }
-        val intent = Intent(TIMER_INTENT_ACTION)
-        intent.putExtra(FINISH_TIME_VALUE, timeValue)
-        this.sendBroadcast(intent)
     }
 }

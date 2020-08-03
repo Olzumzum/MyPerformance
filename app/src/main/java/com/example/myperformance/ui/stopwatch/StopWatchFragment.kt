@@ -92,11 +92,6 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
             override fun onReceive(context: Context?, intent: Intent?) {
                 val timeValue = intent?.getIntExtra(TIME_VALUE_EXTRA, 0)
                 runningStopwatchFlag = intent?.getBooleanExtra("runningStopwatchFrlag", false)!!
-//                if(runningStopwatchFlag){
-//
-//
-//                    //change the text on the button
-//                }
                 if (timeValue != null) {
                     showTime(timeValue)
                 } else
@@ -119,11 +114,6 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
             } catch (e: ClassCastException) {
                 showError(R.string.error_cast_stopwatch_message)
             }
-//            decrease_time_view.text = timeValue.toString()
-
-            //note that the stopwatch has started
-//            runningStopwatchFlag = true
-
             startStopwatch()
 
             val intent = Intent(context, StopwatchService::class.java)
@@ -138,7 +128,7 @@ class StopWatchFragment : MvpAppCompatFragment(), StopwatchView {
      */
     private fun displayStopwathcStop(){
         //note that the stopwatch is stopped
-//        runningStopwatchFlag = false
+        runningStopwatchFlag = false
 
         val intent = Intent(context, StopwatchService::class.java)
         context?.sendBroadcast(intent)
